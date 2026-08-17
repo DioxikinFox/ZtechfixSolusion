@@ -22,36 +22,53 @@
     }
 
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0b0b0d 0%, #12151a 100%); color: var(--text); }
+    body { margin: 0; font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0b0b0d 0%, #12151a 100%); color: var(--text); scroll-behavior: smooth; }
     a { color: inherit; text-decoration: none; }
 
     .login-shell { min-height: 100vh; display: grid; place-items: center; padding: 2rem; }
     .login-box { width: min(420px, 100%); background: rgba(20,20,24,0.92); border: 1px solid var(--line); border-radius: 20px; padding: 2rem; box-shadow: var(--shadow); }
     .login-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; font-weight: 800; font-size: 1.2rem; }
-    .brand-mark { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, var(--orange), #fb923c); color: #111; font-weight: 900; }
+    .brand-mark { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg, var(--orange), #fb923c); color: #111; font-weight: 900; }
 
     .field { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1rem; }
     .field label { color: var(--muted); font-size: 0.8rem; font-weight: 600; }
     .field input, .field textarea, .field select { width: 100%; border: 1px solid var(--line); background: #0e0f12; border-radius: 10px; padding: 0.8rem 0.9rem; color: var(--text); font-size: 0.95rem; }
 
-    .btn { border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--text); padding: 0.8rem 1rem; font-weight: 600; cursor: pointer; transition: 0.2s ease; width: 100%; }
+    .btn { border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--text); padding: 0.8rem 1rem; font-weight: 600; cursor: pointer; transition: 0.2s ease; width: 100%; text-align: center; }
     .btn.primary { background: linear-gradient(135deg, var(--orange), var(--orange-2)); border-color: transparent; color: white; }
     .btn.success { background: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.35); color: #c7f9d5; }
     .btn.danger { background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.35); color: #fecaca; }
     .error-text { color: #fed7d7; font-size: 0.82rem; min-height: 1.1em; margin-top: 0.45rem; }
     .hidden { display: none !important; }
 
-    .topbar { position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; background: rgba(11,11,13,0.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 1rem 2rem; }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: 0.5px; }
-    .top-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    /* Modern Toggle Switch Style */
+    .switch { position: relative; display: inline-block; width: 50px; height: 26px; vertical-align: middle; margin-right: 8px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2b2d35; transition: .3s; border-radius: 34px; border: 1px solid var(--line); }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+    input:checked + .slider { background-color: var(--orange); }
+    input:checked + .slider:before { transform: translateX(24px); }
 
-    .layout { display: grid; grid-template-columns: 250px minmax(0, 1fr) 320px; gap: 1.5rem; max-width: 1500px; margin: 2rem auto; padding: 0 1rem 2rem; }
-    .sidebar { background: rgba(20,20,24,0.82); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem; height: fit-content; position: sticky; top: 88px; }
-    .sidebar h3 { margin: 0 0 1rem; font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
-    .menu a { display: block; padding: 0.8rem 0.9rem; border-radius: 10px; color: var(--muted); border: 1px solid transparent; margin-bottom: 0.5rem; transition: 0.2s ease; }
-    .menu a:hover, .menu a.active { color: var(--text); background: rgba(249, 115, 22, 0.08); border-color: rgba(249, 115, 22, 0.3); }
+    /* Topbar & Navigation */
+    .topbar { position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; background: rgba(11,11,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 0.75rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    
+    .brand-container { position: relative; display: inline-block; user-select: none; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 0.95rem; cursor: pointer; padding: 4px 8px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--line); transition: 0.2s; }
+    .brand:hover { border-color: var(--orange); }
+    .brand-dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 0.5rem; width: 180px; box-shadow: var(--shadow); z-index: 2000; display: none; }
+    .brand-dropdown.show { display: block; }
+    .brand-dropdown a { display: block; padding: 0.6rem 0.8rem; border-radius: 8px; color: var(--text); font-size: 0.82rem; font-weight: 600; transition: 0.2s; }
+    .brand-dropdown a:hover { background: rgba(249,115,22,0.12); color: var(--orange); }
 
-    .main { display: flex; flex-direction: column; gap: 1.5rem; }
+    .top-nav { display: flex; gap: 0.5rem; align-items: center; overflow-x: auto; max-width: 100%; padding-bottom: 2px; scrollbar-width: thin; }
+    .top-nav::-webkit-scrollbar { height: 4px; }
+    .top-nav::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+    .top-nav a { padding: 0.5rem 0.85rem; border-radius: 8px; color: var(--muted); font-size: 0.8rem; font-weight: 600; white-space: nowrap; transition: 0.2s; border: 1px solid transparent; }
+    .top-nav a:hover, .top-nav a.active { color: var(--text); background: rgba(249, 115, 22, 0.12); border-color: rgba(249, 115, 22, 0.3); }
+
+    .layout { max-width: 1300px; margin: 2rem auto; padding: 0 1rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .main { display: flex; flex-direction: column; gap: 1.5rem; width: 100%; min-width: 0; }
+    
     .panel { background: rgba(20,20,24,0.82); border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow); }
     .panel h2 { margin: 0 0 1.25rem; font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--line); padding-bottom: 0.75rem; }
 
@@ -69,7 +86,7 @@
     .stat-card strong { font-size: 1.5rem; font-weight: 800; }
 
     table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 0.8rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 0.85rem; }
+    th, td { text-align: left; padding: 0.8rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 0.85rem; word-break: break-word; }
     th { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; }
 
     .status-pill { display: inline-block; border-radius: 999px; padding: 0.35rem 0.65rem; font-size: 0.72rem; font-weight: 700; border: 1px solid transparent; }
@@ -83,25 +100,17 @@
 
     .empty-state { color: var(--muted); padding: 1rem 0; text-align: center; }
     .toolbar-row { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin: 0 0 1rem; flex-wrap: wrap; }
-    .search-group { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
-    .search-box, .filter-select { background: rgba(12, 13, 17, 0.9); border: 1px solid var(--line); border-radius: 10px; color: var(--text); padding: 0.75rem 0.9rem; min-width: 180px; }
-    .search-box { min-width: 240px; }
-
-    .preview-panel { background: linear-gradient(180deg, rgba(249,115,22,0.07), rgba(20,20,24,0.9)); border: 1px solid rgba(249,115,22,0.25); border-radius: 18px; padding: 1rem; position: sticky; top: 88px; height: fit-content; }
-    .preview-panel h3 { margin: 0 0 0.75rem; font-size: 0.8rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
-    .preview-box { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: rgba(11,11,13,0.9); }
-    .preview-image { width: 100%; height: 180px; object-fit: cover; background: #1a1c22; display: block; }
-    .preview-content { padding: 1rem; }
-    .eyebrow { display: inline-block; padding: 0.35rem 0.6rem; border-radius: 999px; background: rgba(249,115,22,0.12); color: #fed7aa; border: 1px solid rgba(249,115,22,0.3); font-size: 0.72rem; margin-bottom: 0.8rem; font-weight: 700; }
-    .preview-content h4 { margin: 0 0 0.5rem; font-size: 1.1rem; }
-    .preview-content p { color: var(--muted); font-size: 0.82rem; margin: 0; line-height: 1.6; }
+    .search-group { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; width: 100%; }
+    @media(min-width: 600px) { .search-group { width: auto; } }
+    .search-box, .filter-select { background: rgba(12, 13, 17, 0.9); border: 1px solid var(--line); border-radius: 10px; color: var(--text); padding: 0.75rem 0.9rem; min-width: 150px; flex: 1; }
+    .search-box { min-width: 200px; }
 
     .manager-stack { display: grid; gap: 1rem; }
     .manager-card { background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 14px; padding: 1rem; }
     .manager-card h3 { margin: 0 0 0.9rem; font-size: 1rem; }
     .manager-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
-    .manager-body { overflow-x: auto; }
-    .mini-table { width: 100%; min-width: 700px; border-collapse: collapse; }
+    .manager-body { overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; }
+    .mini-table { width: 100%; min-width: 650px; border-collapse: collapse; }
     .mini-table th, .mini-table td { padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 0.8rem; }
 
     .inline-form { display: grid; grid-template-columns: repeat(2, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
@@ -109,7 +118,19 @@
     .inline-form .full { grid-column: 1 / -1; }
     .inline-actions { display: flex; gap: 0.75rem; align-items: end; flex-wrap: wrap; grid-column: 1 / -1; margin-top: 0.25rem; }
 
-    @media (max-width: 980px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } }
+    @media (max-width: 768px) {
+      .topbar { padding: 0.75rem 1rem; }
+      .form-grid, .inline-form { grid-template-columns: 1fr !important; }
+      .stats-grid, .dashboard-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .panel { padding: 1rem 0.75rem; }
+      .login-box { padding: 1.5rem; width: 100%; }
+      .login-shell { padding: 1rem; }
+      .search-box, .filter-select { min-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid, .dashboard-grid { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -127,34 +148,39 @@
   <!-- ADMIN APP -->
   <div id="adminApp" class="hidden">
     <header class="topbar">
-      <div class="brand"><div class="brand-mark">ZS</div><span>ZTECHFIX ADMIN</span></div>
-      <div class="top-actions">
-        <a class="btn" href="index.html" target="_blank" style="width:auto;">Preview Customer</a>
-        <button id="logoutBtn" class="btn danger" type="button" style="width:auto;">Logout</button>
+      <!-- ZS Logo with Dropdown -->
+      <div class="brand-container">
+        <div class="brand" onclick="toggleBrandDropdown(event)">
+          <div class="brand-mark" style="width:28px; height:28px; font-size:0.75rem;">ZS</div>
+          <span>ZTECHFIX ADMIN ▾</span>
+        </div>
+        <div id="brandDropdown" class="brand-dropdown">
+          <a href="index.html" target="_blank">Preview Customer</a>
+          <a href="#" onclick="logoutAdmin(); return false;" style="color: var(--red);">Log Out</a>
+        </div>
       </div>
+
+      <!-- TOP NAVIGATION MENU -->
+      <nav class="top-nav" id="topNavMenu">
+        <a href="#dashboard-overview" class="active" onclick="setActiveNav(this)">Dashboard</a>
+        <a href="#smart-settings" onclick="setActiveNav(this)">Tetapan Operasi</a>
+        <a href="#analytics-feedbacks" onclick="setActiveNav(this)">Analitik & Maklum Balas</a>
+        <a href="#settings" onclick="setActiveNav(this)">General Settings</a>
+        <a href="#content-managers" onclick="setActiveNav(this)">Kandungan Website</a>
+        <a href="#orders" onclick="setActiveNav(this)">Orders</a>
+      </nav>
     </header>
 
     <div class="layout">
-      <!-- SIDEBAR MENU LENGKAP -->
-      <aside class="sidebar">
-        <h3>Menu Navigasi</h3>
-        <nav class="menu">
-          <a href="#dashboard-overview" class="active">1. Dashboard</a>
-          <a href="#smart-settings">2. Tetapan Bijak & Operasi</a>
-          <a href="#analytics-feedbacks">3. Analitik & Maklum Balas</a>
-          <a href="#settings">4. General Store Settings</a>
-          <a href="#content-managers">5. Pengurusan Kandungan Website</a>
-          <a href="#orders">6. Senarai Orders Pelanggan</a>
-        </nav>
-      </aside>
-
       <main class="main">
         <!-- 1. DASHBOARD OVERVIEW -->
         <section class="panel" id="dashboard-overview">
           <div class="toolbar-row">
             <div><h2 style="margin:0; border:none; padding:0;">1. Dashboard Overview</h2></div>
-            <div class="search-group">
-              <button id="importAllBtn" class="btn primary" type="button" style="width:auto;">📥 Import Semua Data (Firebase)</button>
+            <div class="search-group" style="justify-content: flex-end;">
+              <button id="importAllBtn" class="btn primary" type="button" style="width:auto; display:flex; gap:8px; align-items:center;">
+                <span id="importIcon">📥</span> <span id="importText">Import Semua Data (Firebase)</span>
+              </button>
             </div>
           </div>
           <div class="dashboard-grid" style="margin-top: 1rem;">
@@ -165,54 +191,83 @@
           </div>
         </section>
 
-        <!-- 2. TETAPAN BIJAK & OPERASI (STAFF & TOGGLES) -->
+        <!-- 2. TETAPAN BIJAK & OPERASI -->
         <section class="panel" id="smart-settings">
           <h2>2. Tetapan Operasi, Staff & Paparan</h2>
           <div class="form-grid">
             <div class="field full">
               <label>Pengumuman Website (Banner)</label>
-              <input type="checkbox" id="showAnnouncement"> Aktifkan
-              <input id="announcementText" type="text" placeholder="Teks pengumuman promosi..." class="form-control" style="margin-top:5px;">
+              <div style="margin-top:8px; display: flex; align-items: center;">
+                <label class="switch"><input type="checkbox" id="showAnnouncement"><span class="slider"></span></label> Aktifkan Banner Pengumuman
+              </div>
+              <input id="announcementText" type="text" placeholder="Teks pengumuman promosi..." class="form-control" style="margin-top:8px;">
             </div>
             <div class="field">
               <label>Kedai Cuti/Tutup Paksa?</label>
-              <input type="checkbox" id="forceClose"> Ya, Tutup Kedai
-              <input id="forceCloseMsg" type="text" placeholder="Sebab cuti..." class="form-control" style="margin-top:5px;">
+              <div style="margin-top:8px; display: flex; align-items: center;">
+                <label class="switch"><input type="checkbox" id="forceClose"><span class="slider"></span></label> Ya, Tutup Kedai Sementara
+              </div>
+              <input id="forceCloseMsg" type="text" placeholder="Sebab cuti..." class="form-control" style="margin-top:8px;">
             </div>
             <div class="field">
               <label>Staff 1 (Nama & Status Cuti)</label>
               <input id="staff1_name" type="text" placeholder="Nama Staff 1">
-              <div style="margin-top:5px;"><input type="checkbox" id="staff1_leave"> Sedang Cuti</div>
-              <input id="staff1_duration" type="text" placeholder="Cth: 2 Hari / 4 Jam" style="margin-top:5px;">
+              <div style="margin-top:8px; display: flex; align-items: center;">
+                <label class="switch"><input type="checkbox" id="staff1_leave"><span class="slider"></span></label> Sedang Cuti
+              </div>
+              <input id="staff1_duration" type="text" placeholder="Cth: 2 Hari / 4 Jam" style="margin-top:8px;">
             </div>
             <div class="field">
               <label>Staff 2 (Nama & Status Cuti)</label>
               <input id="staff2_name" type="text" placeholder="Nama Staff 2">
-              <div style="margin-top:5px;"><input type="checkbox" id="staff2_leave"> Sedang Cuti</div>
-              <input id="staff2_duration" type="text" placeholder="Cth: 1 Minggu" style="margin-top:5px;">
+              <div style="margin-top:8px; display: flex; align-items: center;">
+                <label class="switch"><input type="checkbox" id="staff2_leave"><span class="slider"></span></label> Sedang Cuti
+              </div>
+              <input id="staff2_duration" type="text" placeholder="Cth: 1 Minggu" style="margin-top:8px;">
             </div>
             <div class="field full" style="border-top:1px solid #333; padding-top:1rem;">
-              <label>Matikan Fitur (Jika tak nak tunjuk di website)</label>
-              <label><input type="checkbox" id="toggleRepair"> Papar Kalkulator Repair</label><br>
-              <label><input type="checkbox" id="toggleBuilder"> Papar Bina PC Custom</label>
+              <label style="margin-bottom: 0.75rem; display: block; font-weight: 700; color: var(--text);">Matikan Fitur / Sembunyikan Bahagian di Website</label>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleRepair"><span class="slider"></span></label> Kalkulator Pembaikan</div>
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleBuilder"><span class="slider"></span></label> Bina PC Custom</div>
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleFixItems"><span class="slider"></span></label> Apa Yang Kami Baiki</div>
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleWhyItems"><span class="slider"></span></label> Kenapa Pilih Kami</div>
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleClearance"><span class="slider"></span></label> Jualan Lelong</div>
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleFinder"><span class="slider"></span></label> Carian Upgrade & Gadjet</div>
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleGallery"><span class="slider"></span></label> Galeri Hasil Kerja</div>
+              </div>
             </div>
             <button onclick="saveSmartSettings()" class="btn primary full" style="margin-top:1rem;">Simpan Tetapan Operasi ke DB</button>
           </div>
         </section>
 
-        <!-- 3. ANALITIK & MAKLUM BALAS -->
+        <!-- 3. ANALITIK & MAKLUM BALAS (KEMBALI) -->
         <section class="panel" id="analytics-feedbacks">
-          <h2>3. Analitik Klik & Maklum Balas</h2>
-          <div style="background:#1a1c22; padding:1rem; border-radius:10px; margin-bottom:1.5rem;">
-            <h3>📊 Aktiviti Klik Pelanggan Paling Banyak</h3>
-            <div id="analyticsContainer" style="margin-top:1rem; display:flex; flex-direction:column; gap:10px;"></div>
-            <button onclick="resetAnalytics()" class="btn danger" style="margin-top:1rem;">Restart Graf Analitik</button>
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:1.25rem; border-bottom:1px solid var(--line); padding-bottom:0.75rem;">
+            <h2 style="margin:0; border:none; padding:0;">3. Analitik Klik & Maklum Balas</h2>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <label style="color:var(--muted); font-size:0.8rem; font-weight:600;">Paparan:</label>
+              <select id="analyticsLimitSelect" class="filter-select" onchange="loadAnalytics()" style="padding:0.4rem 0.6rem; min-width:90px;">
+                <option value="5">Top 5</option>
+                <option value="10" selected>Top 10</option>
+              </select>
+            </div>
           </div>
-          <h3>Senarai Maklum Balas / Cadangan</h3>
-          <table class="mini-table">
-            <thead><tr><th>Nama</th><th>Komen</th><th>Tarikh</th><th>Padam</th></tr></thead>
-            <tbody id="feedbackTableBody"></tbody>
-          </table>
+          <div style="background:#1a1c22; padding:1rem; border-radius:10px;">
+            <h3 style="margin-top:0;">📊 Aktiviti Klik Pelanggan Paling Banyak</h3>
+            <div id="analyticsContainer" style="margin-top:1rem; display:flex; flex-direction:column; gap:10px;"></div>
+            <button onclick="resetAnalytics()" class="btn danger" style="margin-top:1rem; width:auto;">Restart Graf Analitik</button>
+          </div>
+          
+          <div style="margin-top: 2rem;">
+            <h3>Senarai Maklum Balas / Ulasan Pelanggan</h3>
+            <div class="manager-body">
+              <table class="mini-table">
+                <thead><tr><th>Nama</th><th>Komen</th><th>Tarikh</th><th>Padam</th></tr></thead>
+                <tbody id="feedbackTableBody"></tbody>
+              </table>
+            </div>
+          </div>
         </section>
 
         <!-- 4. GENERAL STORE SETTINGS -->
@@ -221,7 +276,6 @@
           <div class="toolbar-row">
             <div class="search-group">
               <button id="saveSettingsBtn" class="btn primary" type="button" style="width:auto;">Save Settings</button>
-              <button id="exportDataBtn" class="btn" type="button" style="width:auto;">Export JSON</button>
             </div>
           </div>
           <div class="form-grid">
@@ -252,10 +306,10 @@
                 <option value="whyItems">Kenapa Pilih Kami</option>
                 <option value="stepItems">Bagaimana Ia Berfungsi</option>
                 <option value="galleryItems">Galeri Hasil Kerja</option>
-                <option value="reviews">Ulasan Pelanggan</option>
                 <option value="builder">Bina PC Custom (Komponen)</option>
                 <option value="clearanceItems">Jualan Lelong</option>
                 <option value="finderItems">Carian Upgrade & Gadjet</option>
+                <option value="repairCalculator">Kalkulator Anggaran Kos Pembaikan</option>
               </select>
             </div>
           </div>
@@ -281,22 +335,9 @@
             <div class="stat-card"><span>Pending</span><strong id="pendingOrders">0</strong></div>
             <div class="stat-card"><span>Done</span><strong id="doneOrders">0</strong></div>
           </div>
-          <div id="ordersTableWrap"></div>
+          <div id="ordersTableWrap" class="manager-body"></div>
         </section>
       </main>
-
-      <!-- LIVE PREVIEW SIDEBAR -->
-      <aside class="preview-panel">
-        <h3>Live Preview</h3>
-        <div id="livePreview" class="preview-box">
-          <img id="previewImage" class="preview-image" src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80" alt="preview" />
-          <div class="preview-content">
-            <span id="previewEyebrow" class="eyebrow">Website</span>
-            <h4 id="previewTitle">ZTECHFIX Dashboard</h4>
-            <p id="previewDesc">Pilih item dari panel kiri untuk melihat preview langsung di sini.</p>
-          </div>
-        </div>
-      </aside>
     </div>
   </div>
 
@@ -323,15 +364,18 @@
       whyItems: [{ icon: '🛠️', title: 'Juruteknik Bertauliah', description: 'Berpengalaman luas dalam mikropematerian.' }],
       stepItems: [{ step: 'LANGKAH 1', title: 'Hantar Peranti', description: 'Kunjungi premis kami di Kuala Kangsar.' }],
       galleryItems: [{ title: 'Binaan Custom PC RGB', image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80', description: 'Susun atur kabel terstruktur rapi.' }],
-      reviews: [{ name: 'Maya R.', title: 'Skrin iPhone 13', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80', text: 'Skrin iPhone siap cepat dan nampak baru.' }],
       builderOptions: {
-        cpu: [{ value: '350', score: '1', label: 'Intel Core i3 / AMD Ryzen 3 (Asas)' }],
-        gpu: [{ value: '0', score: '0', label: 'Grafik Bersepadu (Integrated)' }],
-        ram: [{ value: '90', score: '1', label: '8GB RAM (Standard Pejabat)' }],
-        storage: [{ value: '150', label: '512GB NVMe M.2 SSD' }]
+        cpu: [{ value: '350', score: '1', label: 'Intel Core i3 / AMD Ryzen 3 (Asas)', description: 'Sesuai untuk kegunaan pejabat dan harian.' }],
+        gpu: [{ value: '0', score: '0', label: 'Grafik Bersepadu (Integrated)', description: 'Menggunakan grafik cip pemproses.' }],
+        ram: [{ value: '90', score: '1', label: '8GB RAM (Standard Pejabat)', description: 'Cukup untuk multitasking ringan.' }],
+        storage: [{ value: '150', label: '512GB NVMe M.2 SSD', description: 'Kelajuan tinggi untuk boot Windows.' }]
       },
-      clearanceItems: [{ title: 'Samsung Galaxy A13 (128GB)', category: 'bajet', oldPrice: 'RM 699', newPrice: 'RM 350', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', description: 'Kapasiti storan 128GB.' }],
-      finderItems: [{ title: 'SSD NVMe M.2 1TB (Upgrade)', category: 'upgrade-pc', price: 'RM 299', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80', description: 'Tingkatkan kepantasan boot komputer.' }]
+      clearanceItems: [{ title: 'Samsung Galaxy A13 (128GB)', category: 'bajet', oldPrice: 'RM 699', newPrice: 'RM 350', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', description: 'Kapasiti storan 128GB.', tag: 'Lelong Bajet', isReserved: false }],
+      finderItems: [{ title: 'SSD NVMe M.2 1TB (Upgrade)', category: 'upgrade-pc', price: 'RM 299', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80', description: 'Tingkatkan kepantasan boot komputer.', tag: 'Upgrade PC' }],
+      repairCalculator: [
+        { deviceType: 'phone', deviceName: 'Telefon Pintar (Phone)', issueKey: 'lcd_ori', issueLabel: 'Tukar LCD Ori', price: 'RM 220 - RM 750' },
+        { deviceType: 'iphone', deviceName: 'iPhone (Apple)', issueKey: 'battery', issueLabel: 'Tukar Bateri iPhone', price: 'RM 100 - RM 350' }
+      ]
     };
 
     const defaultState = {
@@ -394,9 +438,23 @@
       try { return JSON.parse(localStorage.getItem(ORDER_KEY) || '[]'); } catch { return []; }
     }
 
-    function saveOrders(list) {
+    function saveOrdersLocally(list) {
       localStorage.setItem(ORDER_KEY, JSON.stringify(list));
-      syncOrdersToFirebase(list);
+    }
+
+    function toggleBrandDropdown(event) {
+      event.stopPropagation();
+      document.getElementById('brandDropdown').classList.toggle('show');
+    }
+
+    window.addEventListener('click', () => {
+      const dropdown = document.getElementById('brandDropdown');
+      if (dropdown) dropdown.classList.remove('show');
+    });
+
+    function setActiveNav(el) {
+      document.querySelectorAll('.top-nav a').forEach(a => a.classList.remove('active'));
+      el.classList.add('active');
     }
 
     function renderSettingsForm() {
@@ -431,6 +489,10 @@
     const premiumEditors = {};
 
     function cleanText(value) { return (value === undefined || value === null) ? '' : String(value); }
+    
+    function escapeHtml(value) {
+      return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#039;');
+    }
 
     function getSectionList(sectionName) {
       const state = getSiteState();
@@ -441,10 +503,28 @@
       const item = index >= 0 ? (list[index] || {}) : {};
       const formFields = fieldDefs.map((field) => {
         const value = cleanText(item[field.key] || '');
+        if (field.type === 'checkbox') {
+          return `
+            <div class="field ${field.full ? 'full' : ''}">
+              <label>${field.label}</label>
+              <div style="margin-top:5px; display:flex; align-items:center;">
+                <label class="switch"><input type="checkbox" name="${field.key}" ${item[field.key] ? 'checked' : ''}><span class="slider"></span></label> Sudah Dibooking
+              </div>
+            </div>
+          `;
+        }
+        if (field.full) {
+          return `
+            <div class="field full">
+              <label>${field.label}</label>
+              <textarea name="${field.key}">${escapeHtml(value)}</textarea>
+            </div>
+          `;
+        }
         return `
-          <div class="field ${field.full ? 'full' : ''}">
+          <div class="field">
             <label>${field.label}</label>
-            <input name="${field.key}" value="${value.replace(/"/g, '&quot;')}" ${field.type === 'number' ? 'type="number"' : 'type="text"'} />
+            <input name="${field.key}" value="${escapeHtml(value)}" ${field.type === 'number' ? 'type="number"' : 'type="text"'} />
           </div>
         `;
       }).join('');
@@ -465,7 +545,7 @@
       const editingIndex = premiumEditors[sectionName];
       const rows = list.map((item, index) => `
         <tr>
-          ${fieldDefs.slice(0, 3).map((field) => `<td>${escapeHtml(cleanText(item[field.key])) || '—'}</td>`).join('')}
+          ${fieldDefs.slice(0, 3).map((field) => `<td>${field.key === 'isReserved' ? (item[field.key] ? '🔴 Sudah Dibooking' : '🟢 Tersedia') : (escapeHtml(cleanText(item[field.key])) || '—')}</td>`).join('')}
           <td>
             <div class="table-actions">
               <button class="small-btn success" data-action="edit-row" data-section="${sectionName}" data-index="${index}" type="button">Edit</button>
@@ -481,7 +561,7 @@
         <div class="manager-card">
           <div class="manager-toolbar">
             <h3>${title}</h3>
-            <button class="btn success" type="button" data-action="add-row" data-section="${sectionName}" style="width:auto;">+ Tambah Item Baru</button>
+            <button class="btn success" type="button" data-action="add-row" data-section="${sectionName}" style="width:auto;">+ Tambah Item</button>
           </div>
           <div class="manager-body">
             <table class="mini-table">
@@ -491,7 +571,7 @@
                   <th>Tindakan</th>
                 </tr>
               </thead>
-              <tbody>${rows || '<tr><td colspan="4" class="empty-state">Tiada item lagi. Sila klik tambah.</td></tr>'}</tbody>
+              <tbody>${rows || '<tr><td colspan="4" class="empty-state">Tiada item lagi.</td></tr>'}</tbody>
             </table>
           </div>
           ${form}
@@ -504,8 +584,8 @@
       const list = (state.builderOptions && state.builderOptions[groupName]) || defaultContent.builderOptions[groupName] || [];
       const editingIndex = premiumEditors[groupName];
       const fieldDefs = groupName === 'storage'
-        ? [{ key: 'label', label: 'Nama Storan' }, { key: 'value', label: 'Harga (RM)' }]
-        : [{ key: 'label', label: 'Nama Item' }, { key: 'value', label: 'Harga (RM)' }, { key: 'score', label: 'Score AI' }];
+        ? [{ key: 'label', label: 'Nama Storan' }, { key: 'value', label: 'Harga (RM)' }, { key: 'description', label: 'Penerangan', full: true }]
+        : [{ key: 'label', label: 'Nama Item' }, { key: 'value', label: 'Harga (RM)' }, { key: 'score', label: 'Score AI' }, { key: 'description', label: 'Penerangan', full: true }];
 
       const rows = list.map((item, index) => `
         <tr>
@@ -527,7 +607,7 @@
         <div class="manager-card">
           <div class="manager-toolbar">
             <h3>${title}</h3>
-            <button class="btn success" type="button" data-action="add-builder" data-section="${groupName}" style="width:auto;">+ Tambah ${title}</button>
+            <button class="btn success" type="button" data-action="add-builder" data-section="${groupName}" style="width:auto;">+ Tambah</button>
           </div>
           <div class="manager-body">
             <table class="mini-table">
@@ -555,27 +635,17 @@
 
     function renderPremiumManagers() {
       const container = document.getElementById('premiumManagers');
-      const fix = isSectionVisible('fixItems') ? renderGenericListManager('fixItems', 'Apa Yang Kami Baiki', [{ key: 'icon', label: 'Icon (Emoji)' }, { key: 'title', label: 'Tajuk Kategori' }, { key: 'description', label: 'Penerangan', full: true }]) : '';
-      const why = isSectionVisible('whyItems') ? renderGenericListManager('whyItems', 'Kenapa Pilih Kami', [{ key: 'icon', label: 'Icon (Emoji)' }, { key: 'title', label: 'Tajuk' }, { key: 'description', label: 'Penerangan', full: true }]) : '';
-      const steps = isSectionVisible('stepItems') ? renderGenericListManager('stepItems', 'Bagaimana Ia Berfungsi', [{ key: 'step', label: 'Label Langkah' }, { key: 'title', label: 'Tajuk' }, { key: 'description', label: 'Penerangan', full: true }]) : '';
+      const fix = isSectionVisible('fixItems') ? renderGenericListManager('fixItems', 'Apa Yang Kami Baiki', [{ key: 'icon', label: 'Icon' }, { key: 'title', label: 'Tajuk' }, { key: 'description', label: 'Penerangan', full: true }]) : '';
+      const why = isSectionVisible('whyItems') ? renderGenericListManager('whyItems', 'Kenapa Pilih Kami', [{ key: 'icon', label: 'Icon' }, { key: 'title', label: 'Tajuk' }, { key: 'description', label: 'Penerangan', full: true }]) : '';
+      const steps = isSectionVisible('stepItems') ? renderGenericListManager('stepItems', 'Bagaimana Ia Berfungsi', [{ key: 'step', label: 'Langkah' }, { key: 'title', label: 'Tajuk' }, { key: 'description', label: 'Penerangan', full: true }]) : '';
       const gallery = isSectionVisible('galleryItems') ? renderGenericListManager('galleryItems', 'Galeri Hasil Kerja', [{ key: 'title', label: 'Tajuk' }, { key: 'image', label: 'URL Gambar' }, { key: 'description', label: 'Penerangan', full: true }]) : '';
-      const reviews = isSectionVisible('reviews') ? renderGenericListManager('reviews', 'Ulasan Pelanggan', [{ key: 'name', label: 'Nama' }, { key: 'title', label: 'Tajuk' }, { key: 'text', label: 'Teks Ulasan', full: true }]) : '';
-      const clearance = isSectionVisible('clearanceItems') ? renderGenericListManager('clearanceItems', 'Jualan Lelong', [{ key: 'title', label: 'Nama Produk' }, { key: 'newPrice', label: 'Harga' }, { key: 'category', label: 'Kategori' }]) : '';
-      const finder = isSectionVisible('finderItems') ? renderGenericListManager('finderItems', 'Carian Upgrade & Gadjet', [{ key: 'title', label: 'Nama Item' }, { key: 'price', label: 'Harga' }, { key: 'category', label: 'Tag' }]) : '';
+      const clearance = isSectionVisible('clearanceItems') ? renderGenericListManager('clearanceItems', 'Jualan Lelong (Tag, Info & Booking)', [{ key: 'title', label: 'Produk' }, { key: 'newPrice', label: 'Harga' }, { key: 'tag', label: 'Tag (Cth: Lelong Bajet)' }, { key: 'description', label: 'Penerangan', full: true }, { key: 'isReserved', label: 'Status Booking', type: 'checkbox' }]) : '';
+      const finder = isSectionVisible('finderItems') ? renderGenericListManager('finderItems', 'Carian Upgrade & Gadjet (Tag & Info)', [{ key: 'title', label: 'Item' }, { key: 'price', label: 'Harga' }, { key: 'tag', label: 'Tag (Cth: Upgrade PC)' }, { key: 'description', label: 'Penerangan', full: true }]) : '';
+      const repairCalc = isSectionVisible('repairCalculator') ? renderGenericListManager('repairCalculator', 'Kalkulator Anggaran Kos Pembaikan', [{ key: 'deviceName', label: 'Kategori Peranti' }, { key: 'issueLabel', label: 'Jenis Kerosakan' }, { key: 'price', label: 'Julat Harga (Cth: RM 100 - RM 300)' }]) : '';
       const builder = isSectionVisible('builder') ? `<div class="manager-stack">${renderBuilderGroupManager('cpu', 'CPU / Prosesor')}${renderBuilderGroupManager('gpu', 'GPU / Grafik')}${renderBuilderGroupManager('ram', 'RAM')}${renderBuilderGroupManager('storage', 'Storage SSD')}</div>` : '';
 
-      const allManagers = [fix, why, steps, gallery, reviews, builder, clearance, finder].filter(Boolean).join('');
+      const allManagers = [fix, why, steps, gallery, builder, clearance, finder, repairCalc].filter(Boolean).join('');
       container.innerHTML = allManagers ? `<div class="manager-stack">${allManagers}</div>` : '<div class="empty-state">Tiada item dijumpai.</div>';
-    }
-
-    function exportDataAsJson() {
-      const data = { site: getSiteState(), orders: getOrders(), exportedAt: new Date().toISOString() };
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'ztechfix-export.json';
-      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-      alert('Data berjaya dieksport.');
     }
 
     function saveSectionFromForm(form) {
@@ -583,9 +653,11 @@
       const index = Number(form.dataset.formIndex);
       const state = getSiteState();
       const sectionValue = Array.isArray(state[sectionName]) ? [...state[sectionName]] : [...(defaultContent[sectionName] || [])];
-      const payload = Object.fromEntries(new FormData(form).entries());
+      
+      const formData = new FormData(form);
       const cleanedPayload = {};
-      Object.keys(payload).forEach((key) => { cleanedPayload[key] = payload[key].toString(); });
+      formData.forEach((value, key) => { cleanedPayload[key] = value.toString(); });
+      form.querySelectorAll('input[type="checkbox"]').forEach(chk => { cleanedPayload[chk.name] = chk.checked; });
 
       if (Number.isInteger(index) && index >= 0) sectionValue[index] = { ...(sectionValue[index] || {}), ...cleanedPayload };
       else sectionValue.push(cleanedPayload);
@@ -603,11 +675,14 @@
       const state = getSiteState();
       const builder = { ...(state.builderOptions || defaultContent.builderOptions) };
       builder[groupName] = Array.isArray(builder[groupName]) ? [...builder[groupName]] : [];
-      const payload = Object.fromEntries(new FormData(form).entries());
+      
+      const formData = new FormData(form);
       const cleanedPayload = {};
-      Object.keys(payload).forEach((key) => { cleanedPayload[key] = payload[key].toString(); });
+      formData.forEach((value, key) => { cleanedPayload[key] = value.toString(); });
+
       if (index >= 0) builder[groupName][index] = { ...(builder[groupName][index] || {}), ...cleanedPayload };
       else builder[groupName].push(cleanedPayload);
+
       state.builderOptions = builder;
       saveSiteState(state);
       delete premiumEditors[groupName];
@@ -636,20 +711,119 @@
       renderPremiumManagers();
     }
 
-    function escapeHtml(value) {
-      return String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#039;');
+    // LOAD SETTINGS (OPERASI)
+    async function loadSmartSettings() {
+      if (!ensureFirebase()) return;
+      try {
+        const configRef = firebaseState.db.collection('settings').doc('mainConfig');
+        const configSnap = await configRef.get();
+        if (configSnap.exists) {
+          const conf = configSnap.data();
+          document.getElementById('showAnnouncement').checked = conf.showAnnouncement || false;
+          document.getElementById('announcementText').value = conf.announcementText || '';
+          document.getElementById('forceClose').checked = conf.forceClose || false;
+          document.getElementById('forceCloseMsg').value = conf.forceCloseMsg || '';
+          document.getElementById('staff1_name').value = conf.staff1_name || '';
+          document.getElementById('staff1_leave').checked = conf.staff1_leave || false;
+          document.getElementById('staff1_duration').value = conf.staff1_leaveDuration || '';
+          document.getElementById('staff2_name').value = conf.staff2_name || '';
+          document.getElementById('staff2_leave').checked = conf.staff2_leave || false;
+          document.getElementById('staff2_duration').value = conf.staff2_leaveDuration || '';
+          
+          document.getElementById('toggleRepair').checked = conf.hideRepairCalc === false || conf.hideRepairCalc === undefined;
+          document.getElementById('toggleBuilder').checked = conf.hideBuilder === false || conf.hideBuilder === undefined;
+          document.getElementById('toggleFixItems').checked = conf.hideFixItems === false || conf.hideFixItems === undefined;
+          document.getElementById('toggleWhyItems').checked = conf.hideWhyItems === false || conf.hideWhyItems === undefined;
+          document.getElementById('toggleClearance').checked = conf.hideClearance === false || conf.hideClearance === undefined;
+          document.getElementById('toggleFinder').checked = conf.hideFinder === false || conf.hideFinder === undefined;
+          document.getElementById('toggleGallery').checked = conf.hideGallery === false || conf.hideGallery === undefined;
+        } else {
+           ['toggleRepair','toggleBuilder','toggleFixItems','toggleWhyItems','toggleClearance','toggleFinder','toggleGallery'].forEach(id => {
+              document.getElementById(id).checked = true;
+           });
+        }
+      } catch (e) { console.error("Ralat muat tetapan", e); }
     }
 
-    async function renderOrders() {
-      let orders = getOrders();
-      if (firebaseState.db) {
+    async function saveSmartSettings() {
+      if (!ensureFirebase()) return alert('Sila pastikan Firebase bersambung.');
+      const config = {
+        showAnnouncement: document.getElementById('showAnnouncement').checked,
+        announcementText: document.getElementById('announcementText').value,
+        forceClose: document.getElementById('forceClose').checked,
+        forceCloseMsg: document.getElementById('forceCloseMsg').value,
+        staff1_name: document.getElementById('staff1_name').value,
+        staff1_leave: document.getElementById('staff1_leave').checked,
+        staff1_leaveDuration: document.getElementById('staff1_duration').value,
+        staff2_name: document.getElementById('staff2_name').value,
+        staff2_leave: document.getElementById('staff2_leave').checked,
+        staff2_leaveDuration: document.getElementById('staff2_duration').value,
+        hideRepairCalc: !document.getElementById('toggleRepair').checked,
+        hideBuilder: !document.getElementById('toggleBuilder').checked,
+        hideFixItems: !document.getElementById('toggleFixItems').checked,
+        hideWhyItems: !document.getElementById('toggleWhyItems').checked,
+        hideClearance: !document.getElementById('toggleClearance').checked,
+        hideFinder: !document.getElementById('toggleFinder').checked,
+        hideGallery: !document.getElementById('toggleGallery').checked
+      };
+      await firebaseState.db.collection('settings').doc('mainConfig').set(config, { merge: true });
+      alert("Tetapan kedai & operasi berjaya diselaraskan! Pastikan kod disalin ke dalam index.html supaya website customer berfungsi.");
+    }
+
+    // IMPORT PENUH
+    async function importAllDataFromDatabase() {
+      const btnText = document.getElementById('importText');
+      const btnIcon = document.getElementById('importIcon');
+      const originalText = btnText.textContent;
+      
+      btnText.textContent = 'Mengimport Data...';
+      btnIcon.textContent = '⏳';
+      document.getElementById('importAllBtn').disabled = true;
+
+      if (ensureFirebase()) {
+        try {
+          // Tarik data kandungan website
+          const docRef = firebaseState.db.collection('siteSettings').doc('main');
+          const docSnap = await docRef.get();
+          if (docSnap.exists) {
+            localStorage.setItem(SITE_KEY, JSON.stringify({ ...defaultState, ...docSnap.data() }));
+          }
+
+          renderSettingsForm();
+          await loadSmartSettings();
+          await renderOrders(true);
+          await loadAnalytics();
+          await loadFeedbacks();
+
+          alert('Berjaya! Data ditarik secara berpusat dari pangkalan data awan. Peringatan: Jika bahagian kandungan masih kosong, ia bermakna data tersebut belum pernah disimpan dari Admin Panel ke Firebase.');
+          document.getElementById('dashSiteStatus').textContent = 'Synced (Cloud)';
+        } catch (e) {
+          console.error(e);
+          alert('Ralat ketika import: ' + e.message);
+          document.getElementById('dashSiteStatus').textContent = 'Error Sync';
+        }
+      } else {
+        alert('Gagal menyambung ke Firebase. Sila semak capaian internet.');
+      }
+
+      btnIcon.textContent = '📥';
+      btnText.textContent = originalText;
+      document.getElementById('importAllBtn').disabled = false;
+    }
+
+    // ORDERS
+    async function renderOrders(forceFetch = false) {
+      let orders = [];
+      if (ensureFirebase()) {
         try {
           const snap = await firebaseState.db.collection('orders').orderBy('date', 'desc').get();
-          if (!snap.empty) {
-            orders = [];
-            snap.forEach(doc => orders.push({ id: doc.id, ...doc.data() }));
-          }
-        } catch(e) {}
+          snap.forEach(doc => orders.push({ id: doc.id, ...doc.data() }));
+          saveOrdersLocally(orders);
+        } catch(e) {
+          orders = getOrders();
+        }
+      } else {
+        orders = getOrders();
       }
 
       const total = orders.length;
@@ -674,17 +848,17 @@
       if (!filteredOrders.length) { wrap.innerHTML = '<div class="empty-state">Tiada order dijumpai.</div>'; return; }
 
       wrap.innerHTML = `
-        <table>
+        <table class="mini-table">
           <thead><tr><th>Nama</th><th>Phone</th><th>Produk</th><th>Harga</th><th>Status</th><th>Tarikh</th><th>Tindakan</th></tr></thead>
           <tbody>
             ${filteredOrders.map((order, index) => `
               <tr>
-                <td>${order.customerName || '-'}</td>
-                <td>${order.customerPhone || '-'}</td>
-                <td>${order.product || '-'}</td>
-                <td>${order.price || '-'}</td>
+                <td>${escapeHtml(order.customerName || '-')}</td>
+                <td>${escapeHtml(order.customerPhone || '-')}</td>
+                <td>${escapeHtml(order.product || '-')}</td>
+                <td>${escapeHtml(order.price || '-')}</td>
                 <td><span class="status-pill ${order.status === 'done' ? 'status-done' : 'status-pending'}">${order.status === 'done' ? 'Done' : 'Pending'}</span></td>
-                <td>${order.date || '-'}</td>
+                <td>${escapeHtml(order.date || '-')}</td>
                 <td>
                   <div class="table-actions">
                     <button class="small-btn success" onclick="markOrderDone('${order.id || index}')" type="button">Selesai</button>
@@ -703,7 +877,7 @@
         await firebaseState.db.collection('orders').doc(id).update({ status: 'done' });
       } else {
         const orders = getOrders();
-        if(orders[id]) { orders[id].status = 'done'; saveOrders(orders); }
+        if(orders[id]) { orders[id].status = 'done'; syncOrdersToFirebase(orders); }
       }
       renderOrders();
     };
@@ -715,30 +889,60 @@
       } else {
         const orders = getOrders();
         orders.splice(Number(id), 1);
-        saveOrders(orders);
+        syncOrdersToFirebase(orders);
       }
       renderOrders();
     };
 
-    async function importAllDataFromDatabase() {
-      let loadedFromFirebase = false;
-      if (ensureFirebase()) {
-        try {
-          const docRef = firebaseState.db.collection('siteSettings').doc('main');
-          const docSnap = await docRef.get();
-          if (docSnap.exists) {
-            saveSiteState({ ...defaultState, ...docSnap.data() });
-            loadedFromFirebase = true;
-          }
-        } catch (e) {}
-      }
-      renderSettingsForm();
-      renderPremiumManagers();
-      renderOrders();
-      alert('Berjaya! Semua data telah diimport.');
-      document.getElementById('dashSiteStatus').textContent = loadedFromFirebase ? 'Synced (Cloud)' : 'Synced (Local)';
+    // ANALYTICS & FEEDBACKS
+    async function loadAnalytics() {
+      if (!ensureFirebase()) return;
+      try {
+        const limitVal = Number(document.getElementById('analyticsLimitSelect').value) || 10;
+        const snap = await firebaseState.db.collection('analytics').orderBy('clicks', 'desc').limit(limitVal).get();
+        const container = document.getElementById('analyticsContainer');
+        container.innerHTML = "";
+        if (snap.empty) { container.innerHTML = `<p style="color:var(--muted);">Tiada data klik lagi.</p>`; return; }
+        let maxClicks = 0;
+        const items = [];
+        snap.forEach(doc => { const d = doc.data(); items.push({ id: doc.id, clicks: d.clicks }); if(d.clicks > maxClicks) maxClicks = d.clicks; });
+        items.forEach(item => {
+          const width = Math.max((item.clicks / maxClicks) * 100, 5);
+          container.innerHTML += `<div style="margin-bottom:8px;"><div title="${escapeHtml(item.id)}" style="font-size:0.8rem; margin-bottom:2px; font-weight:600;">${escapeHtml(item.id)}</div><div style="background:#0e0f12; border-radius:6px; overflow:hidden; border:1px solid var(--line);"><div style="width:${width}%; background:var(--orange); padding:4px 8px; font-size:0.75rem; color:#fff; text-align:right;">${item.clicks} klik</div></div></div>`;
+        });
+      } catch(e) {}
     }
 
+    async function resetAnalytics() {
+      if (!confirm("Reset semua rekod klik?")) return;
+      const snap = await firebaseState.db.collection('analytics').get();
+      const batch = firebaseState.db.batch();
+      snap.forEach(doc => batch.delete(doc.ref));
+      await batch.commit();
+      loadAnalytics();
+    }
+
+    async function loadFeedbacks() {
+      if (!ensureFirebase()) return;
+      try {
+        const snap = await firebaseState.db.collection('feedbacks').orderBy('date', 'desc').get();
+        const tbody = document.getElementById('feedbackTableBody');
+        tbody.innerHTML = "";
+        if (snap.empty) { tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada maklum balas.</td></tr>`; return; }
+        snap.forEach(doc => {
+          const d = doc.data();
+          tbody.innerHTML += `<tr><td><b>${escapeHtml(d.name)}</b></td><td>${escapeHtml(d.message)}</td><td>${escapeHtml(d.date || '-')}</td><td><button onclick="deleteFeedback('${doc.id}')" class="small-btn danger">Padam</button></td></tr>`;
+        });
+      } catch(e) {}
+    }
+
+    window.deleteFeedback = async function(id) {
+      if (!confirm("Padam maklum balas ini?")) return;
+      await firebaseState.db.collection('feedbacks').doc(id).delete();
+      loadFeedbacks();
+    };
+
+    // INIT
     function loginAdmin() {
       if (document.getElementById('username').value.trim() === ADMIN_CREDENTIALS.username && document.getElementById('password').value.trim() === ADMIN_CREDENTIALS.password) {
         localStorage.setItem(SESSION_KEY, 'logged-in');
@@ -746,8 +950,9 @@
         document.getElementById('adminApp').classList.remove('hidden');
         renderSettingsForm();
         renderOrders();
-        loadFeedbacks();
         loadAnalytics();
+        loadFeedbacks();
+        loadSmartSettings();
       } else {
         document.getElementById('loginError').textContent = 'Username atau password salah.';
       }
@@ -756,16 +961,13 @@
     function logoutAdmin() { localStorage.removeItem(SESSION_KEY); location.reload(); }
 
     document.getElementById('loginBtn').addEventListener('click', loginAdmin);
-    document.getElementById('logoutBtn').addEventListener('click', logoutAdmin);
     document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
     document.getElementById('importAllBtn').addEventListener('click', importAllDataFromDatabase);
-    document.getElementById('exportDataBtn').addEventListener('click', exportDataAsJson);
-    document.getElementById('refreshOrdersBtn').addEventListener('click', renderOrders);
-
     document.getElementById('contentSearchInput').addEventListener('input', (e) => { dashboardState.contentSearch = e.target.value; renderPremiumManagers(); });
     document.getElementById('contentFilterSelect').addEventListener('change', (e) => { dashboardState.sectionFilter = e.target.value; renderPremiumManagers(); });
     document.getElementById('orderSearchInput').addEventListener('input', (e) => { dashboardState.orderSearch = e.target.value; renderOrders(); });
     document.getElementById('orderFilterSelect').addEventListener('change', (e) => { dashboardState.orderStatus = e.target.value; renderOrders(); });
+    document.getElementById('refreshOrdersBtn').addEventListener('click', () => renderOrders());
 
     document.addEventListener('click', (event) => {
       const btn = event.target.closest('button');
@@ -790,78 +992,12 @@
       event.preventDefault();
     });
 
-    async function saveSmartSettings() {
-      if (!ensureFirebase()) return alert('Sila pastikan Firebase bersambung.');
-      const config = {
-        showAnnouncement: document.getElementById('showAnnouncement').checked,
-        announcementText: document.getElementById('announcementText').value,
-        forceClose: document.getElementById('forceClose').checked,
-        forceCloseMsg: document.getElementById('forceCloseMsg').value,
-        staff1_name: document.getElementById('staff1_name').value,
-        staff1_leave: document.getElementById('staff1_leave').checked,
-        staff1_leaveDuration: document.getElementById('staff1_duration').value,
-        staff2_name: document.getElementById('staff2_name').value,
-        staff2_leave: document.getElementById('staff2_leave').checked,
-        staff2_leaveDuration: document.getElementById('staff2_duration').value,
-        hideRepairCalc: !document.getElementById('toggleRepair').checked,
-        hideBuilder: !document.getElementById('toggleBuilder').checked
-      };
-      await firebaseState.db.collection('settings').doc('mainConfig').set(config, { merge: true });
-      alert("Tetapan kedai & operasi berjaya diselaraskan!");
-    }
-
-    async function loadFeedbacks() {
-      if (!ensureFirebase()) return;
-      try {
-        const snap = await firebaseState.db.collection('feedbacks').orderBy('date', 'desc').get();
-        const tbody = document.getElementById('feedbackTableBody');
-        tbody.innerHTML = "";
-        if (snap.empty) { tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada maklum balas.</td></tr>`; return; }
-        snap.forEach(doc => {
-          const d = doc.data();
-          tbody.innerHTML += `<tr><td><b>${d.name}</b></td><td>${d.message}</td><td>${d.date}</td><td><button onclick="deleteFeedback('${doc.id}')" class="small-btn danger">Padam</button></td></tr>`;
-        });
-      } catch(e) {}
-    }
-
-    window.deleteFeedback = async function(id) {
-      if (!confirm("Padam maklum balas ini?")) return;
-      await firebaseState.db.collection('feedbacks').doc(id).delete();
-      loadFeedbacks();
-    };
-
-    async function loadAnalytics() {
-      if (!ensureFirebase()) return;
-      try {
-        const snap = await firebaseState.db.collection('analytics').orderBy('clicks', 'desc').get();
-        const container = document.getElementById('analyticsContainer');
-        container.innerHTML = "";
-        if (snap.empty) { container.innerHTML = `<p style="color:var(--muted);">Tiada data klik lagi.</p>`; return; }
-        let maxClicks = 0;
-        const items = [];
-        snap.forEach(doc => { const d = doc.data(); items.push({ id: doc.id, clicks: d.clicks }); if(d.clicks > maxClicks) maxClicks = d.clicks; });
-        items.forEach(item => {
-          const width = Math.max((item.clicks / maxClicks) * 100, 5);
-          container.innerHTML += `<div class="graph-bar"><div class="graph-label" title="${item.id}">${item.id}</div><div class="graph-track"><div class="graph-fill" style="width:${width}%;">${item.clicks} klik</div></div></div>`;
-        });
-      } catch(e) {}
-    }
-
-    async function resetAnalytics() {
-      if (!confirm("Reset semua rekod klik?")) return;
-      const snap = await firebaseState.db.collection('analytics').get();
-      const batch = firebaseState.db.batch();
-      snap.forEach(doc => batch.delete(doc.ref));
-      await batch.commit();
-      loadAnalytics();
-    }
-
     if (localStorage.getItem(SESSION_KEY) === 'logged-in') {
       document.getElementById('loginScreen').classList.add('hidden');
       document.getElementById('adminApp').classList.remove('hidden');
       renderSettingsForm();
       renderOrders();
-      setTimeout(() => { if (ensureFirebase()) { loadFeedbacks(); loadAnalytics(); } }, 1000);
+      setTimeout(() => { if (ensureFirebase()) { loadAnalytics(); loadFeedbacks(); loadSmartSettings(); } }, 1000);
     }
   </script>
 </body>

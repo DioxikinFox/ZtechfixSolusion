@@ -738,6 +738,39 @@
         }
 
         window.onload = () => { loadSmartSettings(); }
+
+  firebase.firestore().collection('settings').doc('mainConfig').onSnapshot((doc) => {
+  if (doc.exists) {
+    const config = doc.data();
+    console.log("Talian ke Admin berjaya! Data terkini:", config);
+    
+    // 1. Semak Bahagian Apa Yang Kami Baiki
+    const fixSection = document.getElementById('apa-kami-baiki-section');
+    if (fixSection) {
+      fixSection.style.display = config.hideFixItems ? 'none' : 'block';
+      console.log("Bahagian 'Baiki' berjaya dijumpai dan dikemaskini.");
+    } else {
+      console.error("ALAMAK: ID 'apa-kami-baiki-section' tak wujud dalam HTML kau bro.");
+    }
+
+    // 2. Semak Bahagian Bina PC
+    const pcSection = document.getElementById('bina-pc-section');
+    if (pcSection) {
+      pcSection.style.display = config.hideBuilder ? 'none' : 'block';
+      console.log("Bahagian 'Bina PC' berjaya dijumpai dan dikemaskini.");
+    } else {
+      console.error("ALAMAK: ID 'bina-pc-section' tak wujud dalam HTML kau bro.");
+    }
+    
+    // 3. Semak Bahagian Lelong
+    const lelongSection = document.getElementById('jualan-lelong-section');
+    if (lelongSection) {
+      lelongSection.style.display = config.hideClearance ? 'none' : 'block';
+    }
+  } else {
+    console.log("Belum ada tetapan operasi dalam Firebase.");
+  }
+});
     </script>
 </body>
 </html>
