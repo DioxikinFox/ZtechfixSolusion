@@ -576,11 +576,12 @@
       <aside class="sidebar">
         <h3>Menu Navigasi</h3>
         <nav class="menu">
-          <a href="#dashboard-overview" class="active">1. Dashboard</a>
-          <a href="#settings">2. Store Settings</a>
-          <a href="#content-managers">3. Pengurusan Kandungan</a>
-          <a href="#orders">4. Senarai Orders</a>
-        </nav>
+    <a href="#dashboard-overview" class="active">1. Dashboard</a>
+    <a href="#settings">2. Tetapan Bijak & Operasi</a>
+    <a href="#analytics-feedbacks">3. Analitik & Maklum Balas</a>
+    <a href="#content-managers">4. Kos Pembaikan & Item</a>
+    <a href="#orders">5. Senarai Orders</a>
+</nav>
       </aside>
 
       <main class="main">
@@ -614,6 +615,66 @@
             </div>
           </div>
         </section>
+
+        <section class="panel" id="settings">
+    <h2>2. Tetapan Operasi, Staff & Paparan</h2>
+    <div class="form-grid">
+        <!-- Toggles -->
+        <div class="field full">
+            <label>Pengumuman Website (Banner)</label>
+            <input type="checkbox" id="showAnnouncement"> Aktifkan
+            <input id="announcementText" type="text" placeholder="Teks pengumuman promosi..." class="form-control" style="margin-top:5px;">
+        </div>
+        <div class="field">
+            <label>Kedai Cuti/Tutup Paksa?</label>
+            <input type="checkbox" id="forceClose"> Ya, Tutup Kedai
+            <input id="forceCloseMsg" type="text" placeholder="Sebab cuti..." class="form-control" style="margin-top:5px;">
+        </div>
+
+        <!-- Staff -->
+        <div class="field">
+            <label>Staff 1 (Nama & Status Cuti)</label>
+            <input id="staff1_name" type="text" placeholder="Nama Staff 1">
+            <div style="margin-top:5px;"><input type="checkbox" id="staff1_leave"> Sedang Cuti</div>
+            <input id="staff1_duration" type="text" placeholder="Cth: 2 Hari / 4 Jam" style="margin-top:5px;">
+        </div>
+        <div class="field">
+            <label>Staff 2 (Nama & Status Cuti)</label>
+            <input id="staff2_name" type="text" placeholder="Nama Staff 2">
+            <div style="margin-top:5px;"><input type="checkbox" id="staff2_leave"> Sedang Cuti</div>
+            <input id="staff2_duration" type="text" placeholder="Cth: 1 Minggu" style="margin-top:5px;">
+        </div>
+
+        <!-- Sembunyikan Seksyen -->
+        <div class="field full" style="border-top:1px solid #333; padding-top:1rem;">
+            <label>Matikan Fitur (Jika tak nak tunjuk di website)</label>
+            <label><input type="checkbox" id="toggleRepair"> Papar Kalkulator Repair</label><br>
+            <label><input type="checkbox" id="toggleBuilder"> Papar Bina PC Custom</label>
+        </div>
+        
+        <button onclick="saveSmartSettings()" class="btn primary full" style="margin-top:1rem;">Simpan Tetapan Operasi</button>
+    </div>
+</section>
+
+<section class="panel" id="analytics-feedbacks">
+    <h2>3. Analitik Klik & Maklum Balas</h2>
+    
+    <!-- Graf Analitik Ringkas -->
+    <div style="background:#1a1c22; padding:1rem; border-radius:10px; margin-bottom:1.5rem;">
+        <h3>📊 Aktiviti Klik Pelanggan Paling Banyak</h3>
+        <div id="analyticsContainer" style="margin-top:1rem; display:flex; flex-direction:column; gap:10px;">
+            <!-- Bar analitik di-render di sini oleh JS -->
+        </div>
+        <button onclick="resetAnalytics()" class="btn danger" style="margin-top:1rem;">Restart Graf Analitik</button>
+    </div>
+
+    <!-- Senarai Feedbacks -->
+    <h3>Senarai Maklum Balas / Cadangan</h3>
+    <table class="mini-table">
+        <thead><tr><th>Nama</th><th>Komen</th><th>Tarikh</th><th>Padam</th></tr></thead>
+        <tbody id="feedbackTableBody"></tbody>
+    </table>
+</section>
 
         <!-- 2. GENERAL STORE SETTINGS -->
         <section class="panel" id="settings">
@@ -1494,6 +1555,93 @@ async function importAllDataFromDatabase() {
     toggleAdminView();
     renderOrders();
     renderPremiumManagers();
+
+    // Simpan & Tarik Tetapan Kedai
+async function saveSmartSettings() {
+    const config = {
+        showAnnouncement: document.getElementById('showAnnouncement').checked,
+        announcementText: document.getElementById('announcementText').value,
+        forceClose: document.getElementById('forceClose').checked,
+        forceCloseMsg: document.getElementById('forceCloseMsg').value,
+        staff1_name: document.getElementById('staff1_name').value,
+        staff1_leave: document.getElementById('staff1_leave').checked,
+        staff1_leaveDuration: document.getElementById('staff1_duration').value,
+        staff2_name: document.getElementById('staff2_name').value,
+        staff2_leave: document.getElementById('staff2_leave').checked,
+        staff2_leaveDuration: document.getElementById('staff2_duration').value,
+        showRepairCalc: document.getElementById('toggleRepair').checked,
+        showBuilder: document.getElementById('toggleBuilder').checked
+    };
+    await firebaseState.db.collection('settings').doc('mainConfig').set(config);
+    alert("Tetapan kedai berjaya diselaraskan!");
+}
+
+// Muatkan Feedbacks
+async function loadFeedbacks() {
+    const snapshot = await firebaseState.db.collection('feedbacks').orderBy('date', 'desc').get();
+    const tbody = document.getElementById('feedbackTableBody');
+    tbody.innerHTML = "";
+    snapshot.forEach(doc => {
+        const data = doc.data();
+        tbody.innerHTML += `
+            <tr>
+                <td>${data.name}</td>
+                <td>${data.message}</td>
+                <td>${data.date}</td>
+                <td><button onclick="deleteFeedback('${doc.id}')" class="small-btn danger">Padam</button></td>
+            </tr>`;
+    });
+}
+
+async function deleteFeedback(id) {
+    if(confirm("Padam maklum balas ini? (Bagus jika database penuh)")) {
+        await firebaseState.db.collection('feedbacks').doc(id).delete();
+        loadFeedbacks();
+    }
+}
+
+// Muatkan Graf Analitik (Bar CSS Mudah)
+async function loadAnalytics() {
+    const snapshot = await firebaseState.db.collection('analytics').orderBy('clicks', 'desc').get();
+    const container = document.getElementById('analyticsContainer');
+    container.innerHTML = "";
+    
+    // Cari nilai tertinggi untuk peratusan bar
+    let maxClicks = 0;
+    const items = [];
+    snapshot.forEach(doc => {
+        const data = doc.data();
+        items.push({ id: doc.id, clicks: data.clicks });
+        if(data.clicks > maxClicks) maxClicks = data.clicks;
+    });
+
+    items.forEach(item => {
+        const width = (item.clicks / maxClicks) * 100;
+        container.innerHTML += `
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:150px; font-size:0.8rem; overflow:hidden;">${item.id}</div>
+                <div style="flex:1; background:#000; border-radius:5px;">
+                    <div style="width:${width}%; background:var(--accent-orange); color:#fff; font-size:0.75rem; padding:2px 5px; border-radius:5px;">${item.clicks} klik</div>
+                </div>
+            </div>
+        `;
+    });
+}
+
+async function resetAnalytics() {
+    if(!confirm("Anda pasti mahu reset kosong semua rekod klik?")) return;
+    const snapshot = await firebaseState.db.collection('analytics').get();
+    const batch = firebaseState.db.batch();
+    snapshot.forEach(doc => batch.delete(doc.ref));
+    await batch.commit();
+    loadAnalytics();
+}
+
+// Panggil fungsi ini bila admin page dibuka
+setTimeout(() => {
+    if(firebaseState.db) { loadFeedbacks(); loadAnalytics(); }
+}, 2000);
+
   </script>
 </body>
 </html>

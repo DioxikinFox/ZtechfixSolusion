@@ -153,6 +153,13 @@
                 <li><a onclick="navigate('finder')" id="nav-finder">Carian Upgrade & Gadjet</a></li>
             </ul>
         </div>
+        <!-- Notis Status Kedai, Pengumuman & Cuti Staff -->
+<div id="store-status-banner" style="background: var(--accent-orange); color: #000; text-align: center; padding: 0.75rem; font-weight: 700; font-size: 0.9rem; display: none;">
+    <span id="announcement-text"></span>
+</div>
+<div id="staff-leave-banner" style="background: #ef4444; color: #fff; text-align: center; padding: 0.5rem; font-size: 0.85rem; font-weight: 600; display: none;">
+    <span id="staff-leave-text"></span>
+</div>
     </header>
 
     <main>
@@ -314,7 +321,14 @@
             </div>
         </section>
     </main>
-
+<section id="feedback-section" class="container" style="padding-top: 0;">
+    <div class="form-panel" style="max-width: 600px;">
+        <div class="section-header" style="margin-bottom: 1.5rem;"><h2>Maklum Balas Pelanggan</h2></div>
+        <div class="form-group"><label>Nama</label><input id="fbName" class="form-control" type="text" /></div>
+        <div class="form-group"><label>Komen / Cadangan</label><textarea id="fbMessage" class="form-control" rows="3"></textarea></div>
+        <button onclick="submitFeedback()" class="btn-orange" style="width: 100%;">Hantar Maklum Balas</button>
+    </div>
+</section>
     <footer>
         <div class="footer-grid">
             <div class="footer-col"><div class="logo"><div class="logo-icon">ZS</div> ZTECHFIX</div><p style="color: var(--text-muted); font-size: 0.85rem;">Pakar baik pulih gadjet di Kuala Kangsar[cite: 9].</p></div>
@@ -328,10 +342,40 @@
         if (window.firebase) { firebase.initializeApp(firebaseConfig); }
         const db = window.firebase ? firebase.firestore() : null;
 
-        // Struktur penuh semua kerosakan peranti
+       // Struktur penuh yang dijangkakan oleh Admin dan Database
         const defaultCustomerData = {
             companyName: 'ZTECHFIX',
             whatsappNumber: '60189563923',
+            phoneNumber: '05-776 8905',
+            email: 'ztechfixsolutions@yahoo.com',
+            address: 'No 11 Jalan Bendahara 3, Bandar Baru, Kuala Kangsar',
+            heroTitle: 'Baiki Kerosakan. Bina Sistem Impian.',
+            heroText: 'ZTECHFIX SOLUTIONS (SA0560360-D) - Pakar baik pulih telefon pintar, iPhone, tablet, laptop, MacBook, dan binaan kustom PC di Kuala Kangsar.',
+            builderBase: 700,
+            
+            // Maklumat Bina PC yang hilang
+            builderOptions: {
+                cpu: [
+                    { value: '350', score: '1', label: 'Intel Core i3 / AMD Ryzen 3 (Asas)' },
+                    { value: '750', score: '3', label: 'Intel Core i5 / AMD Ryzen 5 (Pertengahan)' },
+                    { value: '1400', score: '5', label: 'Intel Core i7 / AMD Ryzen 7 (Prestasi)' }
+                ],
+                gpu: [
+                    { value: '0', score: '0', label: 'Grafik Bersepadu (Integrated)' },
+                    { value: '950', score: '3', label: 'NVIDIA RTX 3050 / AMD RX 6600' },
+                    { value: '1550', score: '5', label: 'NVIDIA RTX 4060 / AMD RX 7600' }
+                ],
+                ram: [
+                    { value: '90', score: '1', label: '8GB RAM (Standard)' },
+                    { value: '180', score: '3', label: '16GB RAM (Prestasi)' }
+                ],
+                storage: [
+                    { value: '150', label: '512GB NVMe M.2 SSD' },
+                    { value: '300', label: '1TB NVMe M.2 SSD' }
+                ]
+            },
+
+            // Senarai Repair Penuh
             repairData: {
                 'phone': { 'lcd_ori': { label: 'Tukar LCD Ori', price: 'RM 220 - RM 750' }, 'battery': { label: 'Tukar Bateri', price: 'RM 80 - RM 280' } },
                 'iphone': { 'lcd_ori': { label: 'Tukar LCD Ori (iPhone)', price: 'RM 280 - RM 850' }, 'battery': { label: 'Tukar Bateri iPhone', price: 'RM 100 - RM 350' } },
@@ -346,9 +390,18 @@
         };
 
         function initCustomerPage() {
+            // Simpan ke storage lokal
             localStorage.setItem('ztechfix_site_data', JSON.stringify(defaultCustomerData));
-            if (db) { db.collection('siteSettings').doc('main').set(defaultCustomerData, { merge: true }).catch(() => {}); }
+            
+            // Push struktur penuh ini ke Firebase supaya Admin boleh import dengan sempurna
+            if (db) { 
+                db.collection('siteSettings').doc('main').set(defaultCustomerData, { merge: true })
+                .then(() => console.log('Data berjaya diselaraskan dengan Firebase'))
+                .catch((error) => console.error('Ralat Firebase:', error)); 
+            }
         }
+        
+        // Mulakan proses kemaskini database
         initCustomerPage();
 
         function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }
@@ -392,11 +445,16 @@
             const gpu = parseInt(document.getElementById('pc-gpu').value) || 0;
             const ram = parseInt(document.getElementById('pc-ram').value) || 0;
             const storage = parseInt(document.getElementById('pc-storage').value) || 0;
+            
             if(cpu === 0) return;
-            const total = 700 + cpu + gpu + ram + storage;
+            
+            // Pengiraan Total Berdasarkan Nilai Terkini
+            const basePrice = defaultCustomerData.builderBase || 700;
+            const total = basePrice + cpu + gpu + ram + storage;
+            
             document.getElementById('pc-total-price').textContent = `RM ${total.toLocaleString()}`;
             document.getElementById('pc-recommendation').style.display = "block";
-            document.getElementById('pc-rec-text').textContent = "Konfigurasi sistem dianalisa berjaya.";
+            document.getElementById('pc-rec-text').textContent = "Konfigurasi sistem PC telah dianalisa dengan jayanya.";
             document.getElementById('wa-builder-link').href = `https://wa.me/60189563923?text=${encodeURIComponent('Bina PC Total: RM ' + total)}`;
             document.getElementById('wa-builder-link').style.display = "block";
         }
@@ -405,12 +463,117 @@
             const name = document.getElementById('orderName').value.trim();
             const phone = document.getElementById('orderPhone').value.trim();
             const product = document.getElementById('orderProduct').value.trim();
-            if (!name || !phone || !product) { alert('Sila isi maklumat wajib.'); return; }
+            if (!name || !phone || !product) { alert('Sila isi maklumat wajib (Nama, No Tel, Produk).'); return; }
+            
             const orders = JSON.parse(localStorage.getItem('ztechfix_orders') || '[]');
-            orders.unshift({ customerName: name, customerPhone: phone, product, price: document.getElementById('orderPrice').value || 'RM 0', status: 'pending', date: new Date().toLocaleString() });
+            orders.unshift({ 
+                customerName: name, 
+                customerPhone: phone, 
+                product, 
+                price: document.getElementById('orderPrice').value || 'RM 0', 
+                status: 'pending', 
+                date: new Date().toLocaleString() 
+            });
+            
             localStorage.setItem('ztechfix_orders', JSON.stringify(orders));
-            alert('Order berjaya disimpan!');
+            alert('Tempahan anda berjaya disimpan dalam sistem!');
         });
+
+        // 1. Sistem Track Klik (Analitik)
+function trackClick(itemName) {
+    if (db) {
+        db.collection('analytics').doc(itemName).set({
+            clicks: firebase.firestore.FieldValue.increment(1),
+            lastClicked: new Date().toISOString()
+        }, { merge: true });
+    }
+}
+
+// Tambah event listener kepada butang sedia ada
+document.querySelectorAll('button, a.btn-orange').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        trackClick(e.target.innerText || 'Button Clicked');
+    });
+});
+
+// 2. Sistem Autonomi Waktu Kedai & Toggles
+async function loadSmartSettings() {
+    if (!db) return;
+    const docSnap = await db.collection('settings').doc('mainConfig').get();
+    if (!docSnap.exists) return;
+    
+    const config = docSnap.data();
+    
+    // Auto-Masa Kedai (10:30 pagi - 6:00 petang, Ahad Cuti)
+    const now = new Date();
+    const day = now.getDay(); // 0 = Ahad
+    const hour = now.getHours();
+    const min = now.getMinutes();
+    const timeVal = hour + (min / 60); // Contoh: 10:30 = 10.5
+    
+    let isOpen = true;
+    let statusMsg = "";
+
+    if (day === 0) {
+        isOpen = false; statusMsg = "Kedai Ditutup (Cuti Hari Ahad).";
+    } else if (timeVal < 10.5 || timeVal >= 18.0) {
+        isOpen = false; statusMsg = "Kedai Ditutup. Waktu operasi: 10:30 Pagi - 6:00 Petang.";
+    }
+
+    // Override oleh Admin jika set 'Tutup Paksa / Cuti Umum'
+    if (config.forceClose) {
+        isOpen = false; statusMsg = config.forceCloseMsg || "Kedai Ditutup Atas Urusan Kerja / Cuti Umum.";
+    }
+
+    const banner = document.getElementById('store-status-banner');
+    if (!isOpen) {
+        banner.style.display = 'block';
+        banner.style.background = '#ef4444'; // Merah tutup
+        document.getElementById('announcement-text').innerHTML = `⛔ ${statusMsg}`;
+    } else if (config.showAnnouncement) {
+        banner.style.display = 'block';
+        banner.style.background = 'var(--accent-orange)';
+        document.getElementById('announcement-text').innerHTML = `📢 ${config.announcementText}`;
+    }
+
+    // Sistem Semak Cuti Staff (2 Orang)
+    let leaveMsg = [];
+    if (config.staff1_leave) leaveMsg.push(`Staff 1 (${config.staff1_name}) sedang bercuti selama ${config.staff1_leaveDuration}.`);
+    if (config.staff2_leave) leaveMsg.push(`Staff 2 (${config.staff2_name}) sedang bercuti selama ${config.staff2_leaveDuration}.`);
+    
+    if (leaveMsg.length > 0) {
+        const staffBanner = document.getElementById('staff-leave-banner');
+        staffBanner.style.display = 'block';
+        document.getElementById('staff-leave-text').innerText = "Notis Kelewatan: " + leaveMsg.join(" | ") + " Masa penyelenggaraan mungkin sedikit lambat.";
+    }
+
+    // Sistem Tutup/Buka Seksyen HTML (Toggles)
+    if (!config.showRepairCalc) document.getElementById('repair-section').style.display = 'none';
+    if (!config.showBuilder) document.getElementById('builder').style.display = 'none';
+}
+
+// 3. Sistem Hantar Maklum Balas ke Database Collection 'feedbacks'
+function submitFeedback() {
+    const name = document.getElementById('fbName').value.trim();
+    const msg = document.getElementById('fbMessage').value.trim();
+    if (!name || !msg) { alert("Isi nama dan komen."); return; }
+    
+    if (db) {
+        db.collection('feedbacks').add({
+            name: name,
+            message: msg,
+            date: new Date().toLocaleString()
+        }).then(() => {
+            alert("Terima kasih atas maklum balas anda!");
+            document.getElementById('fbName').value = '';
+            document.getElementById('fbMessage').value = '';
+        });
+    }
+}
+
+// Jalankan ketika website dibuka
+window.onload = () => { loadSmartSettings(); }
+
     </script>
 </body>
 </html>
