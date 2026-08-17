@@ -868,9 +868,9 @@
          ========================================================== -->
     <header>
         <div class="nav-container">
-            <a class="logo" onclick="navigate('home')">
+            <a class="logo" id="brand-logo" onclick="navigate('home')">
                 <div class="logo-icon">ZS</div>
-                ZTECHFIX
+                <span id="brand-name">ZTECHFIX</span>
             </a>
             
             <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -882,7 +882,7 @@
                 <li><a onclick="navigate('finder')" id="nav-finder">Carian Upgrade & Gadjet</a></li>
             </ul>
 
-            <a href="https://wa.me/60189563923" target="_blank" class="btn-orange" style="display: none; @media(min-width: 968px){display:inline-block;}">Tempah Servis</a>
+            <a id="top-cta" href="https://wa.me/60189563923" target="_blank" class="btn-orange" style="display: none; @media(min-width: 968px){display:inline-block;}">Tempah Servis</a>
         </div>
     </header>
 
@@ -1435,10 +1435,424 @@
         </div>
     </footer>
 
+    <section class="container" style="padding-top: 0;">
+        <div class="form-panel" style="max-width: 760px;">
+            <div class="section-header" style="margin-bottom: 1.5rem;">
+                <h2>Order / Tempahan Pantas</h2>
+                <p>Masukkan maklumat anda, order akan disimpan di browser dan admin boleh lihat di halaman admin.</p>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Nama Pelanggan</label>
+                    <input id="orderName" class="form-control" type="text" placeholder="Nama penuh" />
+                </div>
+                <div class="form-group">
+                    <label>No. Telefon</label>
+                    <input id="orderPhone" class="form-control" type="text" placeholder="01x-xxxx xxxx" />
+                </div>
+                <div class="form-group">
+                    <label>Produk / Servis</label>
+                    <input id="orderProduct" class="form-control" type="text" placeholder="Contoh: iPhone 13 LCD / PC Build" />
+                </div>
+                <div class="form-group">
+                    <label>Harga</label>
+                    <input id="orderPrice" class="form-control" type="text" placeholder="RM 350" />
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>Catatan / Maklumat Tambahan</label>
+                    <textarea id="orderNotes" class="form-control" rows="4" placeholder="Sila masuk butiran tambahan..."></textarea>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 1.25rem;">
+                <button id="submitOrderBtn" class="btn-orange" style="width: 100%; max-width: 260px;">Hantar Order</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
     <!-- ==========================================================
          SKRIP JAVASCRIPT & PANDUAN PENYELENGGARAAN KOD
          ========================================================== -->
     <script>
+        const firebaseConfig = {
+          apiKey: "AIzaSyAFZS2YwQITFCmi6Ox2N-8ECKeBi5DFbAQ",
+          authDomain: "ztechfix-23497.firebaseapp.com",
+          projectId: "ztechfix-23497",
+          storageBucket: "ztechfix-23497.firebasestorage.app",
+          messagingSenderId: "29238953296",
+          appId: "1:29238953296:web:6087312f3e6c9c4e581855",
+          measurementId: "G-YX25G1DRN5"
+        };
+
+        if (window.firebase) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        const db = window.firebase ? firebase.firestore() : null;
+        const siteSettingsRef = db ? db.collection('siteSettings').doc('main') : null;
+
+        // ==========================================================
+        // DATA PELANGGAN / ADMIN (localStorage + Firebase fallback)
+        // ==========================================================
+        const defaultCustomerData = {
+            companyName: 'ZTECHFIX',
+            whatsappNumber: '60189563923',
+            phoneNumber: '05-776 8905',
+            email: 'ztechfixsolutions@yahoo.com',
+            address: 'No 11 Jalan Bendahara 3, Bandar Baru, Kuala Kangsar',
+            heroTitle: 'Baiki Kerosakan. Bina Sistem Impian.',
+            heroText: 'ZTECHFIX SOLUTIONS (SA0560360-D) - Pakar baik pulih telefon pintar, iPhone, tablet, laptop, MacBook, dan binaan kustom PC di Kuala Kangsar dengan jaminan kerja telus.',
+            builderBase: 700,
+            footerNote: '&copy; 2026 ZTECHFIX SOLUTIONS (SA0560360-D). 891+ Pengikut. Hak Cipta Terpelihara.',
+            repairData: {
+                phone: {
+                    'lcd_ori': { label: 'Tukar LCD Ori', price: 'RM 220 - RM 750' },
+                    'lcd_copy': { label: 'Tukar LCD Copy (Bajet)', price: 'RM 100 - RM 280' },
+                    'battery': { label: 'Tukar Bateri (Original Grade)', price: 'RM 80 - RM 280' }
+                },
+                laptop: {
+                    'keyboard': { label: 'Tukar Keyboard', price: 'RM 130 - RM 550' },
+                    'battery': { label: 'Tukar Bateri', price: 'RM 110 - RM 480' },
+                    'upgrade_ram': { label: 'Naik Taraf RAM', price: 'RM 100 - RM 350' }
+                }
+            },
+            galleryItems: [
+                { title: 'Binaan Custom PC RGB', image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80', description: 'Susun atur kabel terstruktur rapi dengan aliran udara penyejukan optimum.' },
+                { title: 'Pembaikan Papan Induk (IC)', image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80', description: 'Pematerian tahap komponen mikro menggunakan mikroskop berketepatan tinggi.' }
+            ],
+            reviews: [
+                { name: 'Maya R.', title: 'Skrin iPhone 13', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80', text: 'Skrin iPhone saya retak teruk dan siap dalam masa singkat. Nampak seperti baru.' },
+                { name: 'Devon L.', title: 'Custom PC Gaming', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80', text: 'Mereka bina PC gaming saya dari awal mengikut bajet ketat. Pengurusan kabel sangat kemas.' }
+            ],
+            builderOptions: {
+                cpu: [
+                  { value: '350', score: '1', label: 'Intel Core i3 / AMD Ryzen 3 (Asas)' },
+                  { value: '750', score: '3', label: 'Intel Core i5 / AMD Ryzen 5 (Pertengahan)' },
+                  { value: '1400', score: '5', label: 'Intel Core i7 / AMD Ryzen 7 (Prestasi Tinggi)' }
+                ],
+                gpu: [
+                  { value: '0', score: '0', label: 'Grafik Bersepadu (Integrated)' },
+                  { value: '950', score: '3', label: 'NVIDIA RTX 3050 / AMD RX 6600' },
+                  { value: '1550', score: '5', label: 'NVIDIA RTX 4060 / AMD RX 7600' }
+                ],
+                ram: [
+                  { value: '90', score: '1', label: '8GB RAM (Standard Pejabat)' },
+                  { value: '180', score: '3', label: '16GB RAM (Standard Prestasi)' },
+                  { value: '450', score: '5', label: '32GB RAM (Kreatif / Heavy Multitasking)' }
+                ],
+                storage: [
+                  { value: '150', label: '512GB NVMe M.2 SSD' },
+                  { value: '300', label: '1TB NVMe M.2 SSD' },
+                  { value: '650', label: '2TB NVMe M.2 SSD (Gen4)' }
+                ]
+            },
+            phoneDeals: [
+                { title: 'Samsung Galaxy A13 (128GB)', category: 'bajet', oldPrice: 'RM 699', newPrice: 'RM 350', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', description: 'SAMSUNG GALAXY A13: Kapasiti storan besar 128GB, bateri tahan lama, sangat sesuai untuk pengurusan nota pembelajaran anak-anak, kelas online, dan aplikasi produktiviti asas harian.' },
+                { title: 'Xiaomi Poco X3 Pro', category: 'game', oldPrice: 'RM 1,199', newPrice: 'RM 550', image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80', description: 'XIAOMI POCO X3 PRO: Pemproses berkuasa tinggi Snapdragon 860 dengan paparan skrin 120Hz yang lancar.' }
+            ],
+            clearanceItems: [
+                { title: 'Samsung Galaxy A13 (128GB)', category: 'bajet', oldPrice: 'RM 699', newPrice: 'RM 350', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', description: 'Kapasiti storan 128GB, bateri tahan lama, sesuai untuk penggunaan harian.' },
+                { title: 'Xiaomi Poco X3 Pro', category: 'game', oldPrice: 'RM 1,199', newPrice: 'RM 550', image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80', description: 'Pemproses Snapdragon 860 dengan paparan 120Hz untuk permainan.' }
+            ],
+            finderItems: [
+                { title: 'SSD NVMe M.2 1TB (Upgrade)', category: 'upgrade-pc', price: 'RM 299', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80', description: 'SSD NVMe M.2 1TB: Tingkatkan kepantasan boot komputer riba dan masa muat permainan anda sehingga 5x ganda lebih pantas.' },
+                { title: 'Pro Wireless Controller (Joystick)', category: 'joystick', price: 'RM 249', image: 'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=800&q=80', description: 'PRO WIRELESS CONTROLLER: Alat kawalan serasi PS4 / PS5 / PC dengan sensor anti-drift, cengkaman keselesaan ergonomik.' }
+            ]
+        };
+
+        async function loadRemoteSiteData() {
+            if (!siteSettingsRef) return null;
+            try {
+                const snap = await siteSettingsRef.get();
+                return snap.exists ? snap.data() : null;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function getSiteData() {
+            try {
+                const saved = JSON.parse(localStorage.getItem('ztechfix_site_data') || 'null');
+                if (!saved) return defaultCustomerData;
+                const merged = { ...defaultCustomerData, ...saved };
+                merged.repairData = { ...defaultCustomerData.repairData, ...(saved.repairData || {}) };
+                merged.galleryItems = Array.isArray(saved.galleryItems) ? saved.galleryItems : defaultCustomerData.galleryItems;
+                merged.reviews = Array.isArray(saved.reviews) ? saved.reviews : defaultCustomerData.reviews;
+                merged.builderOptions = { ...defaultCustomerData.builderOptions, ...(saved.builderOptions || {}) };
+                merged.phoneDeals = Array.isArray(saved.phoneDeals) ? saved.phoneDeals : defaultCustomerData.phoneDeals;
+                merged.clearanceItems = Array.isArray(saved.clearanceItems) ? saved.clearanceItems : defaultCustomerData.clearanceItems;
+                merged.finderItems = Array.isArray(saved.finderItems) ? saved.finderItems : defaultCustomerData.finderItems;
+                return merged;
+            } catch (error) {
+                return defaultCustomerData;
+            }
+        }
+
+        function renderRepairOptions() {
+            const data = getSiteData();
+            const deviceType = document.getElementById('device-type');
+            const deviceIssue = document.getElementById('device-issue');
+            if (!deviceType || !deviceIssue) return;
+            const repairData = data.repairData || defaultCustomerData.repairData;
+            deviceType.innerHTML = '<option value="">-- Sila Pilih Peranti --</option>' + Object.keys(repairData).map((key) => `<option value="${key}">${key === 'phone' ? 'Telefon Pintar (Phone)' : key === 'iphone' ? 'iPhone (Apple)' : key === 'ipad' ? 'iPad & Tablet' : key === 'laptop' ? 'Laptop Biasa' : key === 'macbook' ? 'MacBook (Apple)' : key === 'pc' ? 'Komputer Meja (Desktop)' : key === 'console' ? 'Konsol Permainan' : key === 'printer' ? 'Pencetak (Printer)' : key === 'software' ? 'Perisian PC / Online Surfing' : key}</option>`).join('');
+            const selected = deviceType.value || Object.keys(repairData)[0];
+            const issues = repairData[selected] || {};
+            deviceIssue.innerHTML = '<option value="">-- Pilih Kategori Dahulu --</option>' + Object.keys(issues).map((issueKey) => `<option value="${issueKey}">${issues[issueKey].label || issueKey}</option>`).join('');
+            deviceIssue.disabled = Object.keys(issues).length === 0;
+        }
+
+        function renderGallery() {
+            const data = getSiteData();
+            const galleryWrap = document.getElementById('gallery-grid');
+            if (!galleryWrap) return;
+            galleryWrap.innerHTML = (data.galleryItems || []).map((item) => `
+                <div class="card" onclick="openModal('${escapeHtml(item.title || 'Hasil Kerja')}', '${escapeHtml(item.image || '')}', '${escapeHtml(item.description || '')}')">
+                    <div class="card-img-placeholder">
+                        <img src="${escapeHtml(item.image || '')}" alt="${escapeHtml(item.title || 'Hasil Kerja')}">
+                    </div>
+                    <h3>${escapeHtml(item.title || 'Hasil Kerja')}</h3>
+                    <p>${escapeHtml(item.description || '')}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderReviews() {
+            const data = getSiteData();
+            const wrap = document.getElementById('reviews-grid');
+            if (!wrap) return;
+            wrap.innerHTML = (data.reviews || []).map((item) => `
+                <div class="review-card" onclick="openModal('${escapeHtml(item.name || 'Pelanggan')} (${escapeHtml(item.title || 'Ulasan')} )', '${escapeHtml(item.image || '')}', '${escapeHtml(item.text || '')}')">
+                    <div>
+                        <div class="review-header">
+                            <img src="${escapeHtml(item.image || '')}" alt="${escapeHtml(item.name || 'Pelanggan')}" class="reviewer-avatar">
+                            <div class="reviewer-info">
+                                <h4>${escapeHtml(item.name || 'Pelanggan')}</h4>
+                                <p>${escapeHtml(item.title || 'Ulasan')}</p>
+                            </div>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                        <p class="review-text">"${escapeHtml(item.text || '')}"</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderBuilderOptions() {
+            const data = getSiteData();
+            const builderOptions = data.builderOptions || defaultCustomerData.builderOptions;
+            const cpuEl = document.getElementById('pc-cpu');
+            const gpuEl = document.getElementById('pc-gpu');
+            const ramEl = document.getElementById('pc-ram');
+            const storageEl = document.getElementById('pc-storage');
+            if (!cpuEl || !gpuEl || !ramEl || !storageEl) return;
+            cpuEl.innerHTML = '<option value="0">-- Sila Pilih Pemproses --</option>' + (builderOptions.cpu || []).map((item) => `<option value="${item.value}" data-score="${item.score || 0}">${item.label}</option>`).join('');
+            gpuEl.innerHTML = '<option value="0">-- Sila Pilih Grafik --</option>' + (builderOptions.gpu || []).map((item) => `<option value="${item.value}" data-score="${item.score || 0}">${item.label}</option>`).join('');
+            ramEl.innerHTML = '<option value="0">-- Sila Pilih RAM --</option>' + (builderOptions.ram || []).map((item) => `<option value="${item.value}" data-score="${item.score || 0}">${item.label}</option>`).join('');
+            storageEl.innerHTML = '<option value="0">-- Sila Pilih Storan --</option>' + (builderOptions.storage || []).map((item) => `<option value="${item.value}">${item.label}</option>`).join('');
+        }
+
+        function renderClearanceGrid() {
+            const data = getSiteData();
+            const clearanceGrid = document.getElementById('clearance-grid');
+            if (!clearanceGrid) return;
+            clearanceGrid.innerHTML = (data.clearanceItems || []).map((item) => {
+                const safeTitle = escapeHtml(item.title || 'Produk Lelong');
+                const safeImage = escapeHtml(item.image || '');
+                const safeDesc = escapeHtml(item.description || '');
+                const oldPrice = item.oldPrice ? `<div style="text-decoration: line-through; color: var(--text-muted); font-size: 0.8rem;">${escapeHtml(item.oldPrice)}</div>` : '';
+                const newPrice = item.newPrice ? `<div style="color: var(--accent-orange); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem;">${escapeHtml(item.newPrice)}</div>` : '';
+                return `
+                    <div class="card clearance-item" data-category="${escapeHtml(item.category || 'bajet')}" onclick="openModal('${safeTitle}', '${safeImage}', '${safeDesc}')">
+                        <div class="card-img-placeholder"><img src="${safeImage}" alt="${safeTitle}"></div>
+                        <span class="item-tag">${escapeHtml(item.category === 'game' ? 'Prestasi Permainan' : 'Phone Bajet')}</span>
+                        <h3>${safeTitle}</h3>
+                        <p>${safeDesc}</p>
+                        <div style="margin-top: auto;">
+                            ${oldPrice}
+                            ${newPrice}
+                            <button class="btn-outline" style="width:100%;">Mohon Ketersediaan</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderFinderGrid() {
+            const data = getSiteData();
+            const finderResults = document.getElementById('finder-results');
+            if (!finderResults) return;
+            finderResults.innerHTML = (data.finderItems || []).map((item) => {
+                const safeTitle = escapeHtml(item.title || 'Item');
+                const safeImage = escapeHtml(item.image || '');
+                const safeDesc = escapeHtml(item.description || '');
+                const itemTag = item.category === 'joystick' ? 'Joystick' : item.category === 'console' ? 'Konsol' : 'Naik Taraf';
+                return `
+                    <div class="card" data-tags="${escapeHtml(item.category || 'upgrade-pc')}" onclick="openModal('${safeTitle}', '${safeImage}', '${safeDesc}')">
+                        <div class="card-img-placeholder"><img src="${safeImage}" alt="${safeTitle}"></div>
+                        <span class="item-tag">${escapeHtml(itemTag)}</span>
+                        <h3>${safeTitle}</h3>
+                        <p>${safeDesc}</p>
+                        <div style="margin-top: auto;">
+                            <div style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">${escapeHtml(item.price || 'RM 0')}</div>
+                            <button class="btn-outline" style="width:100%;">Tempah Pemasangan</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function applySiteData() {
+            const data = getSiteData();
+            const brandNameEl = document.getElementById('brand-name');
+            if (brandNameEl) brandNameEl.textContent = data.companyName || 'ZTECHFIX';
+
+            const titleEl = document.querySelector('.hero-content h1');
+            if (titleEl) {
+                const firstPart = data.heroTitle.split('.')[0] || 'Baiki Kerosakan';
+                const secondPart = data.heroTitle.includes('.') ? data.heroTitle.split('.').slice(1).join('.').trim() : 'Bina Sistem Impian.';
+                titleEl.innerHTML = `${firstPart}. <span>${secondPart}</span>`;
+            }
+
+            const heroTextEl = document.querySelector('.hero-content p');
+            if (heroTextEl) heroTextEl.textContent = data.heroText || defaultCustomerData.heroText;
+
+            const topCta = document.getElementById('top-cta');
+            if (topCta) topCta.href = `https://wa.me/${data.whatsappNumber}`;
+
+            const footerNote = document.querySelector('.footer-bottom p');
+            if (footerNote) footerNote.innerHTML = data.footerNote || defaultCustomerData.footerNote;
+
+            const footerLinks = document.querySelectorAll('.footer-col a[href^="tel:"]');
+            footerLinks.forEach(link => { if (data.phoneNumber) link.href = `tel:${data.phoneNumber}`; link.textContent = `Tel: ${data.phoneNumber}`; });
+
+            const emailLink = document.querySelector('.footer-col a[href^="mailto:"]');
+            if (emailLink) {
+                emailLink.href = `mailto:${data.email}`;
+                emailLink.textContent = data.email;
+            }
+
+            const addressLink = document.querySelector('.footer-col a[href="#"]');
+            if (addressLink) addressLink.textContent = data.address;
+
+            const phoneCalls = document.querySelectorAll('a[href="https://wa.me/60189563923"]');
+            phoneCalls.forEach(link => { link.href = `https://wa.me/${data.whatsappNumber}`; });
+
+            if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || !window.location.pathname.includes('admin')) {
+                const builder = document.getElementById('pc-total-price');
+                if (builder && data.builderBase) {
+                    document.getElementById('pc-total-price').dataset.basePrice = data.builderBase;
+                }
+            }
+
+            renderRepairOptions();
+            renderGallery();
+            renderReviews();
+            renderBuilderOptions();
+            renderClearanceGrid();
+            renderFinderGrid();
+            renderCustomerInventory();
+        }
+
+        function escapeHtml(value = '') {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function renderCustomerInventory() {
+            const data = getSiteData();
+            const clearanceGrid = document.getElementById('clearance-grid');
+            const finderResults = document.getElementById('finder-results');
+
+            if (clearanceGrid) {
+                clearanceGrid.innerHTML = (data.phoneDeals || []).map((item) => {
+                    const safeTitle = escapeHtml(item.title || 'Product');
+                    const safeImage = escapeHtml(item.image || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80');
+                    const safeDesc = escapeHtml(item.description || 'Penerangan produk.');
+                    const oldPrice = item.oldPrice ? `<div style="text-decoration: line-through; color: var(--text-muted); font-size: 0.8rem;">${escapeHtml(item.oldPrice)}</div>` : '';
+                    const newPrice = item.newPrice ? `<div style="color: var(--accent-orange); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem;">${escapeHtml(item.newPrice)}</div>` : '';
+                    return `
+                        <div class="card clearance-item" data-category="${escapeHtml(item.category || 'bajet')}" onclick="openModal('${safeTitle}', '${safeImage}', '${safeDesc}')">
+                            <div class="card-img-placeholder">
+                                <img src="${safeImage}" alt="${safeTitle}">
+                            </div>
+                            <span class="item-tag">${escapeHtml(item.category === 'game' ? 'Prestasi Permainan' : 'Phone Bajet')}</span>
+                            <h3>${safeTitle}</h3>
+                            <p>${safeDesc}</p>
+                            <div style="margin-top: auto;">
+                                ${oldPrice}
+                                ${newPrice}
+                                <button class="btn-outline" style="width:100%;">Mohon Ketersediaan</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            if (finderResults) {
+                finderResults.innerHTML = (data.finderItems || []).map((item) => {
+                    const safeTitle = escapeHtml(item.title || 'Item');
+                    const safeImage = escapeHtml(item.image || 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80');
+                    const safeDesc = escapeHtml(item.description || 'Penerangan item.');
+                    const itemTag = item.category === 'joystick' ? 'Joystick' : item.category === 'console' ? 'Konsol' : 'Naik Taraf';
+                    return `
+                        <div class="card" data-tags="${escapeHtml(item.category || 'upgrade-pc')}" onclick="openModal('${safeTitle}', '${safeImage}', '${safeDesc}')">
+                            <div class="card-img-placeholder">
+                                <img src="${safeImage}" alt="${safeTitle}">
+                            </div>
+                            <span class="item-tag">${escapeHtml(itemTag)}</span>
+                            <h3>${safeTitle}</h3>
+                            <p>${safeDesc}</p>
+                            <div style="margin-top: auto;">
+                                <div style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">${escapeHtml(item.price || 'RM 0')}</div>
+                                <button class="btn-outline" style="width:100%;">Tempah Pemasangan</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        if (typeof BroadcastChannel !== 'undefined') {
+            const syncChannel = new BroadcastChannel('ztechfix-sync');
+            syncChannel.onmessage = (event) => {
+                if (event.data && event.data.type === 'site-update') {
+                    localStorage.setItem('ztechfix_site_data', JSON.stringify(event.data.data));
+                    applySiteData();
+                }
+            };
+        }
+
+        if (db && siteSettingsRef) {
+            siteSettingsRef.onSnapshot((snap) => {
+                if (snap.exists) {
+                    localStorage.setItem('ztechfix_site_data', JSON.stringify(snap.data()));
+                    applySiteData();
+                }
+            }, () => {});
+        }
+
+        window.addEventListener('storage', (event) => {
+            if (event.key === 'ztechfix_site_data') {
+                applySiteData();
+            }
+        });
+
+        async function initCustomerPage() {
+            const remoteData = await loadRemoteSiteData();
+            if (remoteData) {
+                localStorage.setItem('ztechfix_site_data', JSON.stringify(remoteData));
+            }
+            applySiteData();
+        }
+
+        initCustomerPage();
+
         // CARA UBAH NAVIGASI & MENU MOBILE:
         function toggleMenu() { 
             const nav = document.getElementById('nav-menu');
@@ -1595,7 +2009,7 @@
                 return;
             }
 
-            const baseSystemPrice = 700; // Harga asas casing & PSU
+            const baseSystemPrice = Number(document.getElementById('pc-total-price').dataset.basePrice || 700);
             const total = baseSystemPrice + cpuPrice + gpuPrice + ramPrice + storagePrice;
 
             document.getElementById('pc-total-price').textContent = `RM ${total.toLocaleString('en-MY', {minimumFractionDigits: 2})}`;
@@ -1648,6 +2062,57 @@
                 const productTags = product.getAttribute('data-tags');
                 product.style.display = selectedTags.some(tag => productTags.includes(tag)) ? 'flex' : 'none';
             });
+        }
+
+        const ORDER_KEY = 'ztechfix_orders';
+
+        function getOrders() {
+            try {
+                return JSON.parse(localStorage.getItem(ORDER_KEY) || '[]');
+            } catch {
+                return [];
+            }
+        }
+
+        function addOrderFromCustomer() {
+            const name = document.getElementById('orderName').value.trim();
+            const phone = document.getElementById('orderPhone').value.trim();
+            const product = document.getElementById('orderProduct').value.trim();
+            const price = document.getElementById('orderPrice').value.trim();
+            const notes = document.getElementById('orderNotes').value.trim();
+
+            if (!name || !phone || !product) {
+                alert('Sila isi nama, no telefon dan produk/servis.');
+                return;
+            }
+
+            const orders = getOrders();
+            orders.unshift({
+                customerName: name,
+                customerPhone: phone,
+                product: product,
+                price: price || 'RM 0',
+                notes: notes || '-',
+                status: 'pending',
+                date: new Date().toLocaleString('en-GB')
+            });
+
+            localStorage.setItem(ORDER_KEY, JSON.stringify(orders));
+            if (typeof BroadcastChannel !== 'undefined') {
+                const channel = new BroadcastChannel('ztechfix-sync');
+                channel.postMessage({ type: 'order-update', data: orders });
+            }
+            document.getElementById('orderName').value = '';
+            document.getElementById('orderPhone').value = '';
+            document.getElementById('orderProduct').value = '';
+            document.getElementById('orderPrice').value = '';
+            document.getElementById('orderNotes').value = '';
+            alert('Order berjaya disimpan. Admin boleh lihat di halaman admin.');
+        }
+
+        const submitOrderBtn = document.getElementById('submitOrderBtn');
+        if (submitOrderBtn) {
+            submitOrderBtn.addEventListener('click', addOrderFromCustomer);
         }
     </script>
 </body>

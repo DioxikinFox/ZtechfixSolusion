@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel | ZTECHFIX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0d;
+      --panel: #141418;
+      --panel-2: #1a1c22;
+      --line: #2b2d35;
+      --text: #f5f7fb;
+      --muted: #a1a8b3;
+      --orange: #f97316;
+      --orange-2: #ea580c;
+      --green: #22c55e;
+      --red: #ef4444;
+      --shadow: 0 18px 40px rgba(0,0,0,0.28);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0b0b0d 0%, #12151a 100%);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .login-shell {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+
+    .login-box {
+      width: min(420px, 100%);
+      background: rgba(20,20,24,0.92);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .login-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--orange), #fb923c);
+      color: #111;
+      font-weight: 900;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 1rem;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #0e0f12;
+      border-radius: 10px;
+      padding: 0.8rem 0.9rem;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text);
+      padding: 0.8rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+      width: 100%;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--orange), var(--orange-2));
+      border-color: transparent;
+      color: white;
+    }
+
+    .btn.success {
+      background: rgba(34, 197, 94, 0.12);
+      border-color: rgba(34, 197, 94, 0.35);
+      color: #c7f9d5;
+    }
+
+    .btn.danger {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: rgba(239, 68, 68, 0.35);
+      color: #fecaca;
+    }
+
+    .error-text {
+      color: #fed7d7;
+      font-size: 0.82rem;
+      min-height: 1.1em;
+      margin-top: 0.45rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(11,11,13,0.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      padding: 1rem 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr) 320px;
+      gap: 1.5rem;
+      max-width: 1500px;
+      margin: 2rem auto;
+      padding: 0 1rem 2rem;
+    }
+
+    .sidebar {
+      background: rgba(20,20,24,0.82);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      height: fit-content;
+      position: sticky;
+      top: 88px;
+    }
+
+    .sidebar h3 {
+      margin: 0 0 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .menu a {
+      display: block;
+      padding: 0.8rem 0.9rem;
+      border-radius: 10px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      margin-bottom: 0.5rem;
+      transition: 0.2s ease;
+    }
+
+    .menu a:hover, .menu a.active {
+      color: var(--text);
+      background: rgba(249, 115, 22, 0.08);
+      border-color: rgba(249, 115, 22, 0.3);
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .panel {
+      background: rgba(20,20,24,0.82);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h2 {
+      margin: 0 0 1rem;
+      font-size: 1.25rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .dashboard-card {
+      background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(20,20,24,0.92));
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .dashboard-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .dashboard-card strong {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .stat-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.45rem;
+    }
+
+    .stat-card strong {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.8rem 0.7rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 0.85rem;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .status-pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .status-pending {
+      background: rgba(249,115,22,0.08);
+      border-color: rgba(249,115,22,0.3);
+      color: #fed7aa;
+    }
+
+    .status-done {
+      background: rgba(34,197,94,0.08);
+      border-color: rgba(34,197,94,0.3);
+      color: #bbf7d0;
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .small-btn {
+      padding: 0.45rem 0.7rem;
+      font-size: 0.72rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .small-btn.success {
+      background: rgba(34,197,94,0.12);
+      border-color: rgba(34,197,94,0.35);
+      color: #c7f9d5;
+    }
+
+    .small-btn.danger {
+      background: rgba(239,68,68,0.12);
+      border-color: rgba(239,68,68,0.35);
+      color: #fecaca;
+    }
+
+    .empty-state {
+      color: var(--muted);
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    .toolbar-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0 0 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-group {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-box, .filter-select {
+      background: rgba(12, 13, 17, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--text);
+      padding: 0.75rem 0.9rem;
+      min-width: 180px;
+    }
+
+    .search-box {
+      min-width: 240px;
+    }
+
+    .preview-panel {
+      background: linear-gradient(180deg, rgba(249,115,22,0.07), rgba(20,20,24,0.9));
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 18px;
+      padding: 1rem;
+      position: sticky;
+      top: 88px;
+      height: fit-content;
+    }
+
+    .preview-panel h3 {
+      margin: 0 0 0.75rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .preview-box {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(11,11,13,0.9);
+    }
+
+    .preview-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: #1a1c22;
+      display: block;
+    }
+
+    .preview-content {
+      padding: 1rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(249,115,22,0.12);
+      color: #fed7aa;
+      border: 1px solid rgba(249,115,22,0.3);
+      font-size: 0.72rem;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .preview-content h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .preview-content p {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .manager-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .manager-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem;
+    }
+
+    .manager-card h3 {
+      margin: 0 0 0.9rem;
+      font-size: 1rem;
+    }
+
+    .manager-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .manager-body {
+      overflow-x: auto;
+    }
+
+    .mini-table {
+      width: 100%;
+      min-width: 700px;
+      border-collapse: collapse;
+    }
+
+    .mini-table th, .mini-table td {
+      padding: 0.7rem 0.6rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+      font-size: 0.8rem;
+    }
+
+    .inline-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .inline-form .field {
+      margin-bottom: 0;
+    }
+
+    .inline-form .full {
+      grid-column: 1 / -1;
+    }
+
+    .inline-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: end;
+      flex-wrap: wrap;
+      grid-column: 1 / -1;
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .stats-grid, .form-grid { grid-template-columns: 1fr; }
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loginScreen" class="login-shell">
+    <div class="login-box">
+      <div class="login-header">
+        <div class="brand-mark">ZS</div>
+        <span>Login Admin</span>
+      </div>
+
+      <div class="field">
+        <label for="username">Username</label>
+        <input id="username" type="text" value="admin" />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" value="123456" />
+      </div>
+
+      <button id="loginBtn" class="btn primary" type="button">Masuk</button>
+      <div id="loginError" class="error-text"></div>
+    </div>
+  </div>
+
+  <div id="adminApp" class="hidden">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">ZS</div>
+        <span>ZTECHFIX ADMIN</span>
+      </div>
+      <div class="top-actions">
+        <a class="btn" href="index.html" target="_blank" style="width:auto;">Preview Customer</a>
+        <button id="logoutBtn" class="btn danger" type="button" style="width:auto;">Logout</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <h3>Menu</h3>
+        <nav class="menu">
+          <a href="#settings" class="active">Settings</a>
+          <a href="#orders">Orders</a>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <section class="panel" id="dashboard-overview">
+          <div class="toolbar-row">
+            <div>
+              <h2 style="margin:0;">Dashboard Overview</h2>
+            </div>
+            <div class="search-group">
+              <button id="importWebsiteBtn" class="btn primary" type="button" style="width:auto;">Import Semua Data Customer</button>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="dashboard-card">
+              <span>Order Total</span>
+              <strong id="dashTotalOrders">0</strong>
+            </div>
+            <div class="dashboard-card">
+              <span>Pending</span>
+              <strong id="dashPendingOrders">0</strong>
+            </div>
+            <div class="dashboard-card">
+              <span>Done</span>
+              <strong id="dashDoneOrders">0</strong>
+            </div>
+            <div class="dashboard-card">
+              <span>Website Data</span>
+              <strong id="dashSiteStatus">Ready</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="settings">
+          <h2>General Store Settings</h2>
+          <div class="toolbar-row">
+            <div class="search-group">
+              <button id="saveSettingsBtn" class="btn primary" type="button" style="width:auto;">Save Settings</button>
+              <button id="importWebsiteBtnSecondary" class="btn success" type="button" style="width:auto;">Import Website Data</button>
+              <button id="exportDataBtn" class="btn" type="button" style="width:auto;">Export JSON</button>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label for="companyName">Company Name</label>
+              <input id="companyName" type="text" />
+            </div>
+            <div class="field">
+              <label for="whatsappNumber">WhatsApp Number</label>
+              <input id="whatsappNumber" type="text" placeholder="60189563923" />
+            </div>
+            <div class="field">
+              <label for="phoneNumber">Phone Number</label>
+              <input id="phoneNumber" type="text" placeholder="05-776 8905" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" />
+            </div>
+            <div class="field full">
+              <label for="address">Address</label>
+              <input id="address" type="text" />
+            </div>
+            <div class="field full">
+              <label for="heroTitle">Hero Title</label>
+              <input id="heroTitle" type="text" />
+            </div>
+            <div class="field full">
+              <label for="heroText">Hero Description</label>
+              <textarea id="heroText"></textarea>
+            </div>
+            <div class="field">
+              <label for="builderBase">Base PC Build Price (RM)</label>
+              <input id="builderBase" type="number" min="0" step="10" />
+            </div>
+            <div class="field">
+              <label for="footerNote">Footer Note</label>
+              <input id="footerNote" type="text" />
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="content-managers">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+            <h2>Content Manager Premium</h2>
+            <span style="color: var(--muted); font-size: 0.8rem;">Edit satu-satu item dengan senang</span>
+          </div>
+
+          <div class="toolbar-row">
+            <div class="search-group">
+              <input id="contentSearchInput" class="search-box" type="text" placeholder="Cari item / judul / kata kunci..." />
+              <select id="contentFilterSelect" class="filter-select">
+                <option value="all">Semua Bahagian</option>
+                <option value="gallery">Galeri</option>
+                <option value="reviews">Ulasan</option>
+                <option value="builder">Builder PC</option>
+                <option value="clearance">Lelong</option>
+                <option value="finder">Upgrade</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="premiumManagers"></div>
+        </section>
+
+        <section class="panel" id="content-editors">
+          <h2>Editor JSON (Advanced)</h2>
+
+          <div class="field">
+            <label for="repairEditor">Anggaran Kos Pembaikan</label>
+            <textarea id="repairEditor" rows="10"></textarea>
+            <button class="btn success" type="button" data-section="repairData" style="width:auto;">Save Repair Data</button>
+          </div>
+
+          <div class="field">
+            <label for="galleryEditor">Galeri Hasil Kerja</label>
+            <textarea id="galleryEditor" rows="10"></textarea>
+            <button class="btn success" type="button" data-section="galleryItems" style="width:auto;">Save Gallery</button>
+          </div>
+
+          <div class="field">
+            <label for="reviewsEditor">Ulasan Pelanggan</label>
+            <textarea id="reviewsEditor" rows="10"></textarea>
+            <button class="btn success" type="button" data-section="reviews" style="width:auto;">Save Reviews</button>
+          </div>
+
+          <div class="field">
+            <label for="builderEditor">Konfigurator Sistem PC</label>
+            <textarea id="builderEditor" rows="10"></textarea>
+            <button class="btn success" type="button" data-section="builderOptions" style="width:auto;">Save Builder Config</button>
+          </div>
+
+          <div class="field">
+            <label for="clearanceEditor">Jualan Lelong</label>
+            <textarea id="clearanceEditor" rows="10"></textarea>
+            <button class="btn success" type="button" data-section="clearanceItems" style="width:auto;">Save Clearance</button>
+          </div>
+
+          <div class="field">
+            <label for="finderEditor">Carian Upgrade & Gadjet</label>
+            <textarea id="finderEditor" rows="10"></textarea>
+            <button class="btn success" type="button" data-section="finderItems" style="width:auto;">Save Finder</button>
+          </div>
+        </section>
+
+        <section class="panel" id="orders">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+            <h2>Orders</h2>
+            <div class="search-group">
+              <input id="orderSearchInput" class="search-box" type="text" placeholder="Cari nama / produk / phone..." />
+              <select id="orderFilterSelect" class="filter-select">
+                <option value="all">Semua Status</option>
+                <option value="pending">Pending</option>
+                <option value="done">Done</option>
+              </select>
+              <button id="refreshOrdersBtn" class="btn success" type="button" style="width:auto;">Refresh</button>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span>Total Orders</span>
+              <strong id="totalOrders">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Pending</span>
+              <strong id="pendingOrders">0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Done</span>
+              <strong id="doneOrders">0</strong>
+            </div>
+          </div>
+
+          <div id="ordersTableWrap"></div>
+        </section>
+      </main>
+
+      <aside class="preview-panel">
+        <h3>Live Preview</h3>
+        <div id="livePreview" class="preview-box">
+          <img id="previewImage" class="preview-image" src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80" alt="preview" />
+          <div class="preview-content">
+            <span id="previewEyebrow" class="eyebrow">Website</span>
+            <h4 id="previewTitle">ZTECHFIX Dashboard</h4>
+            <p id="previewDesc">Pilih item dari panel kiri untuk melihat preview langsung di sini.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: 'AIzaSyAFZS2YwQITFCmi6Ox2N-8ECKeBi5DFbAQ',
+      authDomain: 'ztechfix-23497.firebaseapp.com',
+      projectId: 'ztechfix-23497',
+      storageBucket: 'ztechfix-23497.firebasestorage.app',
+      messagingSenderId: '29238953296',
+      appId: '1:29238953296:web:6087312f3e6c9c4e581855',
+      measurementId: 'G-YX25G1DRN5'
+    };
+
+    const ADMIN_CREDENTIALS = { username: 'admin', password: '123456' };
+    const SITE_KEY = 'ztechfix_site_data';
+    const ORDER_KEY = 'ztechfix_orders';
+    const SESSION_KEY = 'ztechfix_admin_session';
+    const dashboardState = {
+      sectionFilter: 'all',
+      contentSearch: '',
+      orderSearch: '',
+      orderStatus: 'all'
+    };
+
+    const defaultContent = {
+      repairData: {
+        phone: {
+          'lcd_ori': { label: 'Tukar LCD Ori', price: 'RM 220 - RM 750' },
+          'battery': { label: 'Tukar Bateri', price: 'RM 80 - RM 280' }
+        },
+        laptop: {
+          'keyboard': { label: 'Tukar Keyboard', price: 'RM 130 - RM 550' },
+          'battery': { label: 'Tukar Bateri', price: 'RM 110 - RM 480' }
+        }
+      },
+      galleryItems: [
+        {
+          title: 'Binaan Custom PC RGB',
+          image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80',
+          description: 'Susun atur kabel terstruktur rapi dengan aliran udara penyejukan optimum.'
+        }
+      ],
+      reviews: [
+        {
+          name: 'Maya R.',
+          title: 'Skrin iPhone 13',
+          image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+          text: 'Skrin iPhone saya retak teruk dan siap dalam masa singkat. Nampak seperti baru.'
+        }
+      ],
+      builderOptions: {
+        cpu: [
+          { value: '350', score: '1', label: 'Intel Core i3 / AMD Ryzen 3 (Asas)' },
+          { value: '750', score: '3', label: 'Intel Core i5 / AMD Ryzen 5 (Pertengahan)' }
+        ],
+        gpu: [
+          { value: '0', score: '0', label: 'Grafik Bersepadu (Integrated)' },
+          { value: '950', score: '3', label: 'NVIDIA RTX 3050 / AMD RX 6600' }
+        ],
+        ram: [
+          { value: '90', score: '1', label: '8GB RAM (Standard Pejabat)' },
+          { value: '180', score: '3', label: '16GB RAM (Standard Prestasi)' }
+        ],
+        storage: [
+          { value: '150', label: '512GB NVMe M.2 SSD' },
+          { value: '300', label: '1TB NVMe M.2 SSD' }
+        ]
+      },
+      clearanceItems: [
+        { title: 'Samsung Galaxy A13 (128GB)', category: 'bajet', oldPrice: 'RM 699', newPrice: 'RM 350', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', description: 'Kapasiti storan 128GB, bateri tahan lama, sesuai untuk penggunaan harian.' }
+      ],
+      finderItems: [
+        { title: 'SSD NVMe M.2 1TB (Upgrade)', category: 'upgrade-pc', price: 'RM 299', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80', description: 'Tingkatkan prestasi komputer dengan SSD berkelajuan tinggi.' }
+      ]
+    };
+
+    const defaultState = {
+      companyName: 'ZTECHFIX',
+      whatsappNumber: '60189563923',
+      phoneNumber: '05-776 8905',
+      email: 'ztechfixsolutions@yahoo.com',
+      address: 'No 11 Jalan Bendahara 3, Bandar Baru, Kuala Kangsar',
+      heroTitle: 'Baiki Kerosakan. Bina Sistem Impian.',
+      heroText: 'ZTECHFIX SOLUTIONS (SA0560360-D) - Pakar baik pulih telefon pintar, iPhone, tablet, laptop, MacBook, dan binaan kustom PC di Kuala Kangsar dengan jaminan kerja telus.',
+      builderBase: 700,
+      footerNote: '&copy; 2026 ZTECHFIX SOLUTIONS (SA0560360-D). 891+ Pengikut. Hak Cipta Terpelihara.',
+      ...defaultContent
+    };
+
+    const firebaseState = { app: null, db: null, enabled: false };
+
+    function ensureFirebase() {
+      try {
+        if (!window.firebase || !window.firebase.initializeApp) {
+          firebaseState.enabled = false;
+          return false;
+        }
+        if (!firebaseState.app) {
+          firebaseState.app = firebase.initializeApp(firebaseConfig);
+        }
+        if (!firebaseState.db) {
+          firebaseState.db = firebase.firestore();
+        }
+        firebaseState.enabled = true;
+        return true;
+      } catch (error) {
+        firebaseState.enabled = false;
+        return false;
+      }
+    }
+
+    async function syncSiteDataToFirebase(payload) {
+      if (!ensureFirebase()) return;
+      try {
+        const docRef = firebaseState.db.collection('siteSettings').doc('main');
+        await docRef.set(payload, { merge: true });
+      } catch (error) {
+        console.warn('Firebase sync failed:', error);
+      }
+    }
+
+    async function syncOrdersToFirebase(list) {
+      if (!ensureFirebase()) return;
+      try {
+        const snapshot = await firebaseState.db.collection('orders').get();
+        const batch = firebaseState.db.batch();
+        snapshot.forEach((doc) => batch.delete(doc.ref));
+        list.forEach((item) => {
+          const ref = firebaseState.db.collection('orders').doc();
+          batch.set(ref, item);
+        });
+        await batch.commit();
+      } catch (error) {
+        console.warn('Firebase orders sync failed:', error);
+      }
+    }
+
+    function getSiteState() {
+      try {
+        const raw = localStorage.getItem(SITE_KEY);
+        return raw ? { ...defaultState, ...JSON.parse(raw) } : { ...defaultState };
+      } catch {
+        return { ...defaultState };
+      }
+    }
+
+    function saveSiteState(payload) {
+      localStorage.setItem(SITE_KEY, JSON.stringify(payload));
+      syncSiteDataToFirebase(payload);
+    }
+
+    function getOrders() {
+      try {
+        return JSON.parse(localStorage.getItem(ORDER_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveOrders(list) {
+      localStorage.setItem(ORDER_KEY, JSON.stringify(list));
+      syncOrdersToFirebase(list);
+      if (typeof BroadcastChannel !== 'undefined') {
+        const channel = new BroadcastChannel('ztechfix-sync');
+        channel.postMessage({ type: 'order-update', data: list });
+      }
+    }
+
+    function getContentState() {
+      const state = getSiteState();
+      return {
+        repairData: state.repairData || defaultContent.repairData,
+        galleryItems: state.galleryItems || defaultContent.galleryItems,
+        reviews: state.reviews || defaultContent.reviews,
+        builderOptions: state.builderOptions || defaultContent.builderOptions,
+        clearanceItems: state.clearanceItems || defaultContent.clearanceItems,
+        finderItems: state.finderItems || defaultContent.finderItems
+      };
+    }
+
+    function renderContentEditors() {
+      const content = getContentState();
+      document.getElementById('repairEditor').value = JSON.stringify(content.repairData, null, 2);
+      document.getElementById('galleryEditor').value = JSON.stringify(content.galleryItems, null, 2);
+      document.getElementById('reviewsEditor').value = JSON.stringify(content.reviews, null, 2);
+      document.getElementById('builderEditor').value = JSON.stringify(content.builderOptions, null, 2);
+      document.getElementById('clearanceEditor').value = JSON.stringify(content.clearanceItems, null, 2);
+      document.getElementById('finderEditor').value = JSON.stringify(content.finderItems, null, 2);
+    }
+
+    function saveContentSection(sectionName, textareaId) {
+      try {
+        const parsed = JSON.parse(document.getElementById(textareaId).value);
+        const state = getSiteState();
+        state[sectionName] = parsed;
+        saveSiteState(state);
+        renderContentEditors();
+        if (typeof BroadcastChannel !== 'undefined') {
+          const channel = new BroadcastChannel('ztechfix-sync');
+          channel.postMessage({ type: 'site-update', data: state });
+        }
+        alert('Data berjaya disimpan.');
+      } catch (error) {
+        alert('Format JSON tidak sah. Sila semak semula struktur data.');
+      }
+    }
+
+    function renderSettingsForm() {
+      const state = getSiteState();
+      document.getElementById('companyName').value = state.companyName || '';
+      document.getElementById('whatsappNumber').value = state.whatsappNumber || '';
+      document.getElementById('phoneNumber').value = state.phoneNumber || '';
+      document.getElementById('email').value = state.email || '';
+      document.getElementById('address').value = state.address || '';
+      document.getElementById('heroTitle').value = state.heroTitle || '';
+      document.getElementById('heroText').value = state.heroText || '';
+      document.getElementById('builderBase').value = state.builderBase || 700;
+      document.getElementById('footerNote').value = state.footerNote || '';
+      renderContentEditors();
+      renderPremiumManagers();
+    }
+
+    function saveSettings() {
+      const state = getSiteState();
+      state.companyName = document.getElementById('companyName').value.trim() || defaultState.companyName;
+      state.whatsappNumber = document.getElementById('whatsappNumber').value.trim() || defaultState.whatsappNumber;
+      state.phoneNumber = document.getElementById('phoneNumber').value.trim() || defaultState.phoneNumber;
+      state.email = document.getElementById('email').value.trim() || defaultState.email;
+      state.address = document.getElementById('address').value.trim() || defaultState.address;
+      state.heroTitle = document.getElementById('heroTitle').value.trim() || defaultState.heroTitle;
+      state.heroText = document.getElementById('heroText').value.trim() || defaultState.heroText;
+      state.builderBase = Number(document.getElementById('builderBase').value) || defaultState.builderBase;
+      state.footerNote = document.getElementById('footerNote').value.trim() || defaultState.footerNote;
+      saveSiteState(state);
+      alert('Tetapan disimpan.');
+      if (typeof BroadcastChannel !== 'undefined') {
+        const channel = new BroadcastChannel('ztechfix-sync');
+        channel.postMessage({ type: 'site-update', data: state });
+      }
+    }
+
+    const premiumEditors = {};
+
+    function cleanText(value) {
+      return (value === undefined || value === null) ? '' : String(value);
+    }
+
+    function getSectionList(sectionName) {
+      const state = getSiteState();
+      return Array.isArray(state[sectionName]) ? state[sectionName] : (Array.isArray(defaultContent[sectionName]) ? [...defaultContent[sectionName]] : []);
+    }
+
+    function getBuilderGroup(sectionName) {
+      const state = getSiteState();
+      const builder = state.builderOptions || defaultContent.builderOptions;
+      return Array.isArray(builder[sectionName]) ? builder[sectionName] : [];
+    }
+
+    function normalizeString(value) {
+      return cleanText(value).trim();
+    }
+
+    function renderManagerForm(sectionName, list, index, fieldDefs) {
+      const item = index >= 0 ? (list[index] || {}) : {};
+      const formFields = fieldDefs.map((field) => {
+        const value = cleanText(item[field.key] || '');
+        return `
+          <div class="field ${field.full ? 'full' : ''}">
+            <label>${field.label}</label>
+            <input name="${field.key}" value="${value.replace(/"/g, '&quot;')}" ${field.type === 'number' ? 'type="number"' : 'type="text"'} />
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <form class="inline-form" data-form-section="${sectionName}" data-form-index="${index}">
+          ${formFields}
+          <div class="inline-actions">
+            <button class="btn success" type="submit" style="width:auto;">Save</button>
+            <button class="btn" type="button" data-action="cancel-edit" data-section="${sectionName}" style="width:auto;">Batal</button>
+          </div>
+        </form>
+      `;
+    }
+
+    function emptyItemFor(sectionName) {
+      const emptyMap = {
+        galleryItems: { title: '', image: '', description: '' },
+        reviews: { name: '', title: '', image: '', text: '' },
+        clearanceItems: { title: '', category: 'bajet', oldPrice: '', newPrice: '', image: '', description: '' },
+        finderItems: { title: '', category: 'upgrade-pc', price: '', image: '', description: '' }
+      };
+      return emptyMap[sectionName] || { title: '', image: '', description: '' };
+    }
+
+    function renderGenericListManager(sectionName, title, fieldDefs) {
+      const list = getSectionList(sectionName);
+      const editingIndex = premiumEditors[sectionName];
+      const rows = list.map((item, index) => `
+        <tr>
+          ${fieldDefs.slice(0, 3).map((field) => `<td>${escapeHtml(cleanText(item[field.key])) || '—'}</td>`).join('')}
+          <td>
+            <div class="table-actions">
+              <button class="small-btn success" data-action="edit-row" data-section="${sectionName}" data-index="${index}" type="button">Edit</button>
+              <button class="small-btn danger" data-action="delete-row" data-section="${sectionName}" data-index="${index}" type="button">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      const form = typeof editingIndex === 'number' ? renderManagerForm(sectionName, list, editingIndex, fieldDefs) : '';
+
+      return `
+        <div class="manager-card">
+          <div class="manager-toolbar">
+            <h3>${title}</h3>
+            <button class="btn success" type="button" data-action="add-row" data-section="${sectionName}" style="width:auto;">Tambah Item</button>
+          </div>
+          <div class="manager-body">
+            <table class="mini-table">
+              <thead>
+                <tr>
+                  ${fieldDefs.slice(0, 3).map((field) => `<th>${field.label}</th>`).join('')}
+                  <th>Tindakan</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows || '<tr><td colspan="4" class="empty-state">Tiada item lagi.</td></tr>'}
+              </tbody>
+            </table>
+          </div>
+          ${form}
+        </div>
+      `;
+    }
+
+    function renderBuilderGroupManager(groupName, title) {
+      const state = getSiteState();
+      const list = (state.builderOptions && state.builderOptions[groupName]) || defaultContent.builderOptions[groupName] || [];
+      const editingIndex = premiumEditors[groupName];
+      const fieldDefs = groupName === 'storage'
+        ? [{ key: 'label', label: 'Nama Storan' }, { key: 'value', label: 'Harga (RM)' }]
+        : [{ key: 'label', label: 'Nama Item' }, { key: 'value', label: 'Harga (RM)' }, { key: 'score', label: 'Score' }];
+
+      const rows = list.map((item, index) => `
+        <tr>
+          <td>${escapeHtml(cleanText(item.label)) || '—'}</td>
+          <td>${escapeHtml(cleanText(item.value)) || '—'}</td>
+          ${groupName === 'storage' ? '' : `<td>${escapeHtml(cleanText(item.score)) || '—'}</td>`}
+          <td>
+            <div class="table-actions">
+              <button class="small-btn success" data-action="edit-builder" data-section="${groupName}" data-index="${index}" type="button">Edit</button>
+              <button class="small-btn danger" data-action="delete-builder" data-section="${groupName}" data-index="${index}" type="button">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      const form = typeof editingIndex === 'number' ? renderManagerForm(groupName, list, editingIndex, fieldDefs) : '';
+
+      return `
+        <div class="manager-card">
+          <div class="manager-toolbar">
+            <h3>${title}</h3>
+            <button class="btn success" type="button" data-action="add-builder" data-section="${groupName}" style="width:auto;">Tambah Item</button>
+          </div>
+          <div class="manager-body">
+            <table class="mini-table">
+              <thead>
+                <tr>
+                  <th>${groupName === 'storage' ? 'Nama Storan' : 'Nama Item'}</th>
+                  <th>Harga (RM)</th>
+                  ${groupName === 'storage' ? '' : '<th>Score</th>'}
+                  <th>Tindakan</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows || '<tr><td colspan="4" class="empty-state">Tiada item lagi.</td></tr>'}
+              </tbody>
+            </table>
+          </div>
+          ${form}
+        </div>
+      `;
+    }
+
+    function isSectionVisible(sectionKey) {
+      const filter = dashboardState.sectionFilter;
+      if (filter === 'all') return true;
+      const map = {
+        gallery: 'galleryItems',
+        reviews: 'reviews',
+        builder: 'builder',
+        clearance: 'clearanceItems',
+        finder: 'finderItems'
+      };
+      return map[filter] === sectionKey;
+    }
+
+    function matchesSearchText(value) {
+      const q = dashboardState.contentSearch.trim().toLowerCase();
+      if (!q) return true;
+      return String(value || '').toLowerCase().includes(q);
+    }
+
+    function filterManagerList(list, fieldKeys) {
+      const q = dashboardState.contentSearch.trim().toLowerCase();
+      if (!q) return list;
+      return list.filter((item) => fieldKeys.some((key) => String(item[key] || '').toLowerCase().includes(q)));
+    }
+
+    function updatePreview(item, label) {
+      const title = item && (item.title || item.name || item.label || 'ZTECHFIX Dashboard');
+      const image = item && (item.image || 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80');
+      const description = item && (item.description || item.text || item.label || 'Pilih item dari panel kiri untuk melihat preview langsung di sini.');
+      document.getElementById('previewTitle').textContent = title;
+      document.getElementById('previewDesc').textContent = description;
+      document.getElementById('previewEyebrow').textContent = label || 'Website';
+      document.getElementById('previewImage').src = image;
+      document.getElementById('previewImage').alt = title;
+    }
+
+    function renderPremiumManagers() {
+      const container = document.getElementById('premiumManagers');
+      const gallery = isSectionVisible('galleryItems') ? renderGenericListManager('galleryItems', 'Galeri Hasil Kerja', [
+        { key: 'title', label: 'Tajuk' },
+        { key: 'image', label: 'URL Gambar' },
+        { key: 'description', label: 'Penerangan' }
+      ]) : '';
+      const reviews = isSectionVisible('reviews') ? renderGenericListManager('reviews', 'Ulasan Pelanggan', [
+        { key: 'name', label: 'Nama' },
+        { key: 'title', label: 'Tajuk' },
+        { key: 'text', label: 'Ulasan' }
+      ]) : '';
+      const clearance = isSectionVisible('clearanceItems') ? renderGenericListManager('clearanceItems', 'Jualan Lelong', [
+        { key: 'title', label: 'Tajuk' },
+        { key: 'newPrice', label: 'Harga Baru' },
+        { key: 'description', label: 'Penerangan' }
+      ]) : '';
+      const finder = isSectionVisible('finderItems') ? renderGenericListManager('finderItems', 'Upgrade & Gadjet', [
+        { key: 'title', label: 'Tajuk' },
+        { key: 'price', label: 'Harga' },
+        { key: 'description', label: 'Penerangan' }
+      ]) : '';
+      const builder = isSectionVisible('builder') ? `
+        <div class="manager-stack">
+          ${renderBuilderGroupManager('cpu', 'CPU / Prosesor')}
+          ${renderBuilderGroupManager('gpu', 'GPU / Grafik')}
+          ${renderBuilderGroupManager('ram', 'RAM')}
+          ${renderBuilderGroupManager('storage', 'Storage')}
+        </div>
+      ` : '';
+
+      const allManagers = [gallery, reviews, builder, clearance, finder].filter(Boolean).join('');
+      container.innerHTML = allManagers ? `<div class="manager-stack">${allManagers}</div>` : '<div class="empty-state">Tiada item sesuai dengan filter yang dipilih.</div>';
+      if (!document.querySelector('.preview-active')) {
+        updatePreview({ title: 'ZTECHFIX Dashboard', description: 'Pilih item dari panel kiri untuk melihat preview langsung di sini.' }, 'Website');
+      }
+    }
+
+    function exportDataAsJson() {
+      const data = {
+        site: getSiteState(),
+        orders: getOrders(),
+        exportedAt: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ztechfix-export.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      alert('Data website dan order berjaya dieksport ke JSON.');
+    }
+
+    function saveSectionFromForm(form) {
+      const sectionName = form.dataset.formSection;
+      const index = Number(form.dataset.formIndex);
+      const state = getSiteState();
+      const sectionValue = Array.isArray(state[sectionName]) ? [...state[sectionName]] : [...(defaultContent[sectionName] || [])];
+      const payload = Object.fromEntries(new FormData(form).entries());
+      const cleanedPayload = {};
+      Object.keys(payload).forEach((key) => {
+        cleanedPayload[key] = payload[key].toString();
+      });
+
+      if (Number.isInteger(index) && index >= 0) {
+        sectionValue[index] = { ...(sectionValue[index] || {}), ...cleanedPayload };
+      } else {
+        sectionValue.push(cleanedPayload);
+      }
+
+      state[sectionName] = sectionValue;
+      saveSiteState(state);
+      delete premiumEditors[sectionName];
+      renderPremiumManagers();
+      renderContentEditors();
+      if (typeof BroadcastChannel !== 'undefined') {
+        const channel = new BroadcastChannel('ztechfix-sync');
+        channel.postMessage({ type: 'site-update', data: state });
+      }
+    }
+
+    function saveBuilderGroupFromForm(form) {
+      const groupName = form.dataset.formSection;
+      const index = Number(form.dataset.formIndex);
+      const state = getSiteState();
+      const builder = { ...(state.builderOptions || defaultContent.builderOptions) };
+      builder[groupName] = Array.isArray(builder[groupName]) ? [...builder[groupName]] : [];
+      const payload = Object.fromEntries(new FormData(form).entries());
+      const cleanedPayload = {};
+      Object.keys(payload).forEach((key) => {
+        cleanedPayload[key] = payload[key].toString();
+      });
+      if (index >= 0) {
+        builder[groupName][index] = { ...(builder[groupName][index] || {}), ...cleanedPayload };
+      } else {
+        builder[groupName].push(cleanedPayload);
+      }
+      state.builderOptions = builder;
+      saveSiteState(state);
+      delete premiumEditors[groupName];
+      renderPremiumManagers();
+      renderContentEditors();
+      if (typeof BroadcastChannel !== 'undefined') {
+        const channel = new BroadcastChannel('ztechfix-sync');
+        channel.postMessage({ type: 'site-update', data: state });
+      }
+    }
+
+    function deleteSectionItem(sectionName, index) {
+      const state = getSiteState();
+      const list = Array.isArray(state[sectionName]) ? [...state[sectionName]] : [...(defaultContent[sectionName] || [])];
+      list.splice(index, 1);
+      state[sectionName] = list;
+      saveSiteState(state);
+      renderPremiumManagers();
+      renderContentEditors();
+      if (typeof BroadcastChannel !== 'undefined') {
+        const channel = new BroadcastChannel('ztechfix-sync');
+        channel.postMessage({ type: 'site-update', data: state });
+      }
+    }
+
+    function deleteBuilderGroupItem(groupName, index) {
+      const state = getSiteState();
+      const builder = { ...(state.builderOptions || defaultContent.builderOptions) };
+      builder[groupName] = Array.isArray(builder[groupName]) ? [...builder[groupName]] : [];
+      builder[groupName].splice(index, 1);
+      state.builderOptions = builder;
+      saveSiteState(state);
+      renderPremiumManagers();
+      renderContentEditors();
+      if (typeof BroadcastChannel !== 'undefined') {
+        const channel = new BroadcastChannel('ztechfix-sync');
+        channel.postMessage({ type: 'site-update', data: state });
+      }
+    }
+
+    function startEdit(sectionName, index) {
+      premiumEditors[sectionName] = index;
+      renderPremiumManagers();
+    }
+
+    function startBuilderEdit(groupName, index) {
+      premiumEditors[groupName] = index;
+      renderPremiumManagers();
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function renderOrders() {
+      const orders = getOrders();
+      const total = orders.length;
+      const pending = orders.filter(order => order.status !== 'done').length;
+      const done = orders.filter(order => order.status === 'done').length;
+
+      document.getElementById('totalOrders').textContent = total;
+      document.getElementById('pendingOrders').textContent = pending;
+      document.getElementById('doneOrders').textContent = done;
+      document.getElementById('dashTotalOrders').textContent = total;
+      document.getElementById('dashPendingOrders').textContent = pending;
+      document.getElementById('dashDoneOrders').textContent = done;
+
+      const filteredOrders = orders.filter((order) => {
+        const q = dashboardState.orderSearch.trim().toLowerCase();
+        const matchesSearch = !q || [order.customerName, order.customerPhone, order.product, order.price].some((value) => String(value || '').toLowerCase().includes(q));
+        const matchesStatus = dashboardState.orderStatus === 'all' || (dashboardState.orderStatus === 'pending' ? order.status !== 'done' : order.status === 'done');
+        return matchesSearch && matchesStatus;
+      });
+
+      const wrap = document.getElementById('ordersTableWrap');
+      if (!filteredOrders.length) {
+        wrap.innerHTML = '<div class="empty-state">Tiada order sesuai dengan carian atau filter.</div>';
+        return;
+      }
+
+      wrap.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Phone</th>
+              <th>Produk</th>
+              <th>Harga</th>
+              <th>Status</th>
+              <th>Tarikh</th>
+              <th>Tindakan</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filteredOrders.map((order, index) => `
+              <tr>
+                <td>${order.customerName || '-'}</td>
+                <td>${order.customerPhone || '-'}</td>
+                <td>${order.product || '-'}</td>
+                <td>${order.price || '-'}</td>
+                <td>
+                  <span class="status-pill ${order.status === 'done' ? 'status-done' : 'status-pending'}">
+                    ${order.status === 'done' ? 'Done' : 'Pending'}
+                  </span>
+                </td>
+                <td>${order.date || '-'}</td>
+                <td>
+                  <div class="table-actions">
+                    <button class="small-btn success" data-action="done" data-index="${orders.indexOf(order)}" type="button">Done</button>
+                    <button class="small-btn danger" data-action="delete" data-index="${orders.indexOf(order)}" type="button">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function importWebsiteData() {
+      try {
+        const customerData = JSON.parse(localStorage.getItem(SITE_KEY) || '{}');
+        if (!customerData || Object.keys(customerData).length === 0) {
+          alert('Tiada data website customer dijumpai. Sila buka halaman customer dahulu dan buat perubahan.');
+          return;
+        }
+
+        const merged = { ...defaultState, ...customerData };
+        saveSiteState(merged);
+        renderSettingsForm();
+        renderPremiumManagers();
+        alert('Semua data website customer berjaya diimport ke admin.');
+        document.getElementById('dashSiteStatus').textContent = 'Synced';
+      } catch (error) {
+        alert('Gagal import data website customer.');
+      }
+    }
+
+    function loginAdmin() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const error = document.getElementById('loginError');
+
+      if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+        localStorage.setItem(SESSION_KEY, 'logged-in');
+        error.textContent = '';
+        renderSettingsForm();
+        renderOrders();
+        toggleAdminView();
+      } else {
+        error.textContent = 'Username atau password salah.';
+      }
+    }
+
+    function logoutAdmin() {
+      localStorage.removeItem(SESSION_KEY);
+      toggleAdminView();
+      document.getElementById('username').value = 'admin';
+      document.getElementById('password').value = '123456';
+    }
+
+    function toggleAdminView() {
+      const isLoggedIn = localStorage.getItem(SESSION_KEY) === 'logged-in';
+      document.getElementById('loginScreen').classList.toggle('hidden', isLoggedIn);
+      document.getElementById('adminApp').classList.toggle('hidden', !isLoggedIn);
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', loginAdmin);
+    document.getElementById('logoutBtn').addEventListener('click', logoutAdmin);
+    document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
+    document.getElementById('importWebsiteBtn').addEventListener('click', importWebsiteData);
+    document.getElementById('importWebsiteBtnSecondary').addEventListener('click', importWebsiteData);
+    document.getElementById('exportDataBtn').addEventListener('click', exportDataAsJson);
+    document.getElementById('refreshOrdersBtn').addEventListener('click', renderOrders);
+    document.getElementById('contentSearchInput').addEventListener('input', (event) => {
+      dashboardState.contentSearch = event.target.value;
+      renderPremiumManagers();
+    });
+    document.getElementById('contentFilterSelect').addEventListener('change', (event) => {
+      dashboardState.sectionFilter = event.target.value;
+      renderPremiumManagers();
+    });
+    document.getElementById('orderSearchInput').addEventListener('input', (event) => {
+      dashboardState.orderSearch = event.target.value;
+      renderOrders();
+    });
+    document.getElementById('orderFilterSelect').addEventListener('change', (event) => {
+      dashboardState.orderStatus = event.target.value;
+      renderOrders();
+    });
+
+    document.querySelectorAll('[data-section]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const section = button.dataset.section;
+        const mapping = {
+          repairData: 'repairEditor',
+          galleryItems: 'galleryEditor',
+          reviews: 'reviewsEditor',
+          builderOptions: 'builderEditor',
+          clearanceItems: 'clearanceEditor',
+          finderItems: 'finderEditor'
+        };
+        saveContentSection(section, mapping[section]);
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const btn = event.target.closest('button');
+      if (!btn) return;
+
+      const action = btn.dataset.action;
+      const section = btn.dataset.section;
+      const idx = Number(btn.dataset.index);
+
+      if (action === 'add-row') {
+        premiumEditors[section] = -1;
+        renderPremiumManagers();
+        return;
+      }
+
+      if (action === 'edit-row' || action === 'edit-builder') {
+        const sectionName = section;
+        const list = sectionName === 'cpu' || sectionName === 'gpu' || sectionName === 'ram' || sectionName === 'storage'
+          ? (getSiteState().builderOptions && getSiteState().builderOptions[sectionName]) || []
+          : getSectionList(sectionName);
+        const item = list[idx] || null;
+        if (item) {
+          updatePreview(item, sectionName === 'galleryItems' ? 'Gallery' : sectionName === 'reviews' ? 'Review' : sectionName === 'clearanceItems' ? 'Clearance' : sectionName === 'finderItems' ? 'Upgrade' : sectionName.toUpperCase());
+          document.querySelectorAll('.preview-active').forEach(el => el.classList.remove('preview-active'));
+          if (btn.closest('tr')) btn.closest('tr').classList.add('preview-active');
+        }
+      }
+
+      if (action === 'edit-row') {
+        premiumEditors[section] = idx;
+        renderPremiumManagers();
+        return;
+      }
+
+      if (action === 'delete-row') {
+        deleteSectionItem(section, idx);
+        return;
+      }
+
+      if (action === 'add-builder') {
+        premiumEditors[section] = -1;
+        renderPremiumManagers();
+        return;
+      }
+
+      if (action === 'edit-builder') {
+        premiumEditors[section] = idx;
+        const builder = getSiteState().builderOptions || defaultContent.builderOptions;
+        const item = (builder[section] || [])[idx];
+        if (item) {
+          updatePreview(item, section.toUpperCase());
+        }
+        renderPremiumManagers();
+        return;
+      }
+
+      if (action === 'delete-builder') {
+        deleteBuilderGroupItem(section, idx);
+        return;
+      }
+
+      if (action === 'cancel-edit') {
+        delete premiumEditors[section];
+        renderPremiumManagers();
+        return;
+      }
+
+      if (action === 'done') {
+        const orders = getOrders();
+        if (!orders[idx]) return;
+        orders[idx].status = 'done';
+        saveOrders(orders);
+        renderOrders();
+      }
+
+      if (action === 'delete') {
+        const orders = getOrders();
+        orders.splice(idx, 1);
+        saveOrders(orders);
+        renderOrders();
+      }
+    });
+
+    document.addEventListener('submit', (event) => {
+      const form = event.target.closest('form');
+      if (!form || !form.dataset.formSection) return;
+      const section = form.dataset.formSection;
+      if (['cpu', 'gpu', 'ram', 'storage'].includes(section)) {
+        saveBuilderGroupFromForm(form);
+      } else {
+        saveSectionFromForm(form);
+      }
+      event.preventDefault();
+    });
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === ORDER_KEY || event.key === SITE_KEY) {
+        renderSettingsForm();
+        renderOrders();
+      }
+    });
+
+    if (typeof BroadcastChannel !== 'undefined') {
+      const syncChannel = new BroadcastChannel('ztechfix-sync');
+      syncChannel.onmessage = (event) => {
+        if (event.data && (event.data.type === 'order-update' || event.data.type === 'site-update')) {
+          renderSettingsForm();
+          renderOrders();
+        }
+      };
+    }
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' && document.getElementById('loginScreen').classList.contains('hidden') === false) {
+        loginAdmin();
+      }
+    });
+
+    renderSettingsForm();
+    toggleAdminView();
+    renderOrders();
+    renderPremiumManagers();
+  </script>
+</body>
+</html>
