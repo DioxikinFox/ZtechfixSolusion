@@ -22,116 +22,84 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100%; }
 
-        /* Navigasi */
         header { background-color: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #ffffff; font-weight: 700; font-size: 1.2rem; cursor: pointer; }
-        .logo-icon { background-color: var(--accent-orange); color: #000; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 800; }
-        .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
-        .nav-links li a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); cursor: pointer; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #ffffff; font-weight: 700; font-size: 1.1rem; cursor: pointer; }
+        .logo-icon { background-color: var(--accent-orange); color: #000; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 800; font-size: 0.9rem; }
+        
+        .nav-links { display: flex; gap: 1rem; list-style: none; align-items: center; }
+        .nav-links li a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; font-weight: 500; transition: var(--transition); cursor: pointer; }
         .nav-links li a:hover, .nav-links li a.active { color: #ffffff; }
+        .menu-toggle { display: none; cursor: pointer; font-size: 1.5rem; color: #fff; background: none; border: none; }
 
-        .btn-orange { background-color: var(--accent-orange); color: #ffffff; padding: 0.55rem 1.1rem; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.85rem; transition: var(--transition); border: none; cursor: pointer; display: inline-block; text-align: center; }
+        .btn-orange { background-color: var(--accent-orange); color: #ffffff; padding: 0.55rem 1rem; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 0.8rem; transition: var(--transition); border: none; cursor: pointer; display: inline-block; text-align: center; }
         .btn-orange:hover { background-color: var(--accent-orange-hover); transform: translateY(-2px); }
-        .menu-toggle { display: none; cursor: pointer; font-size: 1.5rem; color: #fff; }
 
         main { min-height: 80vh; }
         .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
         .page-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 4.5rem 1.5rem; }
-        .section-header { text-align: center; margin-bottom: 3.5rem; }
-        .section-header h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; color: #ffffff; }
-        .section-header p { color: var(--text-muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1rem; }
+        .section-header { text-align: center; margin-bottom: 2.5rem; }
+        .section-header h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #ffffff; }
+        .section-header p { color: var(--text-muted); font-size: 0.85rem; max-width: 500px; margin: 0 auto; }
 
-        /* Hero */
-        .hero-section { max-width: 1200px; margin: 0 auto; padding: 4rem 1.5rem 3rem 1.5rem; display: flex; flex-direction: column; gap: 2.5rem; }
-        .hero-image-box { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; height: 300px; width: 100%; display: flex; align-items: center; justify-content: center; }
-        .hero-image-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
-        .badge-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(249, 115, 22, 0.1); color: var(--accent-orange); padding: 0.35rem 0.85rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 1.25rem; border: 1px solid rgba(249, 115, 22, 0.2); }
-        .badge-dot { width: 6px; height: 6px; background-color: var(--accent-orange); border-radius: 50%; }
-        .hero-content h1 { font-size: 2.5rem; line-height: 1.2; font-weight: 700; margin-bottom: 1.25rem; letter-spacing: -1px; }
-        .hero-content h1 span { color: var(--accent-orange); }
-        .hero-content p { color: var(--text-muted); font-size: 1rem; margin-bottom: 2rem; }
-        .hero-buttons { display: flex; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
-        .btn-outline { background: transparent; color: #ffffff; border: 1px solid var(--border-color); padding: 0.55rem 1.1rem; border-radius: 8px; font-weight: 600; font-size: 0.85rem; transition: var(--transition); cursor: pointer; display: inline-block; text-align: center; }
-        .btn-outline:hover, .btn-outline.active { border-color: var(--accent-orange); color: var(--accent-orange); }
-        .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
-        .stat-item h3 { font-size: 1.1rem; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
-        .stat-item p { font-size: 0.75rem; color: var(--text-muted); }
+        .announcement-banner { background: var(--accent-orange); color: #000; text-align: center; padding: 0.5rem; font-weight: 700; font-size: 0.8rem; display: none; }
+        .staff-banner { background: #ef4444; color: #fff; text-align: center; padding: 0.4rem; font-size: 0.75rem; font-weight: 600; display: none; }
 
-        /* Grid Servis & Kenapa Pilih Kami */
-        .fix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
-        .fix-card, .why-card, .step-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem 1.5rem; transition: var(--transition); }
-        .fix-card:hover, .why-card:hover { border-color: var(--accent-orange); transform: translateY(-3px); }
-        .fix-icon, .why-icon { font-size: 2.5rem; margin-bottom: 1.25rem; }
-        .fix-card h3, .why-card h3, .step-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; color: #ffffff; }
-        .fix-card p, .why-card p, .step-card p { font-size: 0.85rem; color: var(--text-muted); }
+        /* Top Image Banner dengan Border & Sudut Melengkung (Smooth Style) */
+        .top-banner-wrapper { max-width: 1200px; margin: 1.5rem auto 0 auto; padding: 0 1rem; }
+        .top-banner-image { width: 100%; height: 260px; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .top-banner-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
 
-        .why-us-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-        .why-card { flex: 1 1 260px; max-width: 270px; }
+        .hero-section { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; display: flex; flex-direction: column; gap: 1.5rem; text-align: center; align-items: center; }
+        .badge-status { display: inline-flex; align-items: center; gap: 6px; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin: 0.5rem 0; border: 1px solid rgba(255,255,255,0.1); }
+        .badge-status.open { background: rgba(34, 197, 94, 0.15); color: #22c55e; border-color: rgba(34, 197, 94, 0.3); }
+        .badge-status.closed { background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239, 68, 68, 0.3); }
 
-        /* Bagaimana Ia Berfungsi */
-        .steps-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-        .step-card { position: relative; flex: 1 1 260px; max-width: 320px; }
-        .step-number { position: absolute; top: -12px; left: 20px; background-color: var(--accent-orange); color: #000; font-weight: 700; font-size: 0.8rem; padding: 3px 10px; border-radius: 6px; }
+        .store-info-box { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 0.5rem; align-items: center; margin: 0 auto; }
+        .store-info-box h2 { font-size: 1.1rem; color: #fff; }
+        .store-info-box p { color: var(--text-muted); font-size: 0.8rem; display: flex; align-items: center; gap: 6px; }
 
-        /* Kad Umum & Ulasan */
-        .grid-layout, .reviews-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-        .card, .review-card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.75rem; display: flex; flex-direction: column; transition: var(--transition); cursor: pointer; flex: 1 1 280px; max-width: 350px; }
-        .card:hover, .review-card:hover { transform: translateY(-4px); border-color: var(--accent-orange); }
-        .item-tag { display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.7rem; font-weight: 600; padding: 3px 8px; border-radius: 6px; width: fit-content; margin-bottom: 1rem; }
-        .card-img-placeholder { width: 100%; height: 180px; background: #1e1e24; border-radius: 8px; overflow: hidden; margin-bottom: 1.25rem; }
-        .card-img-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+        .social-links { display: flex; gap: 0.75rem; justify-content: center; margin-top: 0.75rem; flex-wrap: wrap; }
+        .social-pill { background: var(--bg-card); border: 1px solid var(--border-color); padding: 0.5rem 1rem; border-radius: 20px; color: var(--text-main); font-size: 0.75rem; font-weight: 600; text-decoration: none; transition: var(--transition); display: flex; align-items: center; gap: 6px; }
+        .social-pill:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
 
-        .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.25rem; }
-        .reviewer-avatar { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 1px solid var(--accent-orange); }
-        .stars { color: #f59e0b; font-size: 0.85rem; margin-bottom: 1rem; }
-        .review-text { color: var(--text-muted); font-size: 0.85rem; font-style: italic; margin-bottom: 1.25rem; }
+        .fix-grid, .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+        .fix-card, .why-card, .step-card, .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem 1rem; transition: var(--transition); cursor: pointer; }
+        .fix-card:hover, .why-card:hover, .card:hover { border-color: var(--accent-orange); transform: translateY(-2px); }
+        .fix-icon, .why-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .fix-card h3, .why-card h3, .step-card h3, .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #ffffff; }
+        .fix-card p, .why-card p, .step-card p, .card p { font-size: 0.78rem; color: var(--text-muted); }
 
-        /* Borang & Kalkulator Repair */
-        .form-panel { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 2rem; max-width: 800px; margin: 0 auto; }
-        .form-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
-        @media(min-width: 768px) { .form-grid { grid-template-columns: 1fr 1fr; } }
-        .form-group { margin-bottom: 1.25rem; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-muted); }
-        .form-control { width: 100%; padding: 0.75rem 1rem; background-color: var(--bg-main); border: 1px solid var(--border-color); border-radius: 8px; color: #ffffff; font-size: 0.9rem; transition: var(--transition); }
-        .form-control:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(249,115,22,0.15); }
+        .why-us-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
+        .why-card { flex: 1 1 200px; max-width: 250px; }
 
-        /* Konfigurator PC & Finder */
-        .builder-container { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
-        @media(min-width: 968px) { .builder-container { grid-template-columns: 1fr 350px; } }
-        .builder-summary { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.75rem; border-top: 4px solid var(--accent-orange); }
-        .total-price { font-size: 2rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem; }
-        .ai-recommendation { background: rgba(249, 115, 22, 0.05); border: 1px solid rgba(249, 115, 22, 0.2); border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; border-left: 3px solid var(--accent-orange); }
+        .steps-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
+        .step-card { position: relative; flex: 1 1 200px; max-width: 250px; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem 1rem; }
+        .step-number { position: absolute; top: -10px; left: 15px; background-color: var(--accent-orange); color: #000; font-weight: 700; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; }
 
-        .finder-layout { display: flex; flex-direction: column; gap: 2rem; }
-        @media(min-width: 968px) { .finder-layout { display: grid; grid-template-columns: 260px 1fr; } }
-        .sidebar-filter { background-color: var(--bg-card); padding: 1.5rem; border-radius: var(--radius); border: 1px solid var(--border-color); height: fit-content; }
-        .checkbox-label { display: flex; align-items: center; margin-bottom: 0.75rem; cursor: pointer; font-size: 0.85rem; color: var(--text-muted); }
-        .checkbox-label input { margin-right: 0.75rem; accent-color: var(--accent-orange); width: 15px; height: 15px; }
+        .form-panel { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; max-width: 700px; margin: 0 auto; }
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        @media(min-width: 600px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-size: 0.75rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--text-muted); }
+        .form-control { width: 100%; padding: 0.6rem 0.8rem; background-color: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: #ffffff; font-size: 0.85rem; transition: var(--transition); }
+        .form-control:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 2px rgba(249,115,22,0.15); }
 
-        /* Modal */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; padding: 1rem; }
-        .modal-content { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); max-width: 750px; width: 100%; padding: 2rem; position: relative; display: flex; flex-direction: column; gap: 1.5rem; box-shadow: 0 25px 50px rgba(0,0,0,0.7); }
-        @media(min-width: 768px) { .modal-content { display: grid; grid-template-columns: 1fr 1fr; padding: 2.5rem; } }
-        .modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; }
-        .modal-img { width: 100%; height: 220px; border-radius: 8px; object-fit: cover; }
+        .builder-container { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; max-width: 900px; margin: 0 auto; }
+        @media(min-width: 768px) { .builder-container { grid-template-columns: 1fr 300px; } }
+        .builder-summary { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; border-top: 4px solid var(--accent-orange); }
+        .total-price { font-size: 1.75rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; }
+        .ai-recommendation { background: rgba(249, 115, 22, 0.05); border: 1px solid rgba(249, 115, 22, 0.2); border-radius: 6px; padding: 1rem; margin: 1rem 0; border-left: 3px solid var(--accent-orange); }
 
-        /* Footer */
-        footer { border-top: 1px solid var(--border-color); background-color: var(--bg-main); padding: 3rem 1rem 2rem 1rem; margin-top: 4rem; }
-        .footer-grid { max-width: 1200px; margin: 0 auto 2.5rem auto; display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        @media(min-width: 768px) { .footer-grid { grid-template-columns: 1.5fr repeat(3, 1fr); } }
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-        .footer-col ul a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; cursor: pointer; }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 0.5rem; }
-        @media(min-width: 768px) { .footer-bottom { flex-direction: row; text-align: left; } }
+        footer { border-top: 1px solid var(--border-color); background-color: var(--bg-main); padding: 2rem 1rem; margin-top: 3rem; text-align: center; }
 
-        @media (max-width: 968px) {
-            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-card); padding: 1.5rem 2rem; border-bottom: 1px solid var(--border-color); gap: 1rem; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-card); padding: 1rem; border-bottom: 1px solid var(--border-color); gap: 0.75rem; text-align: center; }
             .nav-links.active { display: flex; }
             .menu-toggle { display: block; }
         }
@@ -139,13 +107,22 @@
 </head>
 <body>
 
+    <!-- GAMBAR PALING ATAS DENGAN BORDER & SUDUT MELENGKUNG (SMOOTH) -->
+    <div class="top-banner-wrapper">
+        <div class="top-banner-image">
+            <img src="https://www.facebook.com/photo/?fbid=492774322850516&set=a.470299815097967" alt="ZTECHFIX Top Banner" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=1200&q=80';">
+        </div>
+    </div>
+
     <header>
+        <div id="store-status-banner" class="announcement-banner"><span id="announcement-text"></span></div>
+        <div id="staff-leave-banner" class="staff-banner"><span id="staff-leave-text"></span></div>
         <div class="nav-container">
             <a class="logo" onclick="navigate('home')">
                 <div class="logo-icon">ZS</div>
                 <span>ZTECHFIX</span>
             </a>
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <ul class="nav-links" id="nav-menu">
                 <li><a onclick="navigate('home')" id="nav-home" class="active">Utama</a></li>
                 <li><a onclick="navigate('builder')" id="nav-builder">Bina PC Custom</a></li>
@@ -153,34 +130,23 @@
                 <li><a onclick="navigate('finder')" id="nav-finder">Carian Upgrade & Gadjet</a></li>
             </ul>
         </div>
-        <!-- Notis Status Kedai, Pengumuman & Cuti Staff -->
-<div id="store-status-banner" style="background: var(--accent-orange); color: #000; text-align: center; padding: 0.75rem; font-weight: 700; font-size: 0.9rem; display: none;">
-    <span id="announcement-text"></span>
-</div>
-<div id="staff-leave-banner" style="background: #ef4444; color: #fff; text-align: center; padding: 0.5rem; font-size: 0.85rem; font-weight: 600; display: none;">
-    <span id="staff-leave-text"></span>
-</div>
     </header>
 
     <main>
         <!-- HALAMAN 1: UTAMA (HOME) -->
         <section id="home" class="page-section active">
             <div class="hero-section">
-                <div class="hero-image-box">
-                    <img src="https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=800&q=80" alt="Workspace">
-                </div>
-                <div class="hero-content">
-                    <div class="badge-tag"><div class="badge-dot"></div> DIAGNOSTIK HARI YANG SAMA • 891+ PENGIKUT</div>
-                    <h1>Baiki Kerosakan. <span>Bina Sistem Impian.</span></h1>
-                    <p>ZTECHFIX SOLUTIONS (SA0560360-D) - Pakar baik pulih telefon pintar, iPhone, tablet, laptop, MacBook, dan binaan kustom PC di Kuala Kangsar[cite: 9].</p>
-                    <div class="hero-buttons">
+                <div class="hero-content" style="max-width: 700px;">
+                    <div class="badge-tag" style="display: inline-flex; align-items: center; gap: 6px; background: rgba(249, 115, 22, 0.1); color: var(--accent-orange); padding: 0.3rem 0.7rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600; margin-bottom: 1rem; border: 1px solid rgba(249, 115, 22, 0.2);"><div style="width: 5px; height: 5px; background-color: var(--accent-orange); border-radius: 50%;"></div> DIAGNOSTIK HARI YANG SAMA • 891+ PENGIKUT</div>
+                    <h1 style="font-size: 1.8rem; margin-bottom: 0.75rem;">Baiki Kerosakan. <span style="color: var(--accent-orange);">Bina Sistem Impian.</span></h1>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Pakar baik pulih telefon pintar, iPhone, tablet, laptop, MacBook, dan binaan kustom PC di Kuala Kangsar[cite: 9].</p>
+                    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 1.25rem;">
                         <button onclick="navigate('builder')" class="btn-orange">Bina PC Custom</button>
-                        <a href="#repair-section" class="btn-outline">Semak Kos Repair</a>
+                        <a href="#repair-section" class="btn-orange" style="background:transparent; border:1px solid var(--border-color);">Semak Kos Repair</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Apa Yang Kami Baiki -->
             <div class="container">
                 <div class="section-header"><h2>Apa Yang Kami Baiki</h2><p>Perkhidmatan penyelenggaraan menyeluruh untuk peranti elektronik.</p></div>
                 <div class="fix-grid">
@@ -191,7 +157,6 @@
                 </div>
             </div>
 
-            <!-- Kenapa Pilih Kami -->
             <div class="container" style="padding-top: 0;">
                 <div class="section-header"><h2>Kenapa Pilih Kami</h2></div>
                 <div class="why-us-grid">
@@ -201,25 +166,14 @@
                 </div>
             </div>
 
-            <!-- Bagaimana Ia Berfungsi (Dikembalikan Semula) -->
-            <div class="container" style="padding-top: 0;">
-                <div class="section-header"><h2>Bagaimana Ia Berfungsi</h2><p>Prosedur hantar dan baiki peranti yang mudah dan telus[cite: 9].</p></div>
-                <div class="steps-container">
-                    <div class="step-card"><div class="step-number">LANGKAH 1</div><h3>Hantar Peranti</h3><p>Kunjungi premis kami di Bandar Baru, Kuala Kangsar[cite: 9].</p></div>
-                    <div class="step-card"><div class="step-number">LANGKAH 2</div><h3>Diagnostik & Sebut Harga</h3><p>Pemeriksaan percuma sebelum kerja bermula[cite: 9].</p></div>
-                    <div class="step-card"><div class="step-number">LANGKAH 3</div><h3>Proses Pembaikan</h3><p>Pembaikan menggunakan alat ganti berkualiti tinggi[cite: 9].</p></div>
-                    <div class="step-card"><div class="step-number">LANGKAH 4</div><h3>Ujian & Ambil Peranti</h3><p>Peranti diuji sepenuhnya berserta waranti bertulis[cite: 9].</p></div>
-                </div>
-            </div>
-
-            <!-- Kalkulator Kos Pembaikan (Lengkap Semua Kategori) -->
+            <!-- Kalkulator Kos Pembaikan -->
             <div id="repair-section" class="container" style="padding-top: 0;">
                 <div class="section-header"><h2>Anggaran Kos Pembaikan</h2><p>Pilih kategori peranti anda untuk melihat anggaran harga[cite: 9].</p></div>
                 <div class="form-panel">
                     <div class="form-grid">
                         <div class="form-group">
                             <label>Kategori Peranti</label>
-                            <select id="device-type" class="form-control" onchange="updateIssues()">
+                            <select id="device-type" class="form-control" onchange="trackDeviceSelection(this.value); updateIssues();">
                                 <option value="">-- Sila Pilih Peranti --</option>
                                 <option value="phone">Telefon Pintar (Phone)</option>
                                 <option value="iphone">iPhone (Apple)</option>
@@ -234,19 +188,45 @@
                         </div>
                         <div class="form-group">
                             <label>Jenis Isu / Kerosakan</label>
-                            <select id="device-issue" class="form-control" disabled>
+                            <select id="device-issue" class="form-control" disabled onchange="trackIssueSelection(this.value)">
                                 <option value="">-- Pilih Kategori Dahulu --</option>
                             </select>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 1.5rem;">
-                        <button class="btn-orange" style="width: 100%; max-width: 250px;" onclick="calculateRepair()">Jana Anggaran Kos</button>
+                    <div style="text-align: center; margin-top: 1.25rem;">
+                        <button class="btn-orange" style="width: 100%; max-width: 220px;" onclick="calculateRepair()">Jana Anggaran Kos</button>
                     </div>
-                    <div id="repair-result" style="display: none; text-align: center; margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
-                        <p style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600;">ANGGARAN KASAR</p>
-                        <p style="font-size: 2rem; font-weight: 700; color: var(--accent-orange); margin-bottom: 1rem;" id="repair-price">RM 0</p>
-                        <a href="https://wa.me/60189563923" target="_blank" class="btn-orange" style="display: inline-block; width: 100%; max-width: 250px;">Sahkan Melalui WhatsApp</a>
+                    <div id="repair-result" style="display: none; text-align: center; margin-top: 1.5rem; border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+                        <p style="color: var(--text-muted); font-size: 0.75rem; font-weight: 600;">ANGGARAN KASAR</p>
+                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--accent-orange); margin-bottom: 0.75rem;" id="repair-price">RM 0</p>
+                        <a href="https://wa.me/60189563923" target="_blank" class="btn-orange" style="display: inline-block; width: 100%; max-width: 220px;">Sahkan Melalui WhatsApp</a>
                     </div>
+                </div>
+            </div>
+
+            <!-- TEMPAHAN PANTAS (MINIMAKAN - HANYA DI HALAMAN UTAMA) -->
+            <div class="container" style="padding-top: 0; text-align: center;">
+                <button onclick="toggleOrderForm()" class="btn-orange" style="font-size: 0.85rem; padding: 0.75rem 1.5rem;">📝 Buat Tempahan / Order Peranti (Klik Sini)</button>
+                
+                <div id="orderFormContainer" class="form-panel" style="max-width: 700px; margin-top: 1.25rem; display: none; text-align: left;">
+                    <div class="section-header" style="margin-bottom: 1.25rem;"><h2>Borang Tempahan Servis</h2></div>
+                    <div class="form-grid">
+                        <div class="form-group"><label>Nama Pelanggan</label><input id="orderName" class="form-control" type="text" /></div>
+                        <div class="form-group"><label>No. Telefon</label><input id="orderPhone" class="form-control" type="text" /></div>
+                        <div class="form-group"><label>Produk / Servis</label><input id="orderProduct" class="form-control" type="text" /></div>
+                        <div class="form-group"><label>Harga (RM)</label><input id="orderPrice" class="form-control" type="text" /></div>
+                        <div class="form-group" style="grid-column: 1 / -1;"><label>Catatan Kerosakan</label><textarea id="orderNotes" class="form-control" rows="3"></textarea></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;"><button id="submitOrderBtn" class="btn-orange" style="width: 100%; max-width: 220px;">Hantar Order ke Database</button></div>
+                </div>
+            </div>
+
+            <div class="container" style="padding-top: 0;">
+                <div class="form-panel" style="max-width: 500px;">
+                    <div class="section-header" style="margin-bottom: 1.25rem;"><h2>Maklum Balas Pelanggan</h2></div>
+                    <div class="form-group"><label>Nama Anda</label><input id="fbName" class="form-control" type="text" /></div>
+                    <div class="form-group"><label>Komen / Cadangan</label><textarea id="fbMessage" class="form-control" rows="3"></textarea></div>
+                    <button onclick="submitFeedback()" class="btn-orange" style="width: 100%;">Hantar Maklum Balas</button>
                 </div>
             </div>
         </section>
@@ -256,34 +236,34 @@
             <div class="container">
                 <div class="section-header"><h2>Konfigurator Sistem PC</h2></div>
                 <div class="builder-container">
-                    <div class="form-panel">
+                    <div class="form-panel" style="max-width: 100%; margin: 0;">
                         <div class="form-group">
                             <label>CPU</label>
-                            <select id="pc-cpu" class="form-control" onchange="calculateCustomPC()">
+                            <select id="pc-cpu" class="form-control" onchange="trackPCComponent('CPU', this.options[this.selectedIndex].text); calculateCustomPC()">
                                 <option value="0">-- Pilih CPU --</option>
-                                <option value="350" data-score="1">Intel Core i3 / Ryzen 3</option>
-                                <option value="750" data-score="3">Intel Core i5 / Ryzen 5</option>
-                                <option value="1400" data-score="5">Intel Core i7 / Ryzen 7</option>
+                                <option value="350">Intel Core i3 / Ryzen 3</option>
+                                <option value="750">Intel Core i5 / Ryzen 5</option>
+                                <option value="1400">Intel Core i7 / Ryzen 7</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>GPU</label>
-                            <select id="pc-gpu" class="form-control" onchange="calculateCustomPC()">
-                                <option value="0" data-score="0">Grafik Bersepadu</option>
-                                <option value="950" data-score="3">RTX 3050 / RX 6600</option>
-                                <option value="1550" data-score="5">RTX 4060 / RX 7600</option>
+                            <select id="pc-gpu" class="form-control" onchange="trackPCComponent('GPU', this.options[this.selectedIndex].text); calculateCustomPC()">
+                                <option value="0">Grafik Bersepadu</option>
+                                <option value="950">RTX 3050 / RX 6600</option>
+                                <option value="1550">RTX 4060 / RX 7600</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>RAM</label>
-                            <select id="pc-ram" class="form-control" onchange="calculateCustomPC()">
-                                <option value="90" data-score="1">8GB RAM</option>
-                                <option value="180" data-score="3">16GB RAM</option>
+                            <select id="pc-ram" class="form-control" onchange="trackPCComponent('RAM', this.options[this.selectedIndex].text); calculateCustomPC()">
+                                <option value="90">8GB RAM</option>
+                                <option value="180">16GB RAM</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Storan SSD</label>
-                            <select id="pc-storage" class="form-control" onchange="calculateCustomPC()">
+                            <select id="pc-storage" class="form-control" onchange="trackPCComponent('Storage', this.options[this.selectedIndex].text); calculateCustomPC()">
                                 <option value="150">512GB NVMe SSD</option>
                                 <option value="300">1TB NVMe SSD</option>
                             </select>
@@ -296,42 +276,81 @@
                             <h4>Analisa Sistem AI:</h4>
                             <p id="pc-rec-text">-</p>
                         </div>
-                        <a id="wa-builder-link" target="_blank" class="btn-orange" style="width: 100%; display: none; text-align: center;">Tempah via WhatsApp</a>
+                        <a id="wa-builder-link" target="_blank" class="btn-orange" style="width: 100%; display: none; text-align: center;" onclick="trackClick('WhatsApp Order - Custom PC')">Tempah via WhatsApp</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- HALAMAN 3 & 4: JUALAN LELONG & FINDER -->
-        <section id="clearance" class="page-section"><div class="container"><div class="section-header"><h2>Jualan Peranti Refurbished</h2></div></div></section>
-        <section id="finder" class="page-section"><div class="container"><div class="section-header"><h2>Enjin Carian Upgrade</h2></div></div></section>
-
-        <!-- TEMPAHAN PANTAH -->
-        <section class="container" style="padding-top: 0;">
-            <div class="form-panel" style="max-width: 760px;">
-                <div class="section-header" style="margin-bottom: 1.5rem;"><h2>Order / Tempahan Pantas</h2></div>
-                <div class="form-grid">
-                    <div class="form-group"><label>Nama Pelanggan</label><input id="orderName" class="form-control" type="text" /></div>
-                    <div class="form-group"><label>No. Telefon</label><input id="orderPhone" class="form-control" type="text" /></div>
-                    <div class="form-group"><label>Produk / Servis</label><input id="orderProduct" class="form-control" type="text" /></div>
-                    <div class="form-group"><label>Harga</label><input id="orderPrice" class="form-control" type="text" /></div>
-                    <div class="form-group" style="grid-column: 1 / -1;"><label>Catatan</label><textarea id="orderNotes" class="form-control" rows="3"></textarea></div>
+        <!-- HALAMAN 3: JUALAN LELONG -->
+        <section id="clearance" class="page-section">
+            <div class="container">
+                <div class="section-header"><h2>Jualan Peranti Refurbished</h2><p>Semak senarai peranti terpakai berkualiti tinggi.</p></div>
+                <div class="grid-layout" style="max-width: 700px; margin: 0 auto;">
+                    <div class="card" onclick="trackItemView('Lelong: Samsung Galaxy A13')">
+                        <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 0.75rem;">Lelong Bajet</span>
+                        <h3>Samsung Galaxy A13 (128GB)</h3>
+                        <p>Kapasiti storan besar, bateri tahan lama. Harga asal RM699.</p>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 8px;">RM 350</p>
+                    </div>
+                    <div class="card" onclick="trackItemView('Lelong: iPhone SE Refurbished')">
+                        <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 0.75rem;">Apple Refurbished</span>
+                        <h3>iPhone SE (Gen 2)</h3>
+                        <p>Kondisi tip-top 90%, siap waranti kedai.</p>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 8px;">RM 599</p>
+                    </div>
                 </div>
-                <div style="text-align: center; margin-top: 1.25rem;"><button id="submitOrderBtn" class="btn-orange" style="width: 100%; max-width: 260px;">Hantar Order</button></div>
+            </div>
+        </section>
+
+        <!-- HALAMAN 4: CARIAN UPGRADE & GADJET -->
+        <section id="finder" class="page-section">
+            <div class="container">
+                <div class="section-header"><h2>Enjin Carian Upgrade & Gadjet</h2><p>Tingkatkan prestasi perkakasan anda.</p></div>
+                <div class="grid-layout" style="max-width: 700px; margin: 0 auto;">
+                    <div class="card" onclick="trackItemView('Upgrade: SSD NVMe M.2 1TB')">
+                        <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 0.75rem;">Upgrade PC</span>
+                        <h3>SSD NVMe M.2 1TB</h3>
+                        <p>Tingkatkan kepantasan boot komputer sehingga 5x ganda.</p>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 8px;">RM 299</p>
+                    </div>
+                    <div class="card" onclick="trackItemView('Upgrade: RAM 16GB DDR4')">
+                        <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 0.75rem;">Upgrade RAM</span>
+                        <h3>RAM 16GB DDR4 Kit</h3>
+                        <p>Sesuai untuk multitasking dan gaming lancar.</p>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 8px;">RM 180</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-<section id="feedback-section" class="container" style="padding-top: 0;">
-    <div class="form-panel" style="max-width: 600px;">
-        <div class="section-header" style="margin-bottom: 1.5rem;"><h2>Maklum Balas Pelanggan</h2></div>
-        <div class="form-group"><label>Nama</label><input id="fbName" class="form-control" type="text" /></div>
-        <div class="form-group"><label>Komen / Cadangan</label><textarea id="fbMessage" class="form-control" rows="3"></textarea></div>
-        <button onclick="submitFeedback()" class="btn-orange" style="width: 100%;">Hantar Maklum Balas</button>
-    </div>
-</section>
+
+    <!-- BAHAGIAN PALING AKHIR SEKALI -->
     <footer>
-        <div class="footer-grid">
-            <div class="footer-col"><div class="logo"><div class="logo-icon">ZS</div> ZTECHFIX</div><p style="color: var(--text-muted); font-size: 0.85rem;">Pakar baik pulih gadjet di Kuala Kangsar[cite: 9].</p></div>
+        <div class="store-info-box" style="margin-bottom: 1.5rem;">
+            <h2>ZTECHFIX SOLUTIONS</h2>
+            <div id="store-open-badge" class="badge-status open">🟢 BUKA SEKARANG</div>
+            <p>📍 No 11 Jalan Bendahara 3, Bandar Baru, 33000 Kuala Kangsar, Perak[cite: 9]</p>
+            <p>📞 05-776 8905 / 018-956 3923</p>
+            <p>🕒 Isnin - Sabtu: 10:30 AM - 6:00 PM</p>
+            <p>❌ Ahad: Tutup</p>
+        </div>
+
+        <div style="width: 100%; max-width: 600px; margin: 0 auto 1.5rem auto;">
+            <h3 style="margin-bottom: 0.5rem; font-size: 1rem; color: #fff;">Ikuti Kami</h3>
+            <p style="color: var(--text-muted); font-size: 0.78rem; margin-bottom: 0.75rem;">Jom ikuti perkembangan terbaru, promosi, dan di sebalik tabir bengkel kami.</p>
+            <div class="social-links">
+                <a href="https://instagram.com" target="_blank" class="social-pill">📱 Instagram</a>
+                <a href="https://tiktok.com" target="_blank" class="social-pill">🎵 TikTok</a>
+                <a href="https://facebook.com" target="_blank" class="social-pill">📘 Facebook</a>
+            </div>
+        </div>
+
+        <div class="logo" style="justify-content:center; margin-bottom:8px;"><div class="logo-icon" style="width: 20px; height: 20px; font-size: 0.6rem;">ZS</div> ZTECHFIX</div>
+        <p style="color: var(--text-muted); font-size: 0.65rem;">&copy; 2026 ZTECHFIX SOLUTIONS (SA0560360-D). Hak Cipta Terpelihara.</p>
+        
+        <div style="margin-top: 1.25rem;">
+            <button onclick="pushDefaultDataToDB()" class="btn-orange" style="background: #22c55e; font-size: 0.65rem; padding: 0.3rem 0.7rem;">📤 Push Data Sedia Ada ke Database (Firebase)</button>
         </div>
     </footer>
 
@@ -342,7 +361,6 @@
         if (window.firebase) { firebase.initializeApp(firebaseConfig); }
         const db = window.firebase ? firebase.firestore() : null;
 
-       // Struktur penuh yang dijangkakan oleh Admin dan Database
         const defaultCustomerData = {
             companyName: 'ZTECHFIX',
             whatsappNumber: '60189563923',
@@ -350,32 +368,8 @@
             email: 'ztechfixsolutions@yahoo.com',
             address: 'No 11 Jalan Bendahara 3, Bandar Baru, Kuala Kangsar',
             heroTitle: 'Baiki Kerosakan. Bina Sistem Impian.',
-            heroText: 'ZTECHFIX SOLUTIONS (SA0560360-D) - Pakar baik pulih telefon pintar, iPhone, tablet, laptop, MacBook, dan binaan kustom PC di Kuala Kangsar.',
+            heroText: 'ZTECHFIX SOLUTIONS (SA0560360-D) - Pakar baik pulih telefon pintar, iPhone, tablet, laptop, MacBook, dan binaan kustom PC di Kuala Kangsar[cite: 9].',
             builderBase: 700,
-            
-            // Maklumat Bina PC yang hilang
-            builderOptions: {
-                cpu: [
-                    { value: '350', score: '1', label: 'Intel Core i3 / AMD Ryzen 3 (Asas)' },
-                    { value: '750', score: '3', label: 'Intel Core i5 / AMD Ryzen 5 (Pertengahan)' },
-                    { value: '1400', score: '5', label: 'Intel Core i7 / AMD Ryzen 7 (Prestasi)' }
-                ],
-                gpu: [
-                    { value: '0', score: '0', label: 'Grafik Bersepadu (Integrated)' },
-                    { value: '950', score: '3', label: 'NVIDIA RTX 3050 / AMD RX 6600' },
-                    { value: '1550', score: '5', label: 'NVIDIA RTX 4060 / AMD RX 7600' }
-                ],
-                ram: [
-                    { value: '90', score: '1', label: '8GB RAM (Standard)' },
-                    { value: '180', score: '3', label: '16GB RAM (Prestasi)' }
-                ],
-                storage: [
-                    { value: '150', label: '512GB NVMe M.2 SSD' },
-                    { value: '300', label: '1TB NVMe M.2 SSD' }
-                ]
-            },
-
-            // Senarai Repair Penuh
             repairData: {
                 'phone': { 'lcd_ori': { label: 'Tukar LCD Ori', price: 'RM 220 - RM 750' }, 'battery': { label: 'Tukar Bateri', price: 'RM 80 - RM 280' } },
                 'iphone': { 'lcd_ori': { label: 'Tukar LCD Ori (iPhone)', price: 'RM 280 - RM 850' }, 'battery': { label: 'Tukar Bateri iPhone', price: 'RM 100 - RM 350' } },
@@ -389,20 +383,12 @@
             }
         };
 
-        function initCustomerPage() {
-            // Simpan ke storage lokal
-            localStorage.setItem('ztechfix_site_data', JSON.stringify(defaultCustomerData));
-            
-            // Push struktur penuh ini ke Firebase supaya Admin boleh import dengan sempurna
-            if (db) { 
-                db.collection('siteSettings').doc('main').set(defaultCustomerData, { merge: true })
-                .then(() => console.log('Data berjaya diselaraskan dengan Firebase'))
-                .catch((error) => console.error('Ralat Firebase:', error)); 
-            }
+        function pushDefaultDataToDB() {
+            if (!db) return alert("Firebase tidak bersambung.");
+            db.collection('siteSettings').doc('main').set(defaultCustomerData, { merge: true }).then(() => {
+                alert("Berjaya! Data konfigurasi telah dipush ke database Firebase.");
+            }).catch(err => alert("Ralat: " + err.message));
         }
-        
-        // Mulakan proses kemaskini database
-        initCustomerPage();
 
         function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }
         function navigate(pageId) {
@@ -413,6 +399,38 @@
             if(activeNav) activeNav.classList.add('active');
             document.getElementById('nav-menu').classList.remove('active');
             window.scrollTo(0, 0);
+        }
+
+        function toggleOrderForm() {
+            const f = document.getElementById('orderFormContainer');
+            f.style.display = f.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function trackClick(metricName) {
+            if (db) {
+                db.collection('analytics').doc(metricName).set({
+                    clicks: firebase.firestore.FieldValue.increment(1),
+                    lastClicked: new Date().toISOString()
+                }, { merge: true }).catch(()=>{});
+            }
+        }
+
+        function trackDeviceSelection(device) {
+            if(!device) return;
+            trackClick(`Device Repair: ${device.toUpperCase()}`);
+        }
+
+        function trackIssueSelection(issue) {
+            if(!issue) return;
+            trackClick(`Issue Repair: ${issue}`);
+        }
+
+        function trackPCComponent(componentType, componentName) {
+            trackClick(`PC Builder [${componentType}]: ${componentName}`);
+        }
+
+        function trackItemView(itemName) {
+            trackClick(`View/Click Item: ${itemName}`);
         }
 
         const repairData = defaultCustomerData.repairData;
@@ -445,13 +463,8 @@
             const gpu = parseInt(document.getElementById('pc-gpu').value) || 0;
             const ram = parseInt(document.getElementById('pc-ram').value) || 0;
             const storage = parseInt(document.getElementById('pc-storage').value) || 0;
-            
             if(cpu === 0) return;
-            
-            // Pengiraan Total Berdasarkan Nilai Terkini
-            const basePrice = defaultCustomerData.builderBase || 700;
-            const total = basePrice + cpu + gpu + ram + storage;
-            
+            const total = 700 + cpu + gpu + ram + storage;
             document.getElementById('pc-total-price').textContent = `RM ${total.toLocaleString()}`;
             document.getElementById('pc-recommendation').style.display = "block";
             document.getElementById('pc-rec-text').textContent = "Konfigurasi sistem PC telah dianalisa dengan jayanya.";
@@ -465,115 +478,76 @@
             const product = document.getElementById('orderProduct').value.trim();
             if (!name || !phone || !product) { alert('Sila isi maklumat wajib (Nama, No Tel, Produk).'); return; }
             
-            const orders = JSON.parse(localStorage.getItem('ztechfix_orders') || '[]');
-            orders.unshift({ 
-                customerName: name, 
-                customerPhone: phone, 
-                product, 
-                price: document.getElementById('orderPrice').value || 'RM 0', 
-                status: 'pending', 
-                date: new Date().toLocaleString() 
-            });
-            
-            localStorage.setItem('ztechfix_orders', JSON.stringify(orders));
-            alert('Tempahan anda berjaya disimpan dalam sistem!');
+            const orderPayload = {
+                customerName: name, customerPhone: phone, product,
+                price: document.getElementById('orderPrice').value || 'RM 0',
+                notes: document.getElementById('orderNotes').value || '',
+                status: 'pending', date: new Date().toLocaleString()
+            };
+
+            if (db) {
+                db.collection('orders').add(orderPayload).then(() => {
+                    alert('Tempahan berjaya dihantar ke database server!');
+                    document.getElementById('orderName').value = ''; document.getElementById('orderPhone').value = '';
+                    document.getElementById('orderProduct').value = ''; document.getElementById('orderPrice').value = '';
+                    document.getElementById('orderNotes').value = '';
+                    document.getElementById('orderFormContainer').style.display = 'none';
+                }).catch(err => alert('Ralat server: ' + err.message));
+            } else {
+                const orders = JSON.parse(localStorage.getItem('ztechfix_orders') || '[]');
+                orders.unshift(orderPayload);
+                localStorage.setItem('ztechfix_orders', JSON.stringify(orders));
+                alert('Tempahan disimpan secara lokal.');
+            }
         });
 
-        // 1. Sistem Track Klik (Analitik)
-function trackClick(itemName) {
-    if (db) {
-        db.collection('analytics').doc(itemName).set({
-            clicks: firebase.firestore.FieldValue.increment(1),
-            lastClicked: new Date().toISOString()
-        }, { merge: true });
-    }
-}
+        async function loadSmartSettings() {
+            if (!db) return;
+            try {
+                const docSnap = await db.collection('settings').doc('mainConfig').get();
+                const now = new Date();
+                const day = now.getDay();
+                const timeVal = now.getHours() + (now.getMinutes() / 60);
+                
+                let isOpen = true;
+                let statusMsg = "🟢 BUKA SEKARANG";
+                let statusClass = "open";
 
-// Tambah event listener kepada butang sedia ada
-document.querySelectorAll('button, a.btn-orange').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        trackClick(e.target.innerText || 'Button Clicked');
-    });
-});
+                if (day === 0) {
+                    isOpen = false; statusMsg = "🔴 KEDAI TUTUP (Cuti Ahad)"; statusClass = "closed";
+                } else if (timeVal < 10.5 || timeVal >= 18.0) {
+                    isOpen = false; statusMsg = "🔴 KEDAI TUTUP (Luar Waktu Operasi)"; statusClass = "closed";
+                }
 
-// 2. Sistem Autonomi Waktu Kedai & Toggles
-async function loadSmartSettings() {
-    if (!db) return;
-    const docSnap = await db.collection('settings').doc('mainConfig').get();
-    if (!docSnap.exists) return;
-    
-    const config = docSnap.data();
-    
-    // Auto-Masa Kedai (10:30 pagi - 6:00 petang, Ahad Cuti)
-    const now = new Date();
-    const day = now.getDay(); // 0 = Ahad
-    const hour = now.getHours();
-    const min = now.getMinutes();
-    const timeVal = hour + (min / 60); // Contoh: 10:30 = 10.5
-    
-    let isOpen = true;
-    let statusMsg = "";
+                if (docSnap.exists) {
+                    const c = docSnap.data();
+                    if (c.forceClose) {
+                        isOpen = false; statusMsg = `🔴 ${c.forceCloseMsg || 'Tutup Sementara'}`; statusClass = "closed";
+                    }
+                    const banner = document.getElementById('store-status-banner');
+                    if (c.showAnnouncement && c.announcementText) {
+                        banner.style.display = 'block';
+                        document.getElementById('announcement-text').innerHTML = `📢 ${c.announcementText}`;
+                    }
+                }
 
-    if (day === 0) {
-        isOpen = false; statusMsg = "Kedai Ditutup (Cuti Hari Ahad).";
-    } else if (timeVal < 10.5 || timeVal >= 18.0) {
-        isOpen = false; statusMsg = "Kedai Ditutup. Waktu operasi: 10:30 Pagi - 6:00 Petang.";
-    }
+                const badge = document.getElementById('store-open-badge');
+                badge.className = `badge-status ${statusClass}`;
+                badge.textContent = statusMsg;
+            } catch(e) {}
+        }
 
-    // Override oleh Admin jika set 'Tutup Paksa / Cuti Umum'
-    if (config.forceClose) {
-        isOpen = false; statusMsg = config.forceCloseMsg || "Kedai Ditutup Atas Urusan Kerja / Cuti Umum.";
-    }
+        function submitFeedback() {
+            const name = document.getElementById('fbName').value.trim();
+            const msg = document.getElementById('fbMessage').value.trim();
+            if (!name || !msg) { alert("Isi nama dan komen."); return; }
+            if (db) {
+                db.collection('feedbacks').add({ name, message: msg, date: new Date().toLocaleString() })
+                .then(() => { alert("Maklum balas dihantar!"); document.getElementById('fbName').value = ''; document.getElementById('fbMessage').value = ''; });
+            }
+        }
 
-    const banner = document.getElementById('store-status-banner');
-    if (!isOpen) {
-        banner.style.display = 'block';
-        banner.style.background = '#ef4444'; // Merah tutup
-        document.getElementById('announcement-text').innerHTML = `⛔ ${statusMsg}`;
-    } else if (config.showAnnouncement) {
-        banner.style.display = 'block';
-        banner.style.background = 'var(--accent-orange)';
-        document.getElementById('announcement-text').innerHTML = `📢 ${config.announcementText}`;
-    }
-
-    // Sistem Semak Cuti Staff (2 Orang)
-    let leaveMsg = [];
-    if (config.staff1_leave) leaveMsg.push(`Staff 1 (${config.staff1_name}) sedang bercuti selama ${config.staff1_leaveDuration}.`);
-    if (config.staff2_leave) leaveMsg.push(`Staff 2 (${config.staff2_name}) sedang bercuti selama ${config.staff2_leaveDuration}.`);
-    
-    if (leaveMsg.length > 0) {
-        const staffBanner = document.getElementById('staff-leave-banner');
-        staffBanner.style.display = 'block';
-        document.getElementById('staff-leave-text').innerText = "Notis Kelewatan: " + leaveMsg.join(" | ") + " Masa penyelenggaraan mungkin sedikit lambat.";
-    }
-
-    // Sistem Tutup/Buka Seksyen HTML (Toggles)
-    if (!config.showRepairCalc) document.getElementById('repair-section').style.display = 'none';
-    if (!config.showBuilder) document.getElementById('builder').style.display = 'none';
-}
-
-// 3. Sistem Hantar Maklum Balas ke Database Collection 'feedbacks'
-function submitFeedback() {
-    const name = document.getElementById('fbName').value.trim();
-    const msg = document.getElementById('fbMessage').value.trim();
-    if (!name || !msg) { alert("Isi nama dan komen."); return; }
-    
-    if (db) {
-        db.collection('feedbacks').add({
-            name: name,
-            message: msg,
-            date: new Date().toLocaleString()
-        }).then(() => {
-            alert("Terima kasih atas maklum balas anda!");
-            document.getElementById('fbName').value = '';
-            document.getElementById('fbMessage').value = '';
-        });
-    }
-}
-
-// Jalankan ketika website dibuka
-window.onload = () => { loadSmartSettings(); }
-
+        window.onload = () => { loadSmartSettings(); }
     </script>
 </body>
 </html>
