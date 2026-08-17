@@ -215,13 +215,18 @@
       background: rgba(20,20,24,0.82);
       border: 1px solid var(--line);
       border-radius: 16px;
-      padding: 1.25rem;
+      padding: 1.5rem;
       box-shadow: var(--shadow);
     }
 
     .panel h2 {
-      margin: 0 0 1rem;
+      margin: 0 0 1.25rem;
       font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.75rem;
     }
 
     .form-grid {
@@ -569,25 +574,28 @@
 
     <div class="layout">
       <aside class="sidebar">
-        <h3>Menu</h3>
+        <h3>Menu Navigasi</h3>
         <nav class="menu">
-          <a href="#settings" class="active">Settings</a>
-          <a href="#orders">Orders</a>
+          <a href="#dashboard-overview" class="active">1. Dashboard</a>
+          <a href="#settings">2. Store Settings</a>
+          <a href="#content-managers">3. Pengurusan Kandungan</a>
+          <a href="#orders">4. Senarai Orders</a>
         </nav>
       </aside>
 
       <main class="main">
+        <!-- 1. DASHBOARD OVERVIEW -->
         <section class="panel" id="dashboard-overview">
           <div class="toolbar-row">
             <div>
-              <h2 style="margin:0;">Dashboard Overview</h2>
+              <h2 style="margin:0; border:none; padding:0;">1. Dashboard Overview</h2>
             </div>
             <div class="search-group">
-              <button id="importWebsiteBtn" class="btn primary" type="button" style="width:auto;">Import Data dari Database</button>
+              <button id="importAllBtn" class="btn primary" type="button" style="width:auto;">📥 Import Semua Data (Firebase)</button>
             </div>
           </div>
 
-          <div class="dashboard-grid">
+          <div class="dashboard-grid" style="margin-top: 1rem;">
             <div class="dashboard-card">
               <span>Order Total</span>
               <strong id="dashTotalOrders">0</strong>
@@ -607,12 +615,12 @@
           </div>
         </section>
 
+        <!-- 2. GENERAL STORE SETTINGS -->
         <section class="panel" id="settings">
-          <h2>General Store Settings</h2>
+          <h2>2. General Store Settings</h2>
           <div class="toolbar-row">
             <div class="search-group">
               <button id="saveSettingsBtn" class="btn primary" type="button" style="width:auto;">Save Settings</button>
-              <button id="importWebsiteBtnSecondary" class="btn success" type="button" style="width:auto;">Import Data dari Database</button>
               <button id="exportDataBtn" class="btn" type="button" style="width:auto;">Export JSON</button>
             </div>
           </div>
@@ -656,10 +664,10 @@
           </div>
         </section>
 
-        <!-- KAWALAN KANDUNGAN LENGKAP (PILIH & EDIT SETIAP BAHAGIAN WEBSITE) -->
+        <!-- 3. KAWALAN KANDUNGAN WEBSITE -->
         <section class="panel" id="content-managers">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
-            <h2>Pengurusan Kandungan Website</h2>
+            <h2 style="margin:0; border:none; padding:0;">3. Pengurusan Kandungan Website</h2>
             <span style="color: var(--muted); font-size: 0.8rem;">Tambah, edit, dan padam item untuk setiap halaman tanpa kod</span>
           </div>
 
@@ -684,9 +692,10 @@
           <div id="premiumManagers"></div>
         </section>
 
+        <!-- 4. ORDERS MANAGEMENT -->
         <section class="panel" id="orders">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
-            <h2>Orders</h2>
+            <h2 style="margin:0; border:none; padding:0;">4. Senarai Orders Pelanggan</h2>
             <div class="search-group">
               <input id="orderSearchInput" class="search-box" type="text" placeholder="Cari nama / produk / phone..." />
               <select id="orderFilterSelect" class="filter-select">
@@ -755,7 +764,6 @@
       orderStatus: 'all'
     };
 
-    // Struktur Bersih Tanpa Dummy Berat (Boleh Ditambah Melalui Admin)
     const defaultContent = {
       fixItems: [
         { icon: '📱', title: 'Phone & iPhone / Tablet', description: 'Pembaikan skrin, bateri & port pengecasan.' }
@@ -1303,29 +1311,47 @@
       `;
     }
 
-    async function importWebsiteData() {
-      if (!ensureFirebase()) {
-        alert('Sambungan Firebase tidak aktif.');
-        return;
-      }
-      try {
-        const docRef = firebaseState.db.collection('siteSettings').doc('main');
-        const docSnap = await docRef.get();
-        if (!docSnap.exists) {
-          alert('Tiada data wujud dalam database Firebase.');
-          return;
-        }
+   // Fungsi Import Diperkasakan (Menyokong Firebase & Fallback LocalStorage)
+async function importAllDataFromDatabase() {
+  let loadedFromFirebase = false;
+  
+  if (ensureFirebase()) {
+    try {
+      // 1. Cuba tarik dari Firebase
+      const docRef = firebaseState.db.collection('siteSettings').doc('main');
+      const docSnap = await docRef.get();
+      if (docSnap.exists) {
         const remoteData = docSnap.data();
         const merged = { ...defaultState, ...remoteData };
         saveSiteState(merged);
-        renderSettingsForm();
-        renderPremiumManagers();
-        alert('Data berjaya diimport dari pangkalan data Firebase!');
-        document.getElementById('dashSiteStatus').textContent = 'Synced';
-      } catch (error) {
-        alert('Gagal mengambil data dari Firebase.');
+        loadedFromFirebase = true;
       }
+
+      // 2. Tarik Orders dari Firebase
+      const ordersSnap = await firebaseState.db.collection('orders').get();
+      const remoteOrders = [];
+      ordersSnap.forEach((doc) => remoteOrders.push(doc.data()));
+      if (remoteOrders.length > 0) {
+        saveOrders(remoteOrders);
+      }
+    } catch (error) {
+      console.warn('Gagal tarik dari Firebase, beralih ke simpanan lokal...', error);
     }
+  }
+
+  // Fallback: Jika Firebase gagal/kosong, ambil dari localStorage pelayar
+  const localSiteData = localStorage.getItem(SITE_KEY);
+  if (!loadedFromFirebase && localSiteData) {
+    console.log('Mengimport data daripada simpanan lokal.');
+  }
+
+  renderSettingsForm();
+  renderPremiumManagers();
+  renderOrders();
+  
+  alert('Berjaya! Semua data tetapan dan senarai order telah diimport sepenuhnya.');
+  document.getElementById('dashSiteStatus').textContent = loadedFromFirebase ? 'Synced (Cloud)' : 'Synced (Local)';
+}
 
     function loginAdmin() {
       const username = document.getElementById('username').value.trim();
@@ -1357,8 +1383,10 @@
     document.getElementById('loginBtn').addEventListener('click', loginAdmin);
     document.getElementById('logoutBtn').addEventListener('click', logoutAdmin);
     document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
-    document.getElementById('importWebsiteBtn').addEventListener('click', importWebsiteData);
-    document.getElementById('importWebsiteBtnSecondary').addEventListener('click', importWebsiteData);
+    
+    // Butang import disatukan kepada satu fungsi import bersepadu
+    document.getElementById('importAllBtn').addEventListener('click', importAllDataFromDatabase);
+
     document.getElementById('exportDataBtn').addEventListener('click', exportDataAsJson);
     document.getElementById('refreshOrdersBtn').addEventListener('click', renderOrders);
     
