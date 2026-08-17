@@ -253,7 +253,6 @@
       border: 1px solid rgba(249,115,22,0.25);
       border-radius: 16px;
       padding: 1rem;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
     }
 
     .dashboard-card span {
@@ -584,7 +583,7 @@
               <h2 style="margin:0;">Dashboard Overview</h2>
             </div>
             <div class="search-group">
-              <button id="importWebsiteBtn" class="btn primary" type="button" style="width:auto;">Import Semua Data Customer</button>
+              <button id="importWebsiteBtn" class="btn primary" type="button" style="width:auto;">Import Data dari Database</button>
             </div>
           </div>
 
@@ -613,7 +612,7 @@
           <div class="toolbar-row">
             <div class="search-group">
               <button id="saveSettingsBtn" class="btn primary" type="button" style="width:auto;">Save Settings</button>
-              <button id="importWebsiteBtnSecondary" class="btn success" type="button" style="width:auto;">Import Website Data</button>
+              <button id="importWebsiteBtnSecondary" class="btn success" type="button" style="width:auto;">Import Data dari Database</button>
               <button id="exportDataBtn" class="btn" type="button" style="width:auto;">Export JSON</button>
             </div>
           </div>
@@ -657,67 +656,32 @@
           </div>
         </section>
 
+        <!-- KAWALAN KANDUNGAN LENGKAP (PILIH & EDIT SETIAP BAHAGIAN WEBSITE) -->
         <section class="panel" id="content-managers">
           <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
-            <h2>Content Manager Premium</h2>
-            <span style="color: var(--muted); font-size: 0.8rem;">Edit satu-satu item dengan senang</span>
+            <h2>Pengurusan Kandungan Website</h2>
+            <span style="color: var(--muted); font-size: 0.8rem;">Tambah, edit, dan padam item untuk setiap halaman tanpa kod</span>
           </div>
 
           <div class="toolbar-row">
             <div class="search-group">
-              <input id="contentSearchInput" class="search-box" type="text" placeholder="Cari item / judul / kata kunci..." />
+              <input id="contentSearchInput" class="search-box" type="text" placeholder="Cari item / tajuk..." />
               <select id="contentFilterSelect" class="filter-select">
                 <option value="all">Semua Bahagian</option>
-                <option value="gallery">Galeri</option>
-                <option value="reviews">Ulasan</option>
-                <option value="builder">Builder PC</option>
-                <option value="clearance">Lelong</option>
-                <option value="finder">Upgrade</option>
+                <option value="fixItems">Apa Yang Kami Baiki</option>
+                <option value="whyItems">Kenapa Pilih Kami</option>
+                <option value="stepItems">Bagaimana Ia Berfungsi</option>
+                <option value="repairData">Anggaran Kos Pembaikan</option>
+                <option value="galleryItems">Galeri Hasil Kerja</option>
+                <option value="reviews">Ulasan Pelanggan</option>
+                <option value="builder">Bina PC Custom (Komponen)</option>
+                <option value="clearanceItems">Jualan Lelong</option>
+                <option value="finderItems">Carian Upgrade & Gadjet</option>
               </select>
             </div>
           </div>
 
           <div id="premiumManagers"></div>
-        </section>
-
-        <section class="panel" id="content-editors">
-          <h2>Editor JSON (Advanced)</h2>
-
-          <div class="field">
-            <label for="repairEditor">Anggaran Kos Pembaikan</label>
-            <textarea id="repairEditor" rows="10"></textarea>
-            <button class="btn success" type="button" data-section="repairData" style="width:auto;">Save Repair Data</button>
-          </div>
-
-          <div class="field">
-            <label for="galleryEditor">Galeri Hasil Kerja</label>
-            <textarea id="galleryEditor" rows="10"></textarea>
-            <button class="btn success" type="button" data-section="galleryItems" style="width:auto;">Save Gallery</button>
-          </div>
-
-          <div class="field">
-            <label for="reviewsEditor">Ulasan Pelanggan</label>
-            <textarea id="reviewsEditor" rows="10"></textarea>
-            <button class="btn success" type="button" data-section="reviews" style="width:auto;">Save Reviews</button>
-          </div>
-
-          <div class="field">
-            <label for="builderEditor">Konfigurator Sistem PC</label>
-            <textarea id="builderEditor" rows="10"></textarea>
-            <button class="btn success" type="button" data-section="builderOptions" style="width:auto;">Save Builder Config</button>
-          </div>
-
-          <div class="field">
-            <label for="clearanceEditor">Jualan Lelong</label>
-            <textarea id="clearanceEditor" rows="10"></textarea>
-            <button class="btn success" type="button" data-section="clearanceItems" style="width:auto;">Save Clearance</button>
-          </div>
-
-          <div class="field">
-            <label for="finderEditor">Carian Upgrade & Gadjet</label>
-            <textarea id="finderEditor" rows="10"></textarea>
-            <button class="btn success" type="button" data-section="finderItems" style="width:auto;">Save Finder</button>
-          </div>
         </section>
 
         <section class="panel" id="orders">
@@ -791,55 +755,50 @@
       orderStatus: 'all'
     };
 
+    // Struktur Bersih Tanpa Dummy Berat (Boleh Ditambah Melalui Admin)
     const defaultContent = {
+      fixItems: [
+        { icon: '📱', title: 'Phone & iPhone / Tablet', description: 'Pembaikan skrin, bateri & port pengecasan.' }
+      ],
+      whyItems: [
+        { icon: '🛠️', title: 'Juruteknik Bertauliah', description: 'Berpengalaman luas dalam mikropematerian.' }
+      ],
+      stepItems: [
+        { step: 'LANGKAH 1', title: 'Hantar Peranti', description: 'Kunjungi premis kami di Kuala Kangsar.' }
+      ],
       repairData: {
         phone: {
-          'lcd_ori': { label: 'Tukar LCD Ori', price: 'RM 220 - RM 750' },
-          'battery': { label: 'Tukar Bateri', price: 'RM 80 - RM 280' }
+          'lcd_ori': { label: 'Tukar LCD Ori', price: 'RM 220 - RM 750' }
         },
         laptop: {
-          'keyboard': { label: 'Tukar Keyboard', price: 'RM 130 - RM 550' },
-          'battery': { label: 'Tukar Bateri', price: 'RM 110 - RM 480' }
+          'keyboard': { label: 'Tukar Keyboard', price: 'RM 130 - RM 550' }
         }
       },
       galleryItems: [
-        {
-          title: 'Binaan Custom PC RGB',
-          image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80',
-          description: 'Susun atur kabel terstruktur rapi dengan aliran udara penyejukan optimum.'
-        }
+        { title: 'Binaan Custom PC RGB', image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80', description: 'Susun atur kabel terstruktur rapi.' }
       ],
       reviews: [
-        {
-          name: 'Maya R.',
-          title: 'Skrin iPhone 13',
-          image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-          text: 'Skrin iPhone saya retak teruk dan siap dalam masa singkat. Nampak seperti baru.'
-        }
+        { name: 'Maya R.', title: 'Skrin iPhone 13', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80', text: 'Skrin iPhone siap cepat dan nampak baru.' }
       ],
       builderOptions: {
         cpu: [
-          { value: '350', score: '1', label: 'Intel Core i3 / AMD Ryzen 3 (Asas)' },
-          { value: '750', score: '3', label: 'Intel Core i5 / AMD Ryzen 5 (Pertengahan)' }
+          { value: '350', score: '1', label: 'Intel Core i3 / AMD Ryzen 3 (Asas)' }
         ],
         gpu: [
-          { value: '0', score: '0', label: 'Grafik Bersepadu (Integrated)' },
-          { value: '950', score: '3', label: 'NVIDIA RTX 3050 / AMD RX 6600' }
+          { value: '0', score: '0', label: 'Grafik Bersepadu (Integrated)' }
         ],
         ram: [
-          { value: '90', score: '1', label: '8GB RAM (Standard Pejabat)' },
-          { value: '180', score: '3', label: '16GB RAM (Standard Prestasi)' }
+          { value: '90', score: '1', label: '8GB RAM (Standard Pejabat)' }
         ],
         storage: [
-          { value: '150', label: '512GB NVMe M.2 SSD' },
-          { value: '300', label: '1TB NVMe M.2 SSD' }
+          { value: '150', label: '512GB NVMe M.2 SSD' }
         ]
       },
       clearanceItems: [
-        { title: 'Samsung Galaxy A13 (128GB)', category: 'bajet', oldPrice: 'RM 699', newPrice: 'RM 350', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', description: 'Kapasiti storan 128GB, bateri tahan lama, sesuai untuk penggunaan harian.' }
+        { title: 'Samsung Galaxy A13 (128GB)', category: 'bajet', oldPrice: 'RM 699', newPrice: 'RM 350', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', description: 'Kapasiti storan 128GB.' }
       ],
       finderItems: [
-        { title: 'SSD NVMe M.2 1TB (Upgrade)', category: 'upgrade-pc', price: 'RM 299', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80', description: 'Tingkatkan prestasi komputer dengan SSD berkelajuan tinggi.' }
+        { title: 'SSD NVMe M.2 1TB (Upgrade)', category: 'upgrade-pc', price: 'RM 299', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80', description: 'Tingkatkan kepantasan boot komputer.' }
       ]
     };
 
@@ -935,45 +894,6 @@
       }
     }
 
-    function getContentState() {
-      const state = getSiteState();
-      return {
-        repairData: state.repairData || defaultContent.repairData,
-        galleryItems: state.galleryItems || defaultContent.galleryItems,
-        reviews: state.reviews || defaultContent.reviews,
-        builderOptions: state.builderOptions || defaultContent.builderOptions,
-        clearanceItems: state.clearanceItems || defaultContent.clearanceItems,
-        finderItems: state.finderItems || defaultContent.finderItems
-      };
-    }
-
-    function renderContentEditors() {
-      const content = getContentState();
-      document.getElementById('repairEditor').value = JSON.stringify(content.repairData, null, 2);
-      document.getElementById('galleryEditor').value = JSON.stringify(content.galleryItems, null, 2);
-      document.getElementById('reviewsEditor').value = JSON.stringify(content.reviews, null, 2);
-      document.getElementById('builderEditor').value = JSON.stringify(content.builderOptions, null, 2);
-      document.getElementById('clearanceEditor').value = JSON.stringify(content.clearanceItems, null, 2);
-      document.getElementById('finderEditor').value = JSON.stringify(content.finderItems, null, 2);
-    }
-
-    function saveContentSection(sectionName, textareaId) {
-      try {
-        const parsed = JSON.parse(document.getElementById(textareaId).value);
-        const state = getSiteState();
-        state[sectionName] = parsed;
-        saveSiteState(state);
-        renderContentEditors();
-        if (typeof BroadcastChannel !== 'undefined') {
-          const channel = new BroadcastChannel('ztechfix-sync');
-          channel.postMessage({ type: 'site-update', data: state });
-        }
-        alert('Data berjaya disimpan.');
-      } catch (error) {
-        alert('Format JSON tidak sah. Sila semak semula struktur data.');
-      }
-    }
-
     function renderSettingsForm() {
       const state = getSiteState();
       document.getElementById('companyName').value = state.companyName || '';
@@ -985,7 +905,6 @@
       document.getElementById('heroText').value = state.heroText || '';
       document.getElementById('builderBase').value = state.builderBase || 700;
       document.getElementById('footerNote').value = state.footerNote || '';
-      renderContentEditors();
       renderPremiumManagers();
     }
 
@@ -1001,7 +920,7 @@
       state.builderBase = Number(document.getElementById('builderBase').value) || defaultState.builderBase;
       state.footerNote = document.getElementById('footerNote').value.trim() || defaultState.footerNote;
       saveSiteState(state);
-      alert('Tetapan disimpan.');
+      alert('Tetapan Disimpan.');
       if (typeof BroadcastChannel !== 'undefined') {
         const channel = new BroadcastChannel('ztechfix-sync');
         channel.postMessage({ type: 'site-update', data: state });
@@ -1017,16 +936,6 @@
     function getSectionList(sectionName) {
       const state = getSiteState();
       return Array.isArray(state[sectionName]) ? state[sectionName] : (Array.isArray(defaultContent[sectionName]) ? [...defaultContent[sectionName]] : []);
-    }
-
-    function getBuilderGroup(sectionName) {
-      const state = getSiteState();
-      const builder = state.builderOptions || defaultContent.builderOptions;
-      return Array.isArray(builder[sectionName]) ? builder[sectionName] : [];
-    }
-
-    function normalizeString(value) {
-      return cleanText(value).trim();
     }
 
     function renderManagerForm(sectionName, list, index, fieldDefs) {
@@ -1045,21 +954,11 @@
         <form class="inline-form" data-form-section="${sectionName}" data-form-index="${index}">
           ${formFields}
           <div class="inline-actions">
-            <button class="btn success" type="submit" style="width:auto;">Save</button>
+            <button class="btn success" type="submit" style="width:auto;">Simpan Item</button>
             <button class="btn" type="button" data-action="cancel-edit" data-section="${sectionName}" style="width:auto;">Batal</button>
           </div>
         </form>
       `;
-    }
-
-    function emptyItemFor(sectionName) {
-      const emptyMap = {
-        galleryItems: { title: '', image: '', description: '' },
-        reviews: { name: '', title: '', image: '', text: '' },
-        clearanceItems: { title: '', category: 'bajet', oldPrice: '', newPrice: '', image: '', description: '' },
-        finderItems: { title: '', category: 'upgrade-pc', price: '', image: '', description: '' }
-      };
-      return emptyMap[sectionName] || { title: '', image: '', description: '' };
     }
 
     function renderGenericListManager(sectionName, title, fieldDefs) {
@@ -1071,7 +970,7 @@
           <td>
             <div class="table-actions">
               <button class="small-btn success" data-action="edit-row" data-section="${sectionName}" data-index="${index}" type="button">Edit</button>
-              <button class="small-btn danger" data-action="delete-row" data-section="${sectionName}" data-index="${index}" type="button">Delete</button>
+              <button class="small-btn danger" data-action="delete-row" data-section="${sectionName}" data-index="${index}" type="button">Padam</button>
             </div>
           </td>
         </tr>
@@ -1083,7 +982,7 @@
         <div class="manager-card">
           <div class="manager-toolbar">
             <h3>${title}</h3>
-            <button class="btn success" type="button" data-action="add-row" data-section="${sectionName}" style="width:auto;">Tambah Item</button>
+            <button class="btn success" type="button" data-action="add-row" data-section="${sectionName}" style="width:auto;">+ Tambah Item Baru</button>
           </div>
           <div class="manager-body">
             <table class="mini-table">
@@ -1094,7 +993,7 @@
                 </tr>
               </thead>
               <tbody>
-                ${rows || '<tr><td colspan="4" class="empty-state">Tiada item lagi.</td></tr>'}
+                ${rows || '<tr><td colspan="4" class="empty-state">Tiada item lagi. Sila klik tambah.</td></tr>'}
               </tbody>
             </table>
           </div>
@@ -1109,7 +1008,7 @@
       const editingIndex = premiumEditors[groupName];
       const fieldDefs = groupName === 'storage'
         ? [{ key: 'label', label: 'Nama Storan' }, { key: 'value', label: 'Harga (RM)' }]
-        : [{ key: 'label', label: 'Nama Item' }, { key: 'value', label: 'Harga (RM)' }, { key: 'score', label: 'Score' }];
+        : [{ key: 'label', label: 'Nama Item' }, { key: 'value', label: 'Harga (RM)' }, { key: 'score', label: 'Score AI' }];
 
       const rows = list.map((item, index) => `
         <tr>
@@ -1119,7 +1018,7 @@
           <td>
             <div class="table-actions">
               <button class="small-btn success" data-action="edit-builder" data-section="${groupName}" data-index="${index}" type="button">Edit</button>
-              <button class="small-btn danger" data-action="delete-builder" data-section="${groupName}" data-index="${index}" type="button">Delete</button>
+              <button class="small-btn danger" data-action="delete-builder" data-section="${groupName}" data-index="${index}" type="button">Padam</button>
             </div>
           </td>
         </tr>
@@ -1131,7 +1030,7 @@
         <div class="manager-card">
           <div class="manager-toolbar">
             <h3>${title}</h3>
-            <button class="btn success" type="button" data-action="add-builder" data-section="${groupName}" style="width:auto;">Tambah Item</button>
+            <button class="btn success" type="button" data-action="add-builder" data-section="${groupName}" style="width:auto;">+ Tambah ${title}</button>
           </div>
           <div class="manager-body">
             <table class="mini-table">
@@ -1139,7 +1038,7 @@
                 <tr>
                   <th>${groupName === 'storage' ? 'Nama Storan' : 'Nama Item'}</th>
                   <th>Harga (RM)</th>
-                  ${groupName === 'storage' ? '' : '<th>Score</th>'}
+                  ${groupName === 'storage' ? '' : '<th>Score AI</th>'}
                   <th>Tindakan</th>
                 </tr>
               </thead>
@@ -1156,32 +1055,13 @@
     function isSectionVisible(sectionKey) {
       const filter = dashboardState.sectionFilter;
       if (filter === 'all') return true;
-      const map = {
-        gallery: 'galleryItems',
-        reviews: 'reviews',
-        builder: 'builder',
-        clearance: 'clearanceItems',
-        finder: 'finderItems'
-      };
-      return map[filter] === sectionKey;
-    }
-
-    function matchesSearchText(value) {
-      const q = dashboardState.contentSearch.trim().toLowerCase();
-      if (!q) return true;
-      return String(value || '').toLowerCase().includes(q);
-    }
-
-    function filterManagerList(list, fieldKeys) {
-      const q = dashboardState.contentSearch.trim().toLowerCase();
-      if (!q) return list;
-      return list.filter((item) => fieldKeys.some((key) => String(item[key] || '').toLowerCase().includes(q)));
+      return filter === sectionKey;
     }
 
     function updatePreview(item, label) {
       const title = item && (item.title || item.name || item.label || 'ZTECHFIX Dashboard');
       const image = item && (item.image || 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80');
-      const description = item && (item.description || item.text || item.label || 'Pilih item dari panel kiri untuk melihat preview langsung di sini.');
+      const description = item && (item.description || item.text || item.label || 'Pilih item dari panel untuk melihat preview.');
       document.getElementById('previewTitle').textContent = title;
       document.getElementById('previewDesc').textContent = description;
       document.getElementById('previewEyebrow').textContent = label || 'Website';
@@ -1191,40 +1071,60 @@
 
     function renderPremiumManagers() {
       const container = document.getElementById('premiumManagers');
+      
+      const fix = isSectionVisible('fixItems') ? renderGenericListManager('fixItems', 'Apa Yang Kami Baiki', [
+        { key: 'icon', label: 'Icon (Emoji)' },
+        { key: 'title', label: 'Tajuk Kategori' },
+        { key: 'description', label: 'Penerangan', full: true }
+      ]) : '';
+
+      const why = isSectionVisible('whyItems') ? renderGenericListManager('whyItems', 'Kenapa Pilih Kami', [
+        { key: 'icon', label: 'Icon (Emoji)' },
+        { key: 'title', label: 'Tajuk' },
+        { key: 'description', label: 'Penerangan', full: true }
+      ]) : '';
+
+      const steps = isSectionVisible('stepItems') ? renderGenericListManager('stepItems', 'Bagaimana Ia Berfungsi', [
+        { key: 'step', label: 'Label Langkah (Cth: LANGKAH 1)' },
+        { key: 'title', label: 'Tajuk' },
+        { key: 'description', label: 'Penerangan', full: true }
+      ]) : '';
+
       const gallery = isSectionVisible('galleryItems') ? renderGenericListManager('galleryItems', 'Galeri Hasil Kerja', [
         { key: 'title', label: 'Tajuk' },
         { key: 'image', label: 'URL Gambar' },
-        { key: 'description', label: 'Penerangan' }
+        { key: 'description', label: 'Penerangan', full: true }
       ]) : '';
+
       const reviews = isSectionVisible('reviews') ? renderGenericListManager('reviews', 'Ulasan Pelanggan', [
-        { key: 'name', label: 'Nama' },
-        { key: 'title', label: 'Tajuk' },
-        { key: 'text', label: 'Ulasan' }
+        { key: 'name', label: 'Nama Pelanggan' },
+        { key: 'title', label: 'Tajuk Ulasan' },
+        { key: 'text', label: 'Teks Ulasan', full: true }
       ]) : '';
+
       const clearance = isSectionVisible('clearanceItems') ? renderGenericListManager('clearanceItems', 'Jualan Lelong', [
-        { key: 'title', label: 'Tajuk' },
-        { key: 'newPrice', label: 'Harga Baru' },
-        { key: 'description', label: 'Penerangan' }
+        { key: 'title', label: 'Nama Produk' },
+        { key: 'newPrice', label: 'Harga Lelong' },
+        { key: 'category', label: 'Kategori (bajet / game)' }
       ]) : '';
-      const finder = isSectionVisible('finderItems') ? renderGenericListManager('finderItems', 'Upgrade & Gadjet', [
-        { key: 'title', label: 'Tajuk' },
+
+      const finder = isSectionVisible('finderItems') ? renderGenericListManager('finderItems', 'Carian Upgrade & Gadjet', [
+        { key: 'title', label: 'Nama Item' },
         { key: 'price', label: 'Harga' },
-        { key: 'description', label: 'Penerangan' }
+        { key: 'category', label: 'Tag (upgrade-pc / joystick / console)' }
       ]) : '';
+
       const builder = isSectionVisible('builder') ? `
         <div class="manager-stack">
-          ${renderBuilderGroupManager('cpu', 'CPU / Prosesor')}
-          ${renderBuilderGroupManager('gpu', 'GPU / Grafik')}
-          ${renderBuilderGroupManager('ram', 'RAM')}
-          ${renderBuilderGroupManager('storage', 'Storage')}
+          ${renderBuilderGroupManager('cpu', 'CPU / Prosesor (Bina PC)')}
+          ${renderBuilderGroupManager('gpu', 'GPU / Grafik (Bina PC)')}
+          ${renderBuilderGroupManager('ram', 'RAM (Bina PC)')}
+          ${renderBuilderGroupManager('storage', 'Storage SSD (Bina PC)')}
         </div>
       ` : '';
 
-      const allManagers = [gallery, reviews, builder, clearance, finder].filter(Boolean).join('');
-      container.innerHTML = allManagers ? `<div class="manager-stack">${allManagers}</div>` : '<div class="empty-state">Tiada item sesuai dengan filter yang dipilih.</div>';
-      if (!document.querySelector('.preview-active')) {
-        updatePreview({ title: 'ZTECHFIX Dashboard', description: 'Pilih item dari panel kiri untuk melihat preview langsung di sini.' }, 'Website');
-      }
+      const allManagers = [fix, why, steps, gallery, reviews, builder, clearance, finder].filter(Boolean).join('');
+      container.innerHTML = allManagers ? `<div class="manager-stack">${allManagers}</div>` : '<div class="empty-state">Sila pilih bahagian dari senarai dropdown di atas.</div>';
     }
 
     function exportDataAsJson() {
@@ -1242,7 +1142,7 @@
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-      alert('Data website dan order berjaya dieksport ke JSON.');
+      alert('Data berjaya dieksport.');
     }
 
     function saveSectionFromForm(form) {
@@ -1266,7 +1166,7 @@
       saveSiteState(state);
       delete premiumEditors[sectionName];
       renderPremiumManagers();
-      renderContentEditors();
+      alert('Item berjaya disimpan.');
       if (typeof BroadcastChannel !== 'undefined') {
         const channel = new BroadcastChannel('ztechfix-sync');
         channel.postMessage({ type: 'site-update', data: state });
@@ -1293,7 +1193,7 @@
       saveSiteState(state);
       delete premiumEditors[groupName];
       renderPremiumManagers();
-      renderContentEditors();
+      alert('Komponen PC berjaya disimpan.');
       if (typeof BroadcastChannel !== 'undefined') {
         const channel = new BroadcastChannel('ztechfix-sync');
         channel.postMessage({ type: 'site-update', data: state });
@@ -1301,13 +1201,13 @@
     }
 
     function deleteSectionItem(sectionName, index) {
+      if (!confirm('Adakah anda pasti mahu memadam item ini?')) return;
       const state = getSiteState();
       const list = Array.isArray(state[sectionName]) ? [...state[sectionName]] : [...(defaultContent[sectionName] || [])];
       list.splice(index, 1);
       state[sectionName] = list;
       saveSiteState(state);
       renderPremiumManagers();
-      renderContentEditors();
       if (typeof BroadcastChannel !== 'undefined') {
         const channel = new BroadcastChannel('ztechfix-sync');
         channel.postMessage({ type: 'site-update', data: state });
@@ -1315,6 +1215,7 @@
     }
 
     function deleteBuilderGroupItem(groupName, index) {
+      if (!confirm('Adakah anda pasti mahu memadam komponen ini?')) return;
       const state = getSiteState();
       const builder = { ...(state.builderOptions || defaultContent.builderOptions) };
       builder[groupName] = Array.isArray(builder[groupName]) ? [...builder[groupName]] : [];
@@ -1322,21 +1223,10 @@
       state.builderOptions = builder;
       saveSiteState(state);
       renderPremiumManagers();
-      renderContentEditors();
       if (typeof BroadcastChannel !== 'undefined') {
         const channel = new BroadcastChannel('ztechfix-sync');
         channel.postMessage({ type: 'site-update', data: state });
       }
-    }
-
-    function startEdit(sectionName, index) {
-      premiumEditors[sectionName] = index;
-      renderPremiumManagers();
-    }
-
-    function startBuilderEdit(groupName, index) {
-      premiumEditors[groupName] = index;
-      renderPremiumManagers();
     }
 
     function escapeHtml(value) {
@@ -1370,7 +1260,7 @@
 
       const wrap = document.getElementById('ordersTableWrap');
       if (!filteredOrders.length) {
-        wrap.innerHTML = '<div class="empty-state">Tiada order sesuai dengan carian atau filter.</div>';
+        wrap.innerHTML = '<div class="empty-state">Tiada order dijumpai.</div>';
         return;
       }
 
@@ -1403,7 +1293,7 @@
                 <td>
                   <div class="table-actions">
                     <button class="small-btn success" data-action="done" data-index="${orders.indexOf(order)}" type="button">Done</button>
-                    <button class="small-btn danger" data-action="delete" data-index="${orders.indexOf(order)}" type="button">Delete</button>
+                    <button class="small-btn danger" data-action="delete" data-index="${orders.indexOf(order)}" type="button">Padam</button>
                   </div>
                 </td>
               </tr>
@@ -1413,22 +1303,27 @@
       `;
     }
 
-    function importWebsiteData() {
+    async function importWebsiteData() {
+      if (!ensureFirebase()) {
+        alert('Sambungan Firebase tidak aktif.');
+        return;
+      }
       try {
-        const customerData = JSON.parse(localStorage.getItem(SITE_KEY) || '{}');
-        if (!customerData || Object.keys(customerData).length === 0) {
-          alert('Tiada data website customer dijumpai. Sila buka halaman customer dahulu dan buat perubahan.');
+        const docRef = firebaseState.db.collection('siteSettings').doc('main');
+        const docSnap = await docRef.get();
+        if (!docSnap.exists) {
+          alert('Tiada data wujud dalam database Firebase.');
           return;
         }
-
-        const merged = { ...defaultState, ...customerData };
+        const remoteData = docSnap.data();
+        const merged = { ...defaultState, ...remoteData };
         saveSiteState(merged);
         renderSettingsForm();
         renderPremiumManagers();
-        alert('Semua data website customer berjaya diimport ke admin.');
+        alert('Data berjaya diimport dari pangkalan data Firebase!');
         document.getElementById('dashSiteStatus').textContent = 'Synced';
       } catch (error) {
-        alert('Gagal import data website customer.');
+        alert('Gagal mengambil data dari Firebase.');
       }
     }
 
@@ -1451,8 +1346,6 @@
     function logoutAdmin() {
       localStorage.removeItem(SESSION_KEY);
       toggleAdminView();
-      document.getElementById('username').value = 'admin';
-      document.getElementById('password').value = '123456';
     }
 
     function toggleAdminView() {
@@ -1468,6 +1361,7 @@
     document.getElementById('importWebsiteBtnSecondary').addEventListener('click', importWebsiteData);
     document.getElementById('exportDataBtn').addEventListener('click', exportDataAsJson);
     document.getElementById('refreshOrdersBtn').addEventListener('click', renderOrders);
+    
     document.getElementById('contentSearchInput').addEventListener('input', (event) => {
       dashboardState.contentSearch = event.target.value;
       renderPremiumManagers();
@@ -1485,21 +1379,6 @@
       renderOrders();
     });
 
-    document.querySelectorAll('[data-section]').forEach((button) => {
-      button.addEventListener('click', () => {
-        const section = button.dataset.section;
-        const mapping = {
-          repairData: 'repairEditor',
-          galleryItems: 'galleryEditor',
-          reviews: 'reviewsEditor',
-          builderOptions: 'builderEditor',
-          clearanceItems: 'clearanceEditor',
-          finderItems: 'finderEditor'
-        };
-        saveContentSection(section, mapping[section]);
-      });
-    });
-
     document.addEventListener('click', (event) => {
       const btn = event.target.closest('button');
       if (!btn) return;
@@ -1512,19 +1391,6 @@
         premiumEditors[section] = -1;
         renderPremiumManagers();
         return;
-      }
-
-      if (action === 'edit-row' || action === 'edit-builder') {
-        const sectionName = section;
-        const list = sectionName === 'cpu' || sectionName === 'gpu' || sectionName === 'ram' || sectionName === 'storage'
-          ? (getSiteState().builderOptions && getSiteState().builderOptions[sectionName]) || []
-          : getSectionList(sectionName);
-        const item = list[idx] || null;
-        if (item) {
-          updatePreview(item, sectionName === 'galleryItems' ? 'Gallery' : sectionName === 'reviews' ? 'Review' : sectionName === 'clearanceItems' ? 'Clearance' : sectionName === 'finderItems' ? 'Upgrade' : sectionName.toUpperCase());
-          document.querySelectorAll('.preview-active').forEach(el => el.classList.remove('preview-active'));
-          if (btn.closest('tr')) btn.closest('tr').classList.add('preview-active');
-        }
       }
 
       if (action === 'edit-row') {
@@ -1546,11 +1412,6 @@
 
       if (action === 'edit-builder') {
         premiumEditors[section] = idx;
-        const builder = getSiteState().builderOptions || defaultContent.builderOptions;
-        const item = (builder[section] || [])[idx];
-        if (item) {
-          updatePreview(item, section.toUpperCase());
-        }
         renderPremiumManagers();
         return;
       }
@@ -1598,22 +1459,6 @@
       if (event.key === ORDER_KEY || event.key === SITE_KEY) {
         renderSettingsForm();
         renderOrders();
-      }
-    });
-
-    if (typeof BroadcastChannel !== 'undefined') {
-      const syncChannel = new BroadcastChannel('ztechfix-sync');
-      syncChannel.onmessage = (event) => {
-        if (event.data && (event.data.type === 'order-update' || event.data.type === 'site-update')) {
-          renderSettingsForm();
-          renderOrders();
-        }
-      };
-    }
-
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' && document.getElementById('loginScreen').classList.contains('hidden') === false) {
-        loginAdmin();
       }
     });
 

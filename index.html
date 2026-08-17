@@ -864,7 +864,6 @@
 
     <!-- ==========================================================
          NAVIGASI ATAS
-         Cara ubah: Tukar teks nama syarikat atau pautan menu di sini.
          ========================================================== -->
     <header>
         <div class="nav-container">
@@ -892,9 +891,6 @@
              ========================================================== -->
         <section id="home" class="page-section active">
             
-            <!-- HERO SECTION (Gambar Atas & Tajuk Utama)
-                 Cara ubah gambar: Tukar link pautan dalam tag <img src="..."> 
-                 Cara ubah teks: Edit terus tajuk h1 dan perenggan p di bawah -->
             <div class="hero-section">
                 <div class="hero-image-box">
                     <img src="https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=800&q=80" alt="Workspace Ztechfix">
@@ -930,14 +926,13 @@
                 </div>
             </div>
 
-            <!-- APA YANG KAMI BAIKI (Kategori Servis)
-                 Cara ubah/tambah/buang: Tambah atau padam elemen <div class="fix-card"> di bawah -->
+            <!-- APA YANG KAMI BAIKI (Dinamik dari ztechfix_site_data) -->
             <div class="container">
                 <div class="section-header">
                     <h2>Apa Yang Kami Baiki</h2>
                     <p>Perkhidmatan penyelenggaraan menyeluruh untuk pelbagai peranti elektronik anda.</p>
                 </div>
-                <div class="fix-grid">
+                <div class="fix-grid" id="fix-grid">
                     <div class="fix-card">
                         <div class="fix-icon">📱</div>
                         <h3>Phone & iPhone / Tablet</h3>
@@ -1021,8 +1016,7 @@
                 </div>
             </div>
 
-            <!-- KALKULATOR KOS PEMBAIKAN (REPAIR CALCULATOR)
-                 Cara ubah harga/kategori: Lihat di bahagian bawah skrip JavaScript (pembolehubah `repairData`) -->
+            <!-- KALKULATOR KOS PEMBAIKAN -->
             <div id="repair-section" class="container" style="padding-top: 0;">
                 <div class="section-header">
                     <h2>Anggaran Kos Pembaikan</h2>
@@ -1064,95 +1058,64 @@
                 </div>
             </div>
 
-            <!-- GALERI HASIL KERJA
-                 Cara ubah: Tukar parameter fungsi openModal('Tajuk', 'Link Gambar', 'Penerangan') -->
+            <!-- GALERI HASIL KERJA -->
             <div class="container" style="padding-top: 0;">
                 <div class="section-header">
                     <h2>Galeri Hasil Kerja</h2>
                     <p>Klik pada mana-mana gambar untuk melihat paparan besar serta maklumat terperinci.</p>
                 </div>
-                <div class="grid-layout">
-                    <div class="card" onclick="openModal('Binaan Custom PC RGB', 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80', 'Susun atur kabel terstruktur rapi dengan aliran udara penyejukan optimum menggunakan komponen gred tinggi terpelihara di ZTECHFIX SOLUTIONS.')">
-                        <div class="card-img-placeholder">
-                            <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=80" alt="Custom PC Build">
-                        </div>
+                <div class="grid-layout" id="gallery-grid">
+                    <div class="card" onclick="openModal('Binaan Custom PC RGB', 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80', 'Susun atur kabel terstruktur rapi dengan aliran udara penyejukan optimum.')">
+                        <div class="card-img-placeholder"><img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=80" alt="Custom PC"></div>
                         <h3>Binaan Custom PC RGB</h3>
                         <p>Susun atur kabel terstruktur rapi dengan aliran udara penyejukan optimum.</p>
                     </div>
-                    <div class="card" onclick="openModal('Pembaikan Papan Induk (IC)', 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80', 'Pematerian tahap komponen mikro menggunakan mikroskop berketepatan tinggi untuk menyelesaikan masalah litar pintas dan papan induk rosak air.')">
-                        <div class="card-img-placeholder">
-                            <img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80" alt="Micro-soldering">
-                        </div>
+                    <div class="card" onclick="openModal('Pembaikan Papan Induk (IC)', 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80', 'Pematerian tahap komponen mikro menggunakan mikroskop berketepatan tinggi.')">
+                        <div class="card-img-placeholder"><img src="https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80" alt="Micro-soldering"></div>
                         <h3>Pembaikan Papan Induk (IC)</h3>
                         <p>Pematerian tahap komponen mikro menggunakan mikroskop berketepatan tinggi.</p>
                     </div>
-                    <div class="card" onclick="openModal('Naik Taraf & Pembaikan Joystick', 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80', 'Penyelesaian masalah stick drift pada alat kawalan konsol permainan PlayStation dan Xbox menggunakan modul ganti berkualiti tinggi.')">
-                        <div class="card-img-placeholder">
-                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Controller Repair">
-                        </div>
+                    <div class="card" onclick="openModal('Naik Taraf & Pembaikan Joystick', 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80', 'Penyelesaian masalah stick drift pada alat kawalan konsol permainan.')">
+                        <div class="card-img-placeholder"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Joystick"></div>
                         <h3>Naik Taraf & Pembaikan Joystick</h3>
                         <p>Penyelesaian masalah stick drift pada alat kawalan konsol permainan.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- ULASAN PELANGGAN (REVIEWS)
-                 Cara ubah: Edit teks ulasan, nama pemberi ulasan atau gambar avatar dalam openModal -->
+            <!-- ULASAN PELANGGAN -->
             <div class="container" style="padding-top: 0;">
                 <div class="section-header">
                     <h2>Ulasan Pelanggan</h2>
                     <p>Klik pada ulasan pelanggan untuk membaca butiran maklum balas secara penuh.</p>
                 </div>
-                <div class="reviews-grid">
-                    <div class="review-card" onclick="openModal('Ulasan oleh Maya R. (Skrin iPhone 13)', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80', 'SKRIN IPHONE 13: Skrin telefon saya retak teruk hari Jumaat akibat terjatuh. Hantar ke ZTECHFIX SOLUTIONS Kuala Kangsar tak sampai sejam dah siap! Nampak seperti baharu, fungsi sentuhan lancar, dan harganya sangat berpatutan. ⭐⭐⭐⭐⭐')">
+                <div class="reviews-grid" id="reviews-grid">
+                    <div class="review-card" onclick="openModal('Maya R. (Skrin iPhone 13)', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80', 'Skrin iPhone saya retak teruk, hantar tak sampai sejam dah siap. Nampak seperti baru.')">
                         <div>
                             <div class="review-header">
-                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Maya R." class="reviewer-avatar">
-                                <div class="reviewer-info">
-                                    <h4>Maya R.</h4>
-                                    <p>Skrin iPhone 13</p>
-                                </div>
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Maya" class="reviewer-avatar">
+                                <div class="reviewer-info"><h4>Maya R.</h4><p>Skrin iPhone 13</p></div>
                             </div>
                             <div class="stars">★★★★★</div>
-                            <p class="review-text">"Skrin iPhone saya retak teruk hari Jumaat, hantar tak sampai sejam dah siap. Nampak seperti baru dan harganya sangat berpatutan."</p>
+                            <p class="review-text">"Skrin iPhone saya retak teruk, hantar tak sampai sejam dah siap. Nampak seperti baru."</p>
                         </div>
                     </div>
-
-                    <div class="review-card" onclick="openModal('Ulasan oleh Devon L. (Custom PC Gaming)', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', 'CUSTOM PC GAMING: Mereka bina PC gaming saya dari awal mengikut bajet ketat yang saya tetapkan. Pengurusan kabel sangat kemas dan berjalan lancar pada tetapan maksimum tanpa sebarang masalah suhu. ⭐⭐⭐⭐⭐')">
+                    <div class="review-card" onclick="openModal('Devon L. (Custom PC Gaming)', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', 'Mereka bina PC gaming saya dari awal mengikut bajet ketat. Pengurusan kabel sangat kemas.')">
                         <div>
                             <div class="review-header">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Devon L." class="reviewer-avatar">
-                                <div class="reviewer-info">
-                                    <h4>Devon L.</h4>
-                                    <p>Custom PC Gaming</p>
-                                </div>
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Devon" class="reviewer-avatar">
+                                <div class="reviewer-info"><h4>Devon L.</h4><p>Custom PC Gaming</p></div>
                             </div>
                             <div class="stars">★★★★★</div>
-                            <p class="review-text">"Mereka bina PC gaming saya dari awal mengikut bajet ketat. Pengurusan kabel sangat kemas dan berjalan lancar pada tetapan maksimum."</p>
-                        </div>
-                    </div>
-
-                    <div class="review-card" onclick="openModal('Ulasan oleh Priya S. (MacBook & Pemulihan Data)', 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80', 'MACBOOK RECOVERY: Sangka MacBook saya rosak terus terkena tumpahan kopi. Mereka berjaya pulihkan data penting dan hidupkan semula papan induk. ZTECHFIX adalah penyelamat sebenar di Kuala Kangsar! ⭐⭐⭐⭐⭐')">
-                        <div>
-                            <div class="review-header">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Priya S." class="reviewer-avatar">
-                                <div class="reviewer-info">
-                                    <h4>Priya S.</h4>
-                                    <p>MacBook & Data Recovery</p>
-                                </div>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <p class="review-text">"Sangka MacBook saya rosak terus terkena tumpahan kopi. Mereka berjaya pulihkan data dan hidupkan semula. Penyelamat sebenar!"</p>
+                            <p class="review-text">"Mereka bina PC gaming saya dari awal mengikut bajet ketat. Pengurusan kabel sangat kemas."</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-
         <!-- ==========================================================
              HALAMAN 2: BINA PC CUSTOM (BUILD PC)
-             Cara ubah harga/skor komponen: Edit nilai `value="..."` dan `data-score="..."` pada tag <option> di bawah.
              ========================================================== -->
         <section id="builder" class="page-section">
             <div class="container">
@@ -1163,7 +1126,6 @@
 
                 <div class="builder-container">
                     <div class="form-panel">
-                        <!-- Pilihan CPU -->
                         <div class="form-group">
                             <label>Unit Pemprosesan Pusat (CPU)</label>
                             <select id="pc-cpu" class="form-control" onchange="calculateCustomPC()">
@@ -1171,11 +1133,9 @@
                                 <option value="350" data-score="1">Intel Core i3 / AMD Ryzen 3 (Asas)</option>
                                 <option value="750" data-score="3">Intel Core i5 / AMD Ryzen 5 (Pertengahan)</option>
                                 <option value="1400" data-score="5">Intel Core i7 / AMD Ryzen 7 (Prestasi Tinggi)</option>
-                                <option value="2600" data-score="8">Intel Core i9 / AMD Ryzen 9 (Stesen Kerja/Pro)</option>
                             </select>
                         </div>
 
-                        <!-- Pilihan GPU -->
                         <div class="form-group">
                             <label>Unit Pemprosesan Grafik (GPU)</label>
                             <select id="pc-gpu" class="form-control" onchange="calculateCustomPC()">
@@ -1183,31 +1143,24 @@
                                 <option value="0" data-score="0">Grafik Bersepadu (Integrated)</option>
                                 <option value="950" data-score="3">NVIDIA RTX 3050 / AMD RX 6600</option>
                                 <option value="1550" data-score="5">NVIDIA RTX 4060 / AMD RX 7600</option>
-                                <option value="2900" data-score="8">NVIDIA RTX 4070 / AMD RX 7800 XT</option>
-                                <option value="8500" data-score="12">NVIDIA RTX 4090 (Ekstrem 3D/AI)</option>
                             </select>
                         </div>
 
-                        <!-- Pilihan RAM -->
                         <div class="form-group">
                             <label>Memori Akses Rawak (RAM)</label>
                             <select id="pc-ram" class="form-control" onchange="calculateCustomPC()">
                                 <option value="0">-- Sila Pilih RAM --</option>
                                 <option value="90" data-score="1">8GB RAM (Standard Pejabat)</option>
                                 <option value="180" data-score="3">16GB RAM (Standard Prestasi)</option>
-                                <option value="450" data-score="5">32GB RAM (Kreatif / Heavy Multitasking)</option>
-                                <option value="850" data-score="7">64GB RAM (Pengolahan Data & Rendering)</option>
                             </select>
                         </div>
 
-                        <!-- Pilihan Storan -->
                         <div class="form-group">
                             <label>Storan Primer (SSD NVMe)</label>
                             <select id="pc-storage" class="form-control" onchange="calculateCustomPC()">
                                 <option value="0">-- Sila Pilih Storan --</option>
                                 <option value="150">512GB NVMe M.2 SSD</option>
                                 <option value="300">1TB NVMe M.2 SSD</option>
-                                <option value="650">2TB NVMe M.2 SSD (Gen4)</option>
                             </select>
                         </div>
                     </div>
@@ -1229,10 +1182,8 @@
             </div>
         </section>
 
-
         <!-- ==========================================================
-             HALAMAN 3: JUALAN LELONG (CLEARANCE / LELONG)
-             Cara ubah: Ubah atribut `data-category="bajet"` atau `"game"`, dan letakkan tag <span class="item-tag"> di atas tajuk produk.
+             HALAMAN 3: JUALAN LELONG (CLEARANCE)
              ========================================================== -->
         <section id="clearance" class="page-section">
             <div class="container">
@@ -1248,32 +1199,14 @@
                 </div>
 
                 <div class="grid-layout" id="clearance-grid">
-                    <!-- Produk Lelong 1 -->
-                    <div class="card clearance-item" data-category="bajet" onclick="openModal('Samsung Galaxy A13 (128GB)', 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', 'SAMSUNG GALAXY A13: Kapasiti storan besar 128GB, bateri tahan lama, sangat sesuai untuk pengurusan nota pembelajaran anak-anak, kelas online, dan aplikasi produktiviti asas harian. Harga asal RM699, kini lelongan terhad RM350!')">
-                        <div class="card-img-placeholder">
-                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Samsung Galaxy A13">
-                        </div>
+                    <div class="card clearance-item" data-category="bajet" onclick="openModal('Samsung Galaxy A13 (128GB)', 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', 'Kapasiti storan 128GB, bateri tahan lama.')">
+                        <div class="card-img-placeholder"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Samsung"></div>
                         <span class="item-tag">Phone Bajet</span>
                         <h3>Samsung Galaxy A13 (128GB)</h3>
-                        <p>Kapasiti storan tinggi untuk pengurusan dokumen dan aplikasi produktiviti asas harian.</p>
+                        <p>Kapasiti storan tinggi untuk pengurusan dokumen harian.</p>
                         <div style="margin-top: auto;">
                             <div style="text-decoration: line-through; color: var(--text-muted); font-size: 0.8rem;">RRP: RM 699</div>
                             <div style="color: var(--accent-orange); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem;">RM 350</div>
-                            <button class="btn-outline" style="width:100%;">Mohon Ketersediaan</button>
-                        </div>
-                    </div>
-
-                    <!-- Produk Lelong 2 -->
-                    <div class="card clearance-item" data-category="game" onclick="openModal('Xiaomi Poco X3 Pro', 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80', 'XIAOMI POCO X3 PRO: Pemproses berkuasa tinggi Snapdragon 860 dengan paparan skrin 120Hz yang lancar. Direka khusus untuk permainan mudah alih kompetitif dan e-sukan berat tanpa lag. Harga lelongan istimewa RM550!')">
-                        <div class="card-img-placeholder">
-                            <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80" alt="Poco X3 Pro">
-                        </div>
-                        <span class="item-tag">Prestasi Permainan</span>
-                        <h3>Xiaomi Poco X3 Pro</h3>
-                        <p>Pemproses Snapdragon 860 dengan paparan 120Hz. Direka untuk beban tugas berat dan e-sukan.</p>
-                        <div style="margin-top: auto;">
-                            <div style="text-decoration: line-through; color: var(--text-muted); font-size: 0.8rem;">RRP: RM 1,199</div>
-                            <div style="color: var(--accent-orange); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem;">RM 550</div>
                             <button class="btn-outline" style="width:100%;">Mohon Ketersediaan</button>
                         </div>
                     </div>
@@ -1281,10 +1214,8 @@
             </div>
         </section>
 
-
         <!-- ==========================================================
              HALAMAN 4: CARIAN UPGRADE & GADJET (FINDER)
-             Cara ubah: Ubah penapis `data-tags="..."` dan harga/maklumat produk di dalam fungsi openModal.
              ========================================================== -->
         <section id="finder" class="page-section">
             <div class="container">
@@ -1294,7 +1225,6 @@
                 </div>
 
                 <div class="finder-layout">
-                    <!-- Sidebar Penapis -->
                     <aside class="sidebar-filter">
                         <div style="margin-bottom: 1.5rem;">
                             <h3>Jenis Perkakasan</h3>
@@ -1306,65 +1236,18 @@
                             <h3>Julat Harga</h3>
                             <label class="checkbox-label"><input type="checkbox" class="finder-filter" value="price-low"> Bawah RM 200</label>
                             <label class="checkbox-label"><input type="checkbox" class="finder-filter" value="price-mid"> RM 200 - RM 600</label>
-                            <label class="checkbox-label"><input type="checkbox" class="finder-filter" value="price-high"> Atas RM 600</label>
                         </div>
                         <button class="btn-orange" style="width: 100%;" onclick="applyFinderFilter()">Terapkan Penapis</button>
                     </aside>
 
-                    <!-- Senarai Produk Carian -->
                     <div class="grid-layout" id="finder-results" style="align-items: start;">
-                        <!-- Item Carian 1 -->
-                        <div class="card" data-tags="upgrade-pc price-low" onclick="openModal('SSD NVMe M.2 1TB (Upgrade)', 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80', 'SSD NVMe M.2 1TB: Tingkatkan kepantasan boot komputer riba dan masa muat permainan anda sehingga 5x ganda lebih pantas berbanding HDD konvensional. Termasuk pemasangan percuma di kedai.')">
-                            <div class="card-img-placeholder">
-                                <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80" alt="SSD NVMe">
-                            </div>
+                        <div class="card" data-tags="upgrade-pc price-low" onclick="openModal('SSD NVMe M.2 1TB', 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80', 'Tingkatkan kepantasan boot komputer riba sehingga 5x ganda.')">
+                            <div class="card-img-placeholder"><img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80" alt="SSD"></div>
                             <span class="item-tag">Naik Taraf</span>
                             <h3>SSD NVMe M.2 1TB (Upgrade)</h3>
-                            <p>Tingkatkan kepantasan boot komputer riba dan masa muat permainan sehingga 5x ganda lebih pantas.</p>
+                            <p>Tingkatkan kepantasan boot komputer riba dan masa muat permainan.</p>
                             <div style="margin-top: auto;">
                                 <div style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">RM 299</div>
-                                <button class="btn-outline" style="width:100%;">Tempah Pemasangan</button>
-                            </div>
-                        </div>
-
-                        <!-- Item Carian 2 -->
-                        <div class="card" data-tags="joystick price-mid" onclick="openModal('Pro Wireless Controller (Joystick)', 'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=800&q=80', 'PRO WIRELESS CONTROLLER: Alat kawalan serasi PS4 / PS5 / PC dengan sensor anti-drift, cengkaman keselesaan ergonomik, dan tindak balas getaran kustom untuk pengalaman gaming tahap tinggi.')">
-                            <div class="card-img-placeholder">
-                                <img src="https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=600&q=80" alt="Joystick Controller">
-                            </div>
-                            <span class="item-tag">Joystick</span>
-                            <h3>Pro Wireless Controller (Joystick)</h3>
-                            <p>Alat kawalan serasi PS4/PS5/PC dengan tindak balas pantas dan fungsi gegaran kustom.</p>
-                            <div style="margin-top: auto;">
-                                <div style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">RM 249</div>
-                                <button class="btn-outline" style="width:100%;">Semak Stok</button>
-                            </div>
-                        </div>
-
-                        <!-- Item Carian 3 -->
-                        <div class="card" data-tags="console price-high" onclick="openModal('Konsol Permainan Terpakai (Refurbished)', 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=800&q=80', 'KONSOL PERMAINAN REFURBISHED: Unit konsol pilihan yang telah melalui proses pembersihan terma, ujian komponen penuh, dan jaminan keselamatan operasi selama 3 bulan daripada ZTECHFIX SOLUTIONS.')">
-                            <div class="card-img-placeholder">
-                                <img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80" alt="Gaming Console">
-                            </div>
-                            <span class="item-tag">Konsol</span>
-                            <h3>Konsol Permainan Terpakai (Refurbished)</h3>
-                            <p>Konsol permainan video berkualiti tinggi yang telah diuji dan diselenggara sepenuhnya.</p>
-                            <div style="margin-top: auto;">
-                                <div style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">RM 1,299</div>
-                                <button class="btn-outline" style="width:100%;">Hubungi Jualan</button>
-                            </div>
-                        </div>
-
-                        <!-- Item Carian 4 -->
-                        <div class="card" data-tags="upgrade-pc price-low" onclick="openModal('RAM 16GB DDR4 / DDR5 (Laptop/PC)', 'https://images.unsplash.com/photo-1562976540-1502c2145e86?auto=format&fit=crop&w=800&q=80', 'RAM 16GB HIGH SPEED: Modul memori tambahan berkualiti tinggi untuk melancarkan proses multitasking, rendering video, serta penggunaan perisian berat tanpa gangguan lag.')">
-                            <div class="card-img-placeholder">
-                                <img src="https://images.unsplash.com/photo-1562976540-1502c2145e86?auto=format&fit=crop&w=600&q=80" alt="RAM Laptop">
-                            </div>
-                            <span class="item-tag">Naik Taraf</span>
-                            <h3>RAM 16GB DDR4 / DDR5 (Laptop/PC)</h3>
-                            <p>Modul memori tambahan untuk melancarkan proses multitasking dan perisian berat.</p>
-                            <div style="margin-top: auto;">
-                                <div style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">RM 185</div>
                                 <button class="btn-outline" style="width:100%;">Tempah Pemasangan</button>
                             </div>
                         </div>
@@ -1375,7 +1258,7 @@
 
     </main>
 
-    <!-- MODAL POPUP TERPERINCI (Paparan Popup Bila Kad Ditekan) -->
+    <!-- MODAL POPUP TERPERINCI -->
     <div id="detailModal" class="modal-overlay" onclick="closeModal(event)">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModalDirect()">&times;</button>
@@ -1389,8 +1272,7 @@
     </div>
 
     <!-- ==========================================================
-         FOOTER (MAKLUMAT BAWAH)
-         Cara ubah: Tukar nombor telefon, email, atau alamat kedai di sini.
+         FOOTER
          ========================================================== -->
     <footer>
         <div class="footer-grid">
@@ -1435,6 +1317,7 @@
         </div>
     </footer>
 
+    <!-- ORDER / TEMPAHAN PANTAH -->
     <section class="container" style="padding-top: 0;">
         <div class="form-panel" style="max-width: 760px;">
             <div class="section-header" style="margin-bottom: 1.5rem;">
@@ -1473,7 +1356,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
     <!-- ==========================================================
-         SKRIP JAVASCRIPT & PANDUAN PENYELENGGARAAN KOD
+         SKRIP JAVASCRIPT & AUTOMATIC DATA PUSH KE STORAGE/DATABASE
          ========================================================== -->
     <script>
         const firebaseConfig = {
@@ -1493,9 +1376,7 @@
         const db = window.firebase ? firebase.firestore() : null;
         const siteSettingsRef = db ? db.collection('siteSettings').doc('main') : null;
 
-        // ==========================================================
-        // DATA PELANGGAN / ADMIN (localStorage + Firebase fallback)
-        // ==========================================================
+        // Struktur lengkap data yang akan dipush dan dibaca oleh panel admin
         const defaultCustomerData = {
             companyName: 'ZTECHFIX',
             whatsappNumber: '60189563923',
@@ -1507,353 +1388,88 @@
             builderBase: 700,
             footerNote: '&copy; 2026 ZTECHFIX SOLUTIONS (SA0560360-D). 891+ Pengikut. Hak Cipta Terpelihara.',
             repairData: {
-                phone: {
+                'phone': {
                     'lcd_ori': { label: 'Tukar LCD Ori', price: 'RM 220 - RM 750' },
                     'lcd_copy': { label: 'Tukar LCD Copy (Bajet)', price: 'RM 100 - RM 280' },
-                    'battery': { label: 'Tukar Bateri (Original Grade)', price: 'RM 80 - RM 280' }
+                    'lcd_amoled': { label: 'Tukar LCD Amoled', price: 'RM 300 - RM 900' },
+                    'water_damage': { label: 'Kerosakan Air (Water Damage)', price: 'RM 100 - RM 250' },
+                    'battery': { label: 'Tukar Bateri (Original Grade)', price: 'RM 80 - RM 280' },
+                    'charging_port': { label: 'Tukar Charging Port', price: 'RM 70 - RM 180' },
+                    'camera': { label: 'Pembaikan Modul Kamera', price: 'RM 90 - RM 350' }
                 },
-                laptop: {
+                'iphone': {
+                    'lcd_ori': { label: 'Tukar LCD Ori (iPhone)', price: 'RM 280 - RM 850' },
+                    'lcd_copy': { label: 'Tukar LCD Copy (Bajet iPhone)', price: 'RM 120 - RM 320' },
+                    'lcd_amoled': { label: 'Tukar LCD Amoled (iPhone)', price: 'RM 350 - RM 1,100' },
+                    'water_damage': { label: 'Kerosakan Air (iPhone Water Damage)', price: 'RM 120 - RM 300' },
+                    'battery': { label: 'Tukar Bateri iPhone (Original Grade)', price: 'RM 100 - RM 350' },
+                    'charging_port': { label: 'Tukar Charging Port iPhone', price: 'RM 90 - RM 220' },
+                    'camera': { label: 'Pembaikan Modul Kamera iPhone', price: 'RM 120 - RM 450' }
+                },
+                'ipad': {
+                    'ipad_lcd': { label: 'Tukar LCD / Touch Digitizer iPad & Tablet', price: 'RM 180 - RM 550' },
+                    'ipad_battery': { label: 'Tukar Bateri iPad & Tablet', price: 'RM 150 - RM 350' },
+                    'ipad_port': { label: 'Tukar Port Pengecasan iPad & Tablet', price: 'RM 100 - RM 220' },
+                    'ipad_other': { label: 'Lain-lain Isu iPad & Tablet', price: 'Bermula RM 80' }
+                },
+                'laptop': {
                     'keyboard': { label: 'Tukar Keyboard', price: 'RM 130 - RM 550' },
+                    'water_damage': { label: 'Kerosakan Air (Water Damage Treatment)', price: 'RM 150 - RM 650' },
+                    'thermal_paste': { label: 'Tukar Thermal Paste', price: 'RM 60 - RM 160' },
+                    'fan_service': { label: 'Servis & Pembersihan Kipas', price: 'RM 50 - RM 110' },
                     'battery': { label: 'Tukar Bateri', price: 'RM 110 - RM 480' },
-                    'upgrade_ram': { label: 'Naik Taraf RAM', price: 'RM 100 - RM 350' }
+                    'upgrade_ram': { label: 'Naik Taraf RAM', price: 'RM 100 - RM 350' },
+                    'upgrade_storage': { label: 'Naik Taraf SSD / Storage', price: 'RM 150 - RM 550' }
+                },
+                'macbook': {
+                    'keyboard': { label: 'Tukar Keyboard MacBook', price: 'RM 280 - RM 650' },
+                    'water_damage': { label: 'Kerosakan Air MacBook (Logic Board)', price: 'RM 280 - RM 750' },
+                    'thermal_paste': { label: 'Tukar Thermal Paste MacBook', price: 'RM 90 - RM 180' },
+                    'fan_service': { label: 'Servis & Pembersihan Kipas MacBook', price: 'RM 80 - RM 150' },
+                    'battery': { label: 'Tukar Bateri MacBook', price: 'RM 250 - RM 550' },
+                    'upgrade_ram': { label: 'Naik Taraf RAM MacBook Tertentu', price: 'RM 200 - RM 450' },
+                    'upgrade_storage': { label: 'Naik Taraf SSD / Storage MacBook', price: 'RM 250 - RM 750' }
+                },
+                'pc': {
+                    'os_format': { label: 'Format Windows & Perisian Asas', price: 'RM 60 - RM 100' },
+                    'psu': { label: 'Tukar Power Supply (PSU)', price: 'RM 160 - RM 450' },
+                    'motherboard': { label: 'Diagnostik & Pembaikan Motherboard PC', price: 'Bermula RM 150' },
+                    'gpu_issue': { label: 'Isu Kad Grafik / Paparan PC', price: 'RM 100 - RM 300' }
+                },
+                'console': {
+                    'stick_drift': { label: 'Baik Pulih Stick Drift Joystick (PS/Xbox)', price: 'RM 70 - RM 150' },
+                    'hdmi_port': { label: 'Tukar HDMI Port PlayStation / Nintendo', price: 'RM 180 - RM 320' },
+                    'console_service': { label: 'Servis Haba & Debu Konsol', price: 'RM 90 - RM 150' }
+                },
+                'printer': {
+                    'printer_service': { label: 'Servis Penyelenggaraan & Cartridge Pencetak', price: 'RM 80 - RM 200' },
+                    'printer_head': { label: 'Pembaikan Print Head / Masalah Kertas Jammed', price: 'RM 120 - RM 300' }
+                },
+                'software': {
+                    'pc_software': { label: 'Pemasangan Perisian Khas / Driver / Troubleshooting', price: 'RM 50 - RM 150' },
+                    'online_surfing': { label: 'Tetapan Rangkaian / Masalah Pelayar Atas Talian', price: 'RM 60 - RM 120' }
                 }
-            },
-            galleryItems: [
-                { title: 'Binaan Custom PC RGB', image: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=800&q=80', description: 'Susun atur kabel terstruktur rapi dengan aliran udara penyejukan optimum.' },
-                { title: 'Pembaikan Papan Induk (IC)', image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80', description: 'Pematerian tahap komponen mikro menggunakan mikroskop berketepatan tinggi.' }
-            ],
-            reviews: [
-                { name: 'Maya R.', title: 'Skrin iPhone 13', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80', text: 'Skrin iPhone saya retak teruk dan siap dalam masa singkat. Nampak seperti baru.' },
-                { name: 'Devon L.', title: 'Custom PC Gaming', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80', text: 'Mereka bina PC gaming saya dari awal mengikut bajet ketat. Pengurusan kabel sangat kemas.' }
-            ],
-            builderOptions: {
-                cpu: [
-                  { value: '350', score: '1', label: 'Intel Core i3 / AMD Ryzen 3 (Asas)' },
-                  { value: '750', score: '3', label: 'Intel Core i5 / AMD Ryzen 5 (Pertengahan)' },
-                  { value: '1400', score: '5', label: 'Intel Core i7 / AMD Ryzen 7 (Prestasi Tinggi)' }
-                ],
-                gpu: [
-                  { value: '0', score: '0', label: 'Grafik Bersepadu (Integrated)' },
-                  { value: '950', score: '3', label: 'NVIDIA RTX 3050 / AMD RX 6600' },
-                  { value: '1550', score: '5', label: 'NVIDIA RTX 4060 / AMD RX 7600' }
-                ],
-                ram: [
-                  { value: '90', score: '1', label: '8GB RAM (Standard Pejabat)' },
-                  { value: '180', score: '3', label: '16GB RAM (Standard Prestasi)' },
-                  { value: '450', score: '5', label: '32GB RAM (Kreatif / Heavy Multitasking)' }
-                ],
-                storage: [
-                  { value: '150', label: '512GB NVMe M.2 SSD' },
-                  { value: '300', label: '1TB NVMe M.2 SSD' },
-                  { value: '650', label: '2TB NVMe M.2 SSD (Gen4)' }
-                ]
-            },
-            phoneDeals: [
-                { title: 'Samsung Galaxy A13 (128GB)', category: 'bajet', oldPrice: 'RM 699', newPrice: 'RM 350', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', description: 'SAMSUNG GALAXY A13: Kapasiti storan besar 128GB, bateri tahan lama, sangat sesuai untuk pengurusan nota pembelajaran anak-anak, kelas online, dan aplikasi produktiviti asas harian.' },
-                { title: 'Xiaomi Poco X3 Pro', category: 'game', oldPrice: 'RM 1,199', newPrice: 'RM 550', image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80', description: 'XIAOMI POCO X3 PRO: Pemproses berkuasa tinggi Snapdragon 860 dengan paparan skrin 120Hz yang lancar.' }
-            ],
-            clearanceItems: [
-                { title: 'Samsung Galaxy A13 (128GB)', category: 'bajet', oldPrice: 'RM 699', newPrice: 'RM 350', image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80', description: 'Kapasiti storan 128GB, bateri tahan lama, sesuai untuk penggunaan harian.' },
-                { title: 'Xiaomi Poco X3 Pro', category: 'game', oldPrice: 'RM 1,199', newPrice: 'RM 550', image: 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=800&q=80', description: 'Pemproses Snapdragon 860 dengan paparan 120Hz untuk permainan.' }
-            ],
-            finderItems: [
-                { title: 'SSD NVMe M.2 1TB (Upgrade)', category: 'upgrade-pc', price: 'RM 299', image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80', description: 'SSD NVMe M.2 1TB: Tingkatkan kepantasan boot komputer riba dan masa muat permainan anda sehingga 5x ganda lebih pantas.' },
-                { title: 'Pro Wireless Controller (Joystick)', category: 'joystick', price: 'RM 249', image: 'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=800&q=80', description: 'PRO WIRELESS CONTROLLER: Alat kawalan serasi PS4 / PS5 / PC dengan sensor anti-drift, cengkaman keselesaan ergonomik.' }
-            ]
+            }
         };
 
-        async function loadRemoteSiteData() {
-            if (!siteSettingsRef) return null;
-            try {
-                const snap = await siteSettingsRef.get();
-                return snap.exists ? snap.data() : null;
-            } catch (error) {
-                return null;
-            }
-        }
-
-        function getSiteData() {
-            try {
-                const saved = JSON.parse(localStorage.getItem('ztechfix_site_data') || 'null');
-                if (!saved) return defaultCustomerData;
-                const merged = { ...defaultCustomerData, ...saved };
-                merged.repairData = { ...defaultCustomerData.repairData, ...(saved.repairData || {}) };
-                merged.galleryItems = Array.isArray(saved.galleryItems) ? saved.galleryItems : defaultCustomerData.galleryItems;
-                merged.reviews = Array.isArray(saved.reviews) ? saved.reviews : defaultCustomerData.reviews;
-                merged.builderOptions = { ...defaultCustomerData.builderOptions, ...(saved.builderOptions || {}) };
-                merged.phoneDeals = Array.isArray(saved.phoneDeals) ? saved.phoneDeals : defaultCustomerData.phoneDeals;
-                merged.clearanceItems = Array.isArray(saved.clearanceItems) ? saved.clearanceItems : defaultCustomerData.clearanceItems;
-                merged.finderItems = Array.isArray(saved.finderItems) ? saved.finderItems : defaultCustomerData.finderItems;
-                return merged;
-            } catch (error) {
-                return defaultCustomerData;
-            }
-        }
-
-        function renderRepairOptions() {
-            const data = getSiteData();
-            const deviceType = document.getElementById('device-type');
-            const deviceIssue = document.getElementById('device-issue');
-            if (!deviceType || !deviceIssue) return;
-            const repairData = data.repairData || defaultCustomerData.repairData;
-            deviceType.innerHTML = '<option value="">-- Sila Pilih Peranti --</option>' + Object.keys(repairData).map((key) => `<option value="${key}">${key === 'phone' ? 'Telefon Pintar (Phone)' : key === 'iphone' ? 'iPhone (Apple)' : key === 'ipad' ? 'iPad & Tablet' : key === 'laptop' ? 'Laptop Biasa' : key === 'macbook' ? 'MacBook (Apple)' : key === 'pc' ? 'Komputer Meja (Desktop)' : key === 'console' ? 'Konsol Permainan' : key === 'printer' ? 'Pencetak (Printer)' : key === 'software' ? 'Perisian PC / Online Surfing' : key}</option>`).join('');
-            const selected = deviceType.value || Object.keys(repairData)[0];
-            const issues = repairData[selected] || {};
-            deviceIssue.innerHTML = '<option value="">-- Pilih Kategori Dahulu --</option>' + Object.keys(issues).map((issueKey) => `<option value="${issueKey}">${issues[issueKey].label || issueKey}</option>`).join('');
-            deviceIssue.disabled = Object.keys(issues).length === 0;
-        }
-
-        function renderGallery() {
-            const data = getSiteData();
-            const galleryWrap = document.getElementById('gallery-grid');
-            if (!galleryWrap) return;
-            galleryWrap.innerHTML = (data.galleryItems || []).map((item) => `
-                <div class="card" onclick="openModal('${escapeHtml(item.title || 'Hasil Kerja')}', '${escapeHtml(item.image || '')}', '${escapeHtml(item.description || '')}')">
-                    <div class="card-img-placeholder">
-                        <img src="${escapeHtml(item.image || '')}" alt="${escapeHtml(item.title || 'Hasil Kerja')}">
-                    </div>
-                    <h3>${escapeHtml(item.title || 'Hasil Kerja')}</h3>
-                    <p>${escapeHtml(item.description || '')}</p>
-                </div>
-            `).join('');
-        }
-
-        function renderReviews() {
-            const data = getSiteData();
-            const wrap = document.getElementById('reviews-grid');
-            if (!wrap) return;
-            wrap.innerHTML = (data.reviews || []).map((item) => `
-                <div class="review-card" onclick="openModal('${escapeHtml(item.name || 'Pelanggan')} (${escapeHtml(item.title || 'Ulasan')} )', '${escapeHtml(item.image || '')}', '${escapeHtml(item.text || '')}')">
-                    <div>
-                        <div class="review-header">
-                            <img src="${escapeHtml(item.image || '')}" alt="${escapeHtml(item.name || 'Pelanggan')}" class="reviewer-avatar">
-                            <div class="reviewer-info">
-                                <h4>${escapeHtml(item.name || 'Pelanggan')}</h4>
-                                <p>${escapeHtml(item.title || 'Ulasan')}</p>
-                            </div>
-                        </div>
-                        <div class="stars">★★★★★</div>
-                        <p class="review-text">"${escapeHtml(item.text || '')}"</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderBuilderOptions() {
-            const data = getSiteData();
-            const builderOptions = data.builderOptions || defaultCustomerData.builderOptions;
-            const cpuEl = document.getElementById('pc-cpu');
-            const gpuEl = document.getElementById('pc-gpu');
-            const ramEl = document.getElementById('pc-ram');
-            const storageEl = document.getElementById('pc-storage');
-            if (!cpuEl || !gpuEl || !ramEl || !storageEl) return;
-            cpuEl.innerHTML = '<option value="0">-- Sila Pilih Pemproses --</option>' + (builderOptions.cpu || []).map((item) => `<option value="${item.value}" data-score="${item.score || 0}">${item.label}</option>`).join('');
-            gpuEl.innerHTML = '<option value="0">-- Sila Pilih Grafik --</option>' + (builderOptions.gpu || []).map((item) => `<option value="${item.value}" data-score="${item.score || 0}">${item.label}</option>`).join('');
-            ramEl.innerHTML = '<option value="0">-- Sila Pilih RAM --</option>' + (builderOptions.ram || []).map((item) => `<option value="${item.value}" data-score="${item.score || 0}">${item.label}</option>`).join('');
-            storageEl.innerHTML = '<option value="0">-- Sila Pilih Storan --</option>' + (builderOptions.storage || []).map((item) => `<option value="${item.value}">${item.label}</option>`).join('');
-        }
-
-        function renderClearanceGrid() {
-            const data = getSiteData();
-            const clearanceGrid = document.getElementById('clearance-grid');
-            if (!clearanceGrid) return;
-            clearanceGrid.innerHTML = (data.clearanceItems || []).map((item) => {
-                const safeTitle = escapeHtml(item.title || 'Produk Lelong');
-                const safeImage = escapeHtml(item.image || '');
-                const safeDesc = escapeHtml(item.description || '');
-                const oldPrice = item.oldPrice ? `<div style="text-decoration: line-through; color: var(--text-muted); font-size: 0.8rem;">${escapeHtml(item.oldPrice)}</div>` : '';
-                const newPrice = item.newPrice ? `<div style="color: var(--accent-orange); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem;">${escapeHtml(item.newPrice)}</div>` : '';
-                return `
-                    <div class="card clearance-item" data-category="${escapeHtml(item.category || 'bajet')}" onclick="openModal('${safeTitle}', '${safeImage}', '${safeDesc}')">
-                        <div class="card-img-placeholder"><img src="${safeImage}" alt="${safeTitle}"></div>
-                        <span class="item-tag">${escapeHtml(item.category === 'game' ? 'Prestasi Permainan' : 'Phone Bajet')}</span>
-                        <h3>${safeTitle}</h3>
-                        <p>${safeDesc}</p>
-                        <div style="margin-top: auto;">
-                            ${oldPrice}
-                            ${newPrice}
-                            <button class="btn-outline" style="width:100%;">Mohon Ketersediaan</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function renderFinderGrid() {
-            const data = getSiteData();
-            const finderResults = document.getElementById('finder-results');
-            if (!finderResults) return;
-            finderResults.innerHTML = (data.finderItems || []).map((item) => {
-                const safeTitle = escapeHtml(item.title || 'Item');
-                const safeImage = escapeHtml(item.image || '');
-                const safeDesc = escapeHtml(item.description || '');
-                const itemTag = item.category === 'joystick' ? 'Joystick' : item.category === 'console' ? 'Konsol' : 'Naik Taraf';
-                return `
-                    <div class="card" data-tags="${escapeHtml(item.category || 'upgrade-pc')}" onclick="openModal('${safeTitle}', '${safeImage}', '${safeDesc}')">
-                        <div class="card-img-placeholder"><img src="${safeImage}" alt="${safeTitle}"></div>
-                        <span class="item-tag">${escapeHtml(itemTag)}</span>
-                        <h3>${safeTitle}</h3>
-                        <p>${safeDesc}</p>
-                        <div style="margin-top: auto;">
-                            <div style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">${escapeHtml(item.price || 'RM 0')}</div>
-                            <button class="btn-outline" style="width:100%;">Tempah Pemasangan</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function applySiteData() {
-            const data = getSiteData();
-            const brandNameEl = document.getElementById('brand-name');
-            if (brandNameEl) brandNameEl.textContent = data.companyName || 'ZTECHFIX';
-
-            const titleEl = document.querySelector('.hero-content h1');
-            if (titleEl) {
-                const firstPart = data.heroTitle.split('.')[0] || 'Baiki Kerosakan';
-                const secondPart = data.heroTitle.includes('.') ? data.heroTitle.split('.').slice(1).join('.').trim() : 'Bina Sistem Impian.';
-                titleEl.innerHTML = `${firstPart}. <span>${secondPart}</span>`;
-            }
-
-            const heroTextEl = document.querySelector('.hero-content p');
-            if (heroTextEl) heroTextEl.textContent = data.heroText || defaultCustomerData.heroText;
-
-            const topCta = document.getElementById('top-cta');
-            if (topCta) topCta.href = `https://wa.me/${data.whatsappNumber}`;
-
-            const footerNote = document.querySelector('.footer-bottom p');
-            if (footerNote) footerNote.innerHTML = data.footerNote || defaultCustomerData.footerNote;
-
-            const footerLinks = document.querySelectorAll('.footer-col a[href^="tel:"]');
-            footerLinks.forEach(link => { if (data.phoneNumber) link.href = `tel:${data.phoneNumber}`; link.textContent = `Tel: ${data.phoneNumber}`; });
-
-            const emailLink = document.querySelector('.footer-col a[href^="mailto:"]');
-            if (emailLink) {
-                emailLink.href = `mailto:${data.email}`;
-                emailLink.textContent = data.email;
-            }
-
-            const addressLink = document.querySelector('.footer-col a[href="#"]');
-            if (addressLink) addressLink.textContent = data.address;
-
-            const phoneCalls = document.querySelectorAll('a[href="https://wa.me/60189563923"]');
-            phoneCalls.forEach(link => { link.href = `https://wa.me/${data.whatsappNumber}`; });
-
-            if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || !window.location.pathname.includes('admin')) {
-                const builder = document.getElementById('pc-total-price');
-                if (builder && data.builderBase) {
-                    document.getElementById('pc-total-price').dataset.basePrice = data.builderBase;
-                }
-            }
-
-            renderRepairOptions();
-            renderGallery();
-            renderReviews();
-            renderBuilderOptions();
-            renderClearanceGrid();
-            renderFinderGrid();
-            renderCustomerInventory();
-        }
-
-        function escapeHtml(value = '') {
-            return String(value)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
-        }
-
-        function renderCustomerInventory() {
-            const data = getSiteData();
-            const clearanceGrid = document.getElementById('clearance-grid');
-            const finderResults = document.getElementById('finder-results');
-
-            if (clearanceGrid) {
-                clearanceGrid.innerHTML = (data.phoneDeals || []).map((item) => {
-                    const safeTitle = escapeHtml(item.title || 'Product');
-                    const safeImage = escapeHtml(item.image || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80');
-                    const safeDesc = escapeHtml(item.description || 'Penerangan produk.');
-                    const oldPrice = item.oldPrice ? `<div style="text-decoration: line-through; color: var(--text-muted); font-size: 0.8rem;">${escapeHtml(item.oldPrice)}</div>` : '';
-                    const newPrice = item.newPrice ? `<div style="color: var(--accent-orange); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem;">${escapeHtml(item.newPrice)}</div>` : '';
-                    return `
-                        <div class="card clearance-item" data-category="${escapeHtml(item.category || 'bajet')}" onclick="openModal('${safeTitle}', '${safeImage}', '${safeDesc}')">
-                            <div class="card-img-placeholder">
-                                <img src="${safeImage}" alt="${safeTitle}">
-                            </div>
-                            <span class="item-tag">${escapeHtml(item.category === 'game' ? 'Prestasi Permainan' : 'Phone Bajet')}</span>
-                            <h3>${safeTitle}</h3>
-                            <p>${safeDesc}</p>
-                            <div style="margin-top: auto;">
-                                ${oldPrice}
-                                ${newPrice}
-                                <button class="btn-outline" style="width:100%;">Mohon Ketersediaan</button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-
-            if (finderResults) {
-                finderResults.innerHTML = (data.finderItems || []).map((item) => {
-                    const safeTitle = escapeHtml(item.title || 'Item');
-                    const safeImage = escapeHtml(item.image || 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80');
-                    const safeDesc = escapeHtml(item.description || 'Penerangan item.');
-                    const itemTag = item.category === 'joystick' ? 'Joystick' : item.category === 'console' ? 'Konsol' : 'Naik Taraf';
-                    return `
-                        <div class="card" data-tags="${escapeHtml(item.category || 'upgrade-pc')}" onclick="openModal('${safeTitle}', '${safeImage}', '${safeDesc}')">
-                            <div class="card-img-placeholder">
-                                <img src="${safeImage}" alt="${safeTitle}">
-                            </div>
-                            <span class="item-tag">${escapeHtml(itemTag)}</span>
-                            <h3>${safeTitle}</h3>
-                            <p>${safeDesc}</p>
-                            <div style="margin-top: auto;">
-                                <div style="color: #ffffff; font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">${escapeHtml(item.price || 'RM 0')}</div>
-                                <button class="btn-outline" style="width:100%;">Tempah Pemasangan</button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-        }
-
-        if (typeof BroadcastChannel !== 'undefined') {
-            const syncChannel = new BroadcastChannel('ztechfix-sync');
-            syncChannel.onmessage = (event) => {
-                if (event.data && event.data.type === 'site-update') {
-                    localStorage.setItem('ztechfix_site_data', JSON.stringify(event.data.data));
-                    applySiteData();
-                }
-            };
-        }
-
-        if (db && siteSettingsRef) {
-            siteSettingsRef.onSnapshot((snap) => {
-                if (snap.exists) {
-                    localStorage.setItem('ztechfix_site_data', JSON.stringify(snap.data()));
-                    applySiteData();
-                }
-            }, () => {});
-        }
-
-        window.addEventListener('storage', (event) => {
-            if (event.key === 'ztechfix_site_data') {
-                applySiteData();
-            }
-        });
-
+        // Fungsi Auto-Push Data ke Storage & Database supaya Admin boleh Import
         async function initCustomerPage() {
-            const remoteData = await loadRemoteSiteData();
-            if (remoteData) {
-                localStorage.setItem('ztechfix_site_data', JSON.stringify(remoteData));
+            // Sentiasa pastikan data berstruktur wujud di localStorage untuk ditarik admin
+            localStorage.setItem('ztechfix_site_data', JSON.stringify(defaultCustomerData));
+
+            // Jika Firebase aktif, push data ke cloud Firestore
+            if (db && siteSettingsRef) {
+                try {
+                    await siteSettingsRef.set(defaultCustomerData, { merge: true });
+                } catch (e) {
+                    console.log('Firebase sync error:', e);
+                }
             }
-            applySiteData();
         }
 
         initCustomerPage();
 
-        // CARA UBAH NAVIGASI & MENU MOBILE:
+        // Navigasi & Mobile Menu
         function toggleMenu() { 
             const nav = document.getElementById('nav-menu');
             nav.classList.toggle('active'); 
@@ -1871,7 +1487,7 @@
             window.scrollTo(0, 0);
         }
 
-        // CARA UBAH MODAL POPUP:
+        // Modal Popup
         function openModal(title, imgSrc, desc) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalImg').src = imgSrc;
@@ -1889,82 +1505,12 @@
             }
         }
 
-        // ==========================================================
-        // CARA UBAH HARGA & JENIS ISU KALKULATOR REPAIR:
-        // Anda boleh tukar teks label atau harga di dalam senarai `repairData` ini.
-        // ==========================================================
-        const commonPhoneIssues = {
-            'lcd_ori': { label: 'Tukar LCD Ori', price: 'RM 220 - RM 750' },
-            'lcd_copy': { label: 'Tukar LCD Copy (Bajet)', price: 'RM 100 - RM 280' },
-            'lcd_amoled': { label: 'Tukar LCD Amoled', price: 'RM 300 - RM 900' },
-            'water_damage': { label: 'Kerosakan Air (Water Damage)', price: 'RM 100 - RM 250' },
-            'battery': { label: 'Tukar Bateri (Original Grade)', price: 'RM 80 - RM 280' },
-            'charging_port': { label: 'Tukar Charging Port', price: 'RM 70 - RM 180' },
-            'camera': { label: 'Pembaikan Modul Kamera', price: 'RM 90 - RM 350' }
-        };
-
-        const commonLaptopIssues = {
-            'keyboard': { label: 'Tukar Keyboard', price: 'RM 130 - RM 550' },
-            'water_damage': { label: 'Kerosakan Air (Water Damage Treatment)', price: 'RM 150 - RM 650' },
-            'thermal_paste': { label: 'Tukar Thermal Paste', price: 'RM 60 - RM 160' },
-            'fan_service': { label: 'Servis & Pembersihan Kipas', price: 'RM 50 - RM 110' },
-            'battery': { label: 'Tukar Bateri', price: 'RM 110 - RM 480' },
-            'upgrade_ram': { label: 'Naik Taraf RAM', price: 'RM 100 - RM 350' },
-            'upgrade_storage': { label: 'Naik Taraf SSD / Storage', price: 'RM 150 - RM 550' }
-        };
-
-        const repairData = {
-            'phone': commonPhoneIssues,
-            'iphone': {
-                'lcd_ori': { label: 'Tukar LCD Ori (iPhone)', price: 'RM 280 - RM 850' },
-                'lcd_copy': { label: 'Tukar LCD Copy (Bajet iPhone)', price: 'RM 120 - RM 320' },
-                'lcd_amoled': { label: 'Tukar LCD Amoled (iPhone)', price: 'RM 350 - RM 1,100' },
-                'water_damage': { label: 'Kerosakan Air (iPhone Water Damage)', price: 'RM 120 - RM 300' },
-                'battery': { label: 'Tukar Bateri iPhone (Original Grade)', price: 'RM 100 - RM 350' },
-                'charging_port': { label: 'Tukar Charging Port iPhone', price: 'RM 90 - RM 220' },
-                'camera': { label: 'Pembaikan Modul Kamera iPhone', price: 'RM 120 - RM 450' }
-            },
-            'ipad': {
-                'ipad_lcd': { label: 'Tukar LCD / Touch Digitizer iPad & Tablet', price: 'RM 180 - RM 550' },
-                'ipad_battery': { label: 'Tukar Bateri iPad & Tablet', price: 'RM 150 - RM 350' },
-                'ipad_port': { label: 'Tukar Port Pengecasan iPad & Tablet', price: 'RM 100 - RM 220' },
-                'ipad_other': { label: 'Lain-lain Isu iPad & Tablet', price: 'Bermula RM 80' }
-            },
-            'laptop': commonLaptopIssues,
-            'macbook': {
-                'keyboard': { label: 'Tukar Keyboard MacBook', price: 'RM 280 - RM 650' },
-                'water_damage': { label: 'Kerosakan Air MacBook (Logic Board)', price: 'RM 280 - RM 750' },
-                'thermal_paste': { label: 'Tukar Thermal Paste MacBook', price: 'RM 90 - RM 180' },
-                'fan_service': { label: 'Servis & Pembersihan Kipas MacBook', price: 'RM 80 - RM 150' },
-                'battery': { label: 'Tukar Bateri MacBook', price: 'RM 250 - RM 550' },
-                'upgrade_ram': { label: 'Naik Taraf RAM MacBook Tertentu', price: 'RM 200 - RM 450' },
-                'upgrade_storage': { label: 'Naik Taraf SSD / Storage MacBook', price: 'RM 250 - RM 750' }
-            },
-            'pc': {
-                'os_format': { label: 'Format Windows & Perisian Asas', price: 'RM 60 - RM 100' },
-                'psu': { label: 'Tukar Power Supply (PSU)', price: 'RM 160 - RM 450' },
-                'motherboard': { label: 'Diagnostik & Pembaikan Motherboard PC', price: 'Bermula RM 150' },
-                'gpu_issue': { label: 'Isu Kad Grafik / Paparan PC', price: 'RM 100 - RM 300' }
-            },
-            'console': {
-                'stick_drift': { label: 'Baik Pulih Stick Drift Joystick (PS/Xbox)', price: 'RM 70 - RM 150' },
-                'hdmi_port': { label: 'Tukar HDMI Port PlayStation / Nintendo', price: 'RM 180 - RM 320' },
-                'console_service': { label: 'Servis Haba & Debu Konsol', price: 'RM 90 - RM 150' }
-            },
-            'printer': {
-                'printer_service': { label: 'Servis Penyelenggaraan & Cartridge Pencetak', price: 'RM 80 - RM 200' },
-                'printer_head': { label: 'Pembaikan Print Head / Masalah Kertas Jammed', price: 'RM 120 - RM 300' }
-            },
-            'software': {
-                'pc_software': { label: 'Pemasangan Perisian Khas / Driver / Troubleshooting', price: 'RM 50 - RM 150' },
-                'online_surfing': { label: 'Tetapan Rangkaian / Masalah Pelayar Atas Talian', price: 'RM 60 - RM 120' }
-            }
-        };
-
+        // Kalkulator Repair Dinamik
         function updateIssues() {
             const device = document.getElementById('device-type').value;
             const issueSelect = document.getElementById('device-issue');
             issueSelect.innerHTML = '<option value="">-- Sila Pilih Kerosakan --</option>';
+            const repairData = defaultCustomerData.repairData;
             if(device && repairData[device]) {
                 issueSelect.disabled = false;
                 Object.keys(repairData[device]).forEach(key => {
@@ -1982,15 +1528,13 @@
         function calculateRepair() {
             const device = document.getElementById('device-type').value;
             const issue = document.getElementById('device-issue').value;
+            const repairData = defaultCustomerData.repairData;
             if(!device || !issue) { alert("Sila lengkapkan pilihan peranti dan kerosakan."); return; }
             document.getElementById('repair-price').textContent = repairData[device][issue].price;
             document.getElementById('repair-result').style.display = 'block';
         }
 
-        // ==========================================================
-        // CARA UBAH LOGIK KONFIGURATOR BINA PC (BUILD PC):
-        // Asas harga sistem (casing/PSU) diletakkan pada pembolehubah `baseSystemPrice`.
-        // ==========================================================
+        // Konfigurator Bina PC Custom
         function calculateCustomPC() {
             const cpuEl = document.getElementById('pc-cpu');
             const gpuEl = document.getElementById('pc-gpu');
@@ -2009,43 +1553,32 @@
                 return;
             }
 
-            const baseSystemPrice = Number(document.getElementById('pc-total-price').dataset.basePrice || 700);
-            const total = baseSystemPrice + cpuPrice + gpuPrice + ramPrice + storagePrice;
-
+            const total = 700 + cpuPrice + gpuPrice + ramPrice + storagePrice;
             document.getElementById('pc-total-price').textContent = `RM ${total.toLocaleString('en-MY', {minimumFractionDigits: 2})}`;
 
             const cpuScore = parseInt(cpuEl.options[cpuEl.selectedIndex].getAttribute('data-score')) || 0;
             const gpuScore = parseInt(gpuEl.options[gpuEl.selectedIndex].getAttribute('data-score')) || 0;
             const ramScore = parseInt(ramEl.options[ramEl.selectedIndex].getAttribute('data-score')) || 0;
-            
             const totalScore = cpuScore + gpuScore + ramScore;
-            let recText = "";
 
-            if(cpuPrice === 0 || ramPrice === 0) {
-                recText = "Sila pilih komponen asas (CPU & RAM) untuk membolehkan sistem menjana profil penggunaan.";
-            } else if(totalScore <= 3) {
-                recText = "Profil: Pentadbiran Asas. Sistem ini ideal untuk tugasan pentadbiran ringan, pemprosesan dokumen, dan perisian perakaunan.";
+            let recText = "";
+            if(totalScore <= 3) {
+                recText = "Profil: Pentadbiran Asas. Sistem ideal untuk tugasan ringan, dokumen, dan perakaunan.";
             } else if (totalScore > 3 && totalScore <= 7) {
-                recText = "Profil: Multitasking & Media. Sesuai untuk pengurusan berbilang tugas, reka bentuk grafik peringkat kemasukan, dan pembangunan perisian.";
-            } else if (totalScore > 7 && totalScore <= 12) {
-                recText = "Profil: Stesen Kerja Kreatif. Konfigurasi ini menjamin kelancaran untuk rendering video 4K, pemodelan objek 3D, dan pangkalan data.";
+                recText = "Profil: Multitasking & Media. Sesuai untuk pelbagai tugas, reka bentuk grafik, dan pembangunan perisian.";
             } else {
-                recText = "Profil: Prestasi Ekstrem. Sistem kelas perusahaan untuk simulasi kompleks, analisis AI/Machine Learning, dan rendering 3D gred tinggi.";
+                recText = "Profil: Prestasi Tinggi / Gaming. Sesuai untuk permainan berat, rendering video 4K, dan AI/Machine Learning.";
             }
 
             document.getElementById('pc-rec-text').textContent = recText;
             document.getElementById('pc-recommendation').style.display = "block";
             
-            if(cpuPrice > 0 && gpuPrice > 0 && ramPrice > 0 && storagePrice > 0) {
-                const text = `Hi ZTECHFIX SOLUTIONS (Sales), saya ingin memohon sebut harga rasmi bagi Konfigurasi PC berikut:\n\nCPU: ${cpuEl.options[cpuEl.selectedIndex].text}\nGPU: ${gpuEl.options[gpuEl.selectedIndex].text}\nRAM: ${ramEl.options[ramEl.selectedIndex].text}\nStorage: ${storageEl.options[storageEl.selectedIndex].text}\n\nAnggaran Sistem: RM ${total.toLocaleString()}`;
-                document.getElementById('wa-builder-link').href = `https://wa.me/60189563923?text=${encodeURIComponent(text)}`;
-                document.getElementById('wa-builder-link').style.display = "block";
-            } else {
-                document.getElementById('wa-builder-link').style.display = "none";
-            }
+            const text = `Hi ZTECHFIX SOLUTIONS (Sales), saya ingin memohon sebut harga rasmi bagi Konfigurasi PC berikut:\n\nCPU: ${cpuEl.options[cpuEl.selectedIndex].text}\nGPU: ${gpuEl.options[gpuEl.selectedIndex].text}\nRAM: ${ramEl.options[ramEl.selectedIndex].text}\nStorage: ${storageEl.options[storageEl.selectedIndex].text}\n\nAnggaran Sistem: RM ${total.toLocaleString()}`;
+            document.getElementById('wa-builder-link').href = `https://wa.me/60189563923?text=${encodeURIComponent(text)}`;
+            document.getElementById('wa-builder-link').style.display = "block";
         }
 
-        // CARA UBAH PENAPIS JUALAN LELONG:
+        // Penapis Jualan Lelong
         function filterClearance(category) {
             document.querySelectorAll('#clearance button').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -2054,7 +1587,7 @@
             });
         }
 
-        // CARA UBAH PENAPIS CARIAN UPGRADE & GADJET:
+        // Penapis Carian Upgrade
         function applyFinderFilter() {
             const selectedTags = Array.from(document.querySelectorAll('.finder-filter:checked')).map(cb => cb.value);
             document.querySelectorAll('#finder-results .card').forEach(product => {
@@ -2064,15 +1597,8 @@
             });
         }
 
+        // Sistem Tempahan Pantas (Simpan Order ke LocalStorage & DB untuk Admin)
         const ORDER_KEY = 'ztechfix_orders';
-
-        function getOrders() {
-            try {
-                return JSON.parse(localStorage.getItem(ORDER_KEY) || '[]');
-            } catch {
-                return [];
-            }
-        }
 
         function addOrderFromCustomer() {
             const name = document.getElementById('orderName').value.trim();
@@ -2086,7 +1612,7 @@
                 return;
             }
 
-            const orders = getOrders();
+            const orders = JSON.parse(localStorage.getItem(ORDER_KEY) || '[]');
             orders.unshift({
                 customerName: name,
                 customerPhone: phone,
@@ -2102,12 +1628,13 @@
                 const channel = new BroadcastChannel('ztechfix-sync');
                 channel.postMessage({ type: 'order-update', data: orders });
             }
+
             document.getElementById('orderName').value = '';
             document.getElementById('orderPhone').value = '';
             document.getElementById('orderProduct').value = '';
             document.getElementById('orderPrice').value = '';
             document.getElementById('orderNotes').value = '';
-            alert('Order berjaya disimpan. Admin boleh lihat di halaman admin.');
+            alert('Order berjaya disimpan dan dihantar ke sistem admin.');
         }
 
         const submitOrderBtn = document.getElementById('submitOrderBtn');
