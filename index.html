@@ -29,8 +29,8 @@
         .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: #ffffff; font-weight: 700; font-size: 1.1rem; cursor: pointer; }
         .logo-icon { background-color: var(--accent-orange); color: #000; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 800; font-size: 0.9rem; }
         
-        .nav-links { display: flex; gap: 1rem; list-style: none; align-items: center; }
-        .nav-links li a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; font-weight: 500; transition: var(--transition); cursor: pointer; }
+        .nav-links { display: flex; gap: 1rem; list-style: none; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+        .nav-links li a { color: var(--text-muted); text-decoration: none; font-size: 0.75rem; font-weight: 500; transition: var(--transition); cursor: pointer; }
         .nav-links li a:hover, .nav-links li a.active { color: #ffffff; }
         .menu-toggle { display: none; cursor: pointer; font-size: 1.5rem; color: #fff; background: none; border: none; }
 
@@ -38,9 +38,9 @@
         .btn-orange:hover { background-color: var(--accent-orange-hover); transform: translateY(-2px); }
 
         main { min-height: 80vh; }
-        .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page-section { display: none; animation: fadeIn 0.3s ease-in-out; }
         .page-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 3rem 1rem; }
         .section-header { text-align: center; margin-bottom: 2.5rem; }
@@ -50,7 +50,6 @@
         .announcement-banner { background: var(--accent-orange); color: #000; text-align: center; padding: 0.5rem; font-weight: 700; font-size: 0.8rem; display: none; }
         .staff-banner { background: #ef4444; color: #fff; text-align: center; padding: 0.4rem; font-size: 0.75rem; font-weight: 600; display: none; }
 
-        /* Top Image Banner dengan Border & Sudut Melengkung (Smooth Style) */
         .top-banner-wrapper { max-width: 1200px; margin: 1.5rem auto 0 auto; padding: 0 1rem; }
         .top-banner-image { width: 100%; height: 260px; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .top-banner-image img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
@@ -68,19 +67,29 @@
         .social-pill { background: var(--bg-card); border: 1px solid var(--border-color); padding: 0.5rem 1rem; border-radius: 20px; color: var(--text-main); font-size: 0.75rem; font-weight: 600; text-decoration: none; transition: var(--transition); display: flex; align-items: center; gap: 6px; }
         .social-pill:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
 
-        .fix-grid, .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
-        .fix-card, .why-card, .step-card, .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem 1rem; transition: var(--transition); cursor: pointer; }
+        /* KHAS TELEFON BIMBIT: "Apa Yang Kami Baiki", Lelong, Upgrade, Galeri disetkan 2 Kolum Grid dengan Padding & Saiz Kompak */
+        .fix-grid, .grid-layout { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+
+        .fix-card, .why-card, .step-card, .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 0.75rem 0.5rem; transition: var(--transition); cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
         .fix-card:hover, .why-card:hover, .card:hover { border-color: var(--accent-orange); transform: translateY(-2px); }
-        .fix-icon, .why-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-        .fix-card h3, .why-card h3, .step-card h3, .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: #ffffff; }
-        .fix-card p, .why-card p, .step-card p, .card p { font-size: 0.78rem; color: var(--text-muted); }
+        
+        .fix-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+        .why-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+
+        .fix-card h3, .why-card h3, .step-card h3, .card h3 { font-size: 0.75rem; font-weight: 600; margin-bottom: 0.2rem; color: #ffffff; line-height: 1.2; }
+        .fix-card p, .why-card p, .step-card p, .card p { font-size: 0.62rem; color: var(--text-muted); line-height: 1.2; }
+
+        /* Saiz Gambar Kotak Produk / Galeri untuk Phone (Kecil & Kemas) */
+        .item-img-container { width: 100%; height: 90px; background: #1a1a1a; border-radius: 6px; overflow: hidden; margin-bottom: 0.5rem; border: 1px solid var(--border-color); }
+        .item-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .card.reserved { opacity: 0.5; filter: grayscale(90%); cursor: not-allowed; border-color: #ef4444 !important; }
+        .card.reserved:hover { transform: none; }
+        .badge-reserved { background: #ef4444; color: #fff; font-size: 0.55rem; font-weight: 700; padding: 1px 4px; border-radius: 3px; display: inline-block; margin-bottom: 0.3rem; width: fit-content; }
+        .item-tag { font-size: 0.55rem !important; padding: 1px 4px !important; margin-bottom: 0.3rem !important; }
 
         .why-us-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
-        .why-card { flex: 1 1 200px; max-width: 250px; }
-
-        .steps-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
-        .step-card { position: relative; flex: 1 1 200px; max-width: 250px; background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem 1rem; }
-        .step-number { position: absolute; top: -10px; left: 15px; background-color: var(--accent-orange); color: #000; font-weight: 700; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; }
+        .why-card { flex: 1 1 200px; max-width: 250px; padding: 1.5rem 1rem; }
 
         .form-panel { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; max-width: 700px; margin: 0 auto; }
         .form-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
@@ -91,10 +100,20 @@
         .form-control:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 2px rgba(249,115,22,0.15); }
 
         .builder-container { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: start; max-width: 900px; margin: 0 auto; }
-        @media(min-width: 768px) { .builder-container { grid-template-columns: 1fr 300px; } }
+        @media(min-width: 768px) { .builder-container { grid-template-columns: 1fr 380px; } }
         .builder-summary { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; border-top: 4px solid var(--accent-orange); }
         .total-price { font-size: 1.75rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; }
         .ai-recommendation { background: rgba(249, 115, 22, 0.05); border: 1px solid rgba(249, 115, 22, 0.2); border-radius: 6px; padding: 1rem; margin: 1rem 0; border-left: 3px solid var(--accent-orange); }
+
+        /* Modal Detail */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 1rem; }
+        .modal-content { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1.5rem; max-width: 500px; width: 100%; position: relative; }
+        .modal-close { position: absolute; top: 10px; right: 15px; background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
+
+        /* Modal Galeri */
+        .gallery-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 1rem; }
+        .gallery-modal-content { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 1rem; max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .gallery-modal-content img { max-width: 100%; max-height: 75vh; object-fit: contain; border-radius: 6px; }
 
         footer { border-top: 1px solid var(--border-color); background-color: var(--bg-main); padding: 2rem 1rem; margin-top: 3rem; text-align: center; }
 
@@ -103,11 +122,59 @@
             .nav-links.active { display: flex; }
             .menu-toggle { display: block; }
         }
+
+        /* KHAS UNTUK TABLET & LAPTOP/DESKTOP (Saiz asal dikembalikan kemas) */
+        @media (min-width: 768px) {
+            .nav-container { max-width: 1350px; padding: 1.2rem 2rem; }
+            .logo { font-size: 1.3rem; }
+            .logo-icon { width: 36px; height: 36px; font-size: 1rem; }
+            .nav-links li a { font-size: 0.95rem; }
+            .btn-orange { padding: 0.7rem 1.4rem; font-size: 0.95rem; }
+
+            .container { max-width: 1350px; padding: 4rem 2rem; }
+            .section-header h2 { font-size: 2.2rem; }
+            .section-header p { font-size: 1rem; max-width: 700px; }
+
+            .top-banner-wrapper { max-width: 1350px; padding: 0 2rem; }
+            .top-banner-image { height: 360px; }
+
+            .hero-section { max-width: 1350px; padding: 3rem 2rem; }
+            .hero-content h1 { font-size: 2.8rem !important; }
+            .hero-content p { font-size: 1.05rem !important; max-width: 800px; }
+
+            .fix-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+            .fix-card { padding: 2rem 1.5rem; }
+            .fix-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+            .fix-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+            .fix-card p { font-size: 0.9rem; }
+
+            .grid-layout { grid-template-columns: repeat(2, 1fr); max-width: 950px; gap: 1.5rem; }
+            .card { padding: 1.5rem 1rem; }
+            .card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+            .card p { font-size: 0.78rem; }
+            .item-img-container { height: 160px; margin-bottom: 1rem; }
+            .badge-reserved { font-size: 0.65rem; padding: 2px 8px; margin-bottom: 0.5rem; }
+            .item-tag { font-size: 0.65rem !important; padding: 2px 6px !important; margin-bottom: 0.75rem !important; }
+
+            .why-us-grid { display: grid; grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+            .why-card { max-width: 100%; padding: 2rem 1.5rem; }
+
+            .form-panel { max-width: 900px; padding: 2.5rem; }
+            .form-group label { font-size: 0.85rem; }
+            .form-control { padding: 0.8rem 1rem; font-size: 0.95rem; }
+
+            .builder-container { max-width: 1150px; grid-template-columns: 1fr 380px; gap: 2rem; }
+            .builder-summary { padding: 2rem; }
+            .total-price { font-size: 2.2rem; }
+
+            .store-info-box { max-width: 750px; padding: 2.5rem; }
+            .store-info-box h2 { font-size: 1.35rem; }
+            .store-info-box p { font-size: 0.95rem; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- GAMBAR PALING ATAS DENGAN BORDER & SUDUT MELENGKUNG (SMOOTH) -->
     <div class="top-banner-wrapper">
         <div class="top-banner-image">
             <img src="https://www.facebook.com/photo/?fbid=492774322850516&set=a.470299815097967" alt="ZTECHFIX Top Banner" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=1200&q=80';">
@@ -128,6 +195,7 @@
                 <li><a onclick="navigate('builder')" id="nav-builder">Bina PC Custom</a></li>
                 <li><a onclick="navigate('clearance')" id="nav-clearance">Jualan Lelong</a></li>
                 <li><a onclick="navigate('finder')" id="nav-finder">Carian Upgrade & Gadjet</a></li>
+                <li><a onclick="navigate('gallery')" id="nav-gallery">Galeri Hasil Kerja</a></li>
             </ul>
         </div>
     </header>
@@ -166,7 +234,6 @@
                 </div>
             </div>
 
-            <!-- Kalkulator Kos Pembaikan -->
             <div id="repair-section" class="container" style="padding-top: 0;">
                 <div class="section-header"><h2>Anggaran Kos Pembaikan</h2><p>Pilih kategori peranti anda untuk melihat anggaran harga[cite: 9].</p></div>
                 <div class="form-panel">
@@ -204,7 +271,6 @@
                 </div>
             </div>
 
-            <!-- TEMPAHAN PANTAS (MINIMAKAN - HANYA DI HALAMAN UTAMA) -->
             <div class="container" style="padding-top: 0; text-align: center;">
                 <button onclick="toggleOrderForm()" class="btn-orange" style="font-size: 0.85rem; padding: 0.75rem 1.5rem;">📝 Buat Tempahan / Order Peranti (Klik Sini)</button>
                 
@@ -234,38 +300,41 @@
         <!-- HALAMAN 2: BINA PC CUSTOM -->
         <section id="builder" class="page-section">
             <div class="container">
-                <div class="section-header"><h2>Konfigurator Sistem PC</h2></div>
+                <div class="section-header"><h2>Konfigurator Sistem PC</h2><p>Sila buat pilihan komponen anda sendiri di bawah.</p></div>
                 <div class="builder-container">
                     <div class="form-panel" style="max-width: 100%; margin: 0;">
                         <div class="form-group">
-                            <label>CPU</label>
+                            <label>CPU (Processor)</label>
                             <select id="pc-cpu" class="form-control" onchange="trackPCComponent('CPU', this.options[this.selectedIndex].text); calculateCustomPC()">
-                                <option value="0">-- Pilih CPU --</option>
-                                <option value="350">Intel Core i3 / Ryzen 3</option>
-                                <option value="750">Intel Core i5 / Ryzen 5</option>
-                                <option value="1400">Intel Core i7 / Ryzen 7</option>
+                                <option value="0">-- Sila Pilih CPU --</option>
+                                <option value="350">Intel Core i3 / Ryzen 3 (RM 350)</option>
+                                <option value="750">Intel Core i5 / Ryzen 5 (RM 750)</option>
+                                <option value="1400">Intel Core i7 / Ryzen 7 (RM 1400)</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>GPU</label>
+                            <label>GPU (Graphic Card)</label>
                             <select id="pc-gpu" class="form-control" onchange="trackPCComponent('GPU', this.options[this.selectedIndex].text); calculateCustomPC()">
-                                <option value="0">Grafik Bersepadu</option>
-                                <option value="950">RTX 3050 / RX 6600</option>
-                                <option value="1550">RTX 4060 / RX 7600</option>
+                                <option value="0">-- Sila Pilih GPU --</option>
+                                <option value="0">Grafik Bersepadu (Tanpa GPU Dedicated) (RM 0)</option>
+                                <option value="950">RTX 3050 / RX 6600 (RM 950)</option>
+                                <option value="1550">RTX 4060 / RX 7600 (RM 1550)</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>RAM</label>
+                            <label>RAM (Memory)</label>
                             <select id="pc-ram" class="form-control" onchange="trackPCComponent('RAM', this.options[this.selectedIndex].text); calculateCustomPC()">
-                                <option value="90">8GB RAM</option>
-                                <option value="180">16GB RAM</option>
+                                <option value="0">-- Sila Pilih RAM --</option>
+                                <option value="90">8GB RAM (RM 90)</option>
+                                <option value="180">16GB RAM (RM 180)</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Storan SSD</label>
                             <select id="pc-storage" class="form-control" onchange="trackPCComponent('Storage', this.options[this.selectedIndex].text); calculateCustomPC()">
-                                <option value="150">512GB NVMe SSD</option>
-                                <option value="300">1TB NVMe SSD</option>
+                                <option value="0">-- Sila Pilih Storan --</option>
+                                <option value="150">512GB NVMe SSD (RM 150)</option>
+                                <option value="300">1TB NVMe SSD (RM 300)</option>
                             </select>
                         </div>
                     </div>
@@ -285,20 +354,33 @@
         <!-- HALAMAN 3: JUALAN LELONG -->
         <section id="clearance" class="page-section">
             <div class="container">
-                <div class="section-header"><h2>Jualan Peranti Refurbished</h2><p>Semak senarai peranti terpakai berkualiti tinggi.</p></div>
-                <div class="grid-layout" style="max-width: 700px; margin: 0 auto;">
-                    <div class="card" onclick="trackItemView('Lelong: Samsung Galaxy A13')">
-                        <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 0.75rem;">Lelong Bajet</span>
-                        <h3>Samsung Galaxy A13 (128GB)</h3>
-                        <p>Kapasiti storan besar, bateri tahan lama. Harga asal RM699.</p>
-                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 8px;">RM 350</p>
+                <div class="section-header"><h2>Jualan Peranti Refurbished</h2><p>Klik pada item untuk lihat butiran terperinci dan tempah.</p></div>
+                <div class="grid-layout" style="margin: 0 auto;">
+                    
+                    <div class="card" onclick="openItemModal('Samsung Galaxy A13 (128GB)', 'RM 350', 'Kapasiti storan besar 128GB, bateri tahan lama 5000mAh. Sesuai untuk kegunaan harian. Harga asal RM699.', 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80')">
+                        <div>
+                            <div class="item-img-container">
+                                <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80" alt="Samsung A13">
+                            </div>
+                            <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 4px;">Lelong Bajet</span>
+                            <h3>Samsung Galaxy A13 (128GB)</h3>
+                            <p>Kapasiti storan besar, bateri tahan lama. Harga asal RM699.</p>
+                        </div>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 6px; font-size: 0.7rem;">RM 350 (Details)</p>
                     </div>
-                    <div class="card" onclick="trackItemView('Lelong: iPhone SE Refurbished')">
-                        <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 0.75rem;">Apple Refurbished</span>
-                        <h3>iPhone SE (Gen 2)</h3>
-                        <p>Kondisi tip-top 90%, siap waranti kedai.</p>
-                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 8px;">RM 599</p>
+
+                    <div class="card reserved">
+                        <div>
+                            <div class="item-img-container">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="iPhone SE">
+                            </div>
+                            <span class="badge-reserved">🔴 SUDAH DICOP</span>
+                            <h3>iPhone SE (Gen 2)</h3>
+                            <p>Kondisi tip-top 90%, siap waranti kedai.</p>
+                        </div>
+                        <p style="color: var(--text-muted); font-weight: 700; margin-top: 6px; font-size: 0.7rem;">RM 599 (Diambil)</p>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -306,26 +388,91 @@
         <!-- HALAMAN 4: CARIAN UPGRADE & GADJET -->
         <section id="finder" class="page-section">
             <div class="container">
-                <div class="section-header"><h2>Enjin Carian Upgrade & Gadjet</h2><p>Tingkatkan prestasi perkakasan anda.</p></div>
-                <div class="grid-layout" style="max-width: 700px; margin: 0 auto;">
-                    <div class="card" onclick="trackItemView('Upgrade: SSD NVMe M.2 1TB')">
-                        <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 0.75rem;">Upgrade PC</span>
-                        <h3>SSD NVMe M.2 1TB</h3>
-                        <p>Tingkatkan kepantasan boot komputer sehingga 5x ganda.</p>
-                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 8px;">RM 299</p>
+                <div class="section-header"><h2>Enjin Carian Upgrade & Gadjet</h2><p>Tingkatkan prestasi perkakasan anda. Klik item untuk maklumat lanjut.</p></div>
+                <div class="grid-layout" style="margin: 0 auto;">
+                    <div class="card" onclick="openItemModal('SSD NVMe M.2 1TB', 'RM 299', 'Tingkatkan kepantasan boot komputer sehingga 5x ganda. Waranti rasmi 3 tahun.', 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80')">
+                        <div>
+                            <div class="item-img-container">
+                                <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80" alt="SSD 1TB">
+                            </div>
+                            <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 4px;">Upgrade PC</span>
+                            <h3>SSD NVMe M.2 1TB</h3>
+                            <p>Tingkatkan kepantasan boot komputer sehingga 5x ganda.</p>
+                        </div>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 6px; font-size: 0.7rem;">RM 299 (Details)</p>
                     </div>
-                    <div class="card" onclick="trackItemView('Upgrade: RAM 16GB DDR4')">
-                        <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); font-size: 0.65rem; font-weight: 600; padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 0.75rem;">Upgrade RAM</span>
-                        <h3>RAM 16GB DDR4 Kit</h3>
-                        <p>Sesuai untuk multitasking dan gaming lancar.</p>
-                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 8px;">RM 180</p>
+
+                    <div class="card" onclick="openItemModal('RAM 16GB DDR4 Kit', 'RM 180', 'Kelajuan 3200MHz, sesuai untuk multitasking berat, rendering video dan gaming lancar.', 'https://images.unsplash.com/photo-1562976540-1e02c5144c9b?auto=format&fit=crop&w=600&q=80')">
+                        <div>
+                            <div class="item-img-container">
+                                <img src="https://images.unsplash.com/photo-1562976540-1e02c5144c9b?auto=format&fit=crop&w=600&q=80" alt="RAM DDR4">
+                            </div>
+                            <span class="item-tag" style="display: inline-block; background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 4px;">Upgrade RAM</span>
+                            <h3>RAM 16GB DDR4 Kit</h3>
+                            <p>Sesuai untuk multitasking dan gaming lancar.</p>
+                        </div>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 6px; font-size: 0.7rem;">RM 180 (Details)</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN 5: GALERI BUKTI KERJA SIAP -->
+        <section id="gallery" class="page-section">
+            <div class="container">
+                <div class="section-header"><h2>Galeri Bukti Hasil Kerja Siap</h2><p>Klik pada mana-mana gambar untuk melihat paparan imej penuh.</p></div>
+                <div class="grid-layout" style="margin: 0 auto;">
+                    
+                    <div class="card" onclick="openGalleryModal('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80', 'Baik Pulih Motherboard MacBook Pro')">
+                        <div>
+                            <div class="item-img-container">
+                                <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Repair 1">
+                            </div>
+                            <h3>Baik Pulih Motherboard MacBook Pro</h3>
+                            <p>Selesai masalah short circuit power IC. Berjaya hidup normal semula.</p>
+                        </div>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 6px; font-size: 0.7rem;">🔍 Gambar Penuh</p>
+                    </div>
+
+                    <div class="card" onclick="openGalleryModal('https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=1200&q=80', 'Custom Rig Gaming RTX 4060')">
+                        <div>
+                            <div class="item-img-container">
+                                <img src="https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=600&q=80" alt="Repair 2">
+                            </div>
+                            <h3>Custom Rig Gaming RTX 4060</h3>
+                            <p>Binaan kemas lengkap cable management untuk pelanggan dari Kuala Kangsar.</p>
+                        </div>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 6px; font-size: 0.7rem;">🔍 Gambar Penuh</p>
+                    </div>
+
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- BAHAGIAN PALING AKHIR SEKALI -->
+    <!-- MODAL DETAIL ITEM LELONG / UPGRADE -->
+    <div id="itemModal" class="modal-overlay" onclick="closeItemModal(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModalDirect()">×</button>
+            <div id="modalImgContainer" style="width: 100%; height: 220px; border-radius: 8px; overflow: hidden; margin-bottom: 1rem;">
+                <img id="modalImg" src="" alt="Item Image" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <h3 id="modalTitle" style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #fff;"></h3>
+            <p id="modalPrice" style="font-size: 1.25rem; font-weight: 700; color: var(--accent-orange); margin-bottom: 0.75rem;"></p>
+            <p id="modalDesc" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem;"></p>
+            <a id="modalWaBtn" href="#" target="_blank" class="btn-orange" style="width: 100%; text-align: center;">Hubungi Admin via WhatsApp</a>
+        </div>
+    </div>
+
+    <!-- MODAL KHAS GALERI: GAMBAR PENUH -->
+    <div id="galleryModal" class="gallery-modal-overlay" onclick="closeGalleryModal(event)">
+        <div class="gallery-modal-content">
+            <button class="modal-close" onclick="closeGalleryModalDirect()">×</button>
+            <img id="galleryModalImg" src="" alt="Full Gallery Image">
+            <p id="galleryModalCaption" style="text-align: center; margin-top: 0.75rem; color: #fff; font-size: 0.9rem; font-weight: 600;"></p>
+        </div>
+    </div>
+
     <footer>
         <div class="store-info-box" style="margin-bottom: 1.5rem;">
             <h2>ZTECHFIX SOLUTIONS</h2>
@@ -391,6 +538,7 @@
         }
 
         function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }
+        
         function navigate(pageId) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
@@ -398,7 +546,46 @@
             const activeNav = document.getElementById('nav-' + pageId);
             if(activeNav) activeNav.classList.add('active');
             document.getElementById('nav-menu').classList.remove('active');
-            window.scrollTo(0, 0);
+            
+            window.scrollTo({ top: 0, behavior: 'auto' });
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }
+
+        function openItemModal(title, price, desc, imgSrc) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('modalDesc').textContent = desc;
+            document.getElementById('modalImg').src = imgSrc;
+            const waText = encodeURIComponent(`Hai ZTechFix, saya berminat / ingin tahu mengenai: ${title} (${price})`);
+            document.getElementById('modalWaBtn').href = `https://wa.me/60189563923?text=${waText}`;
+            document.getElementById('itemModal').style.display = 'flex';
+        }
+
+        function closeItemModal(event) {
+            if(event.target.id === 'itemModal') {
+                document.getElementById('itemModal').style.display = 'none';
+            }
+        }
+
+        function closeModalDirect() {
+            document.getElementById('itemModal').style.display = 'none';
+        }
+
+        function openGalleryModal(imgSrc, caption) {
+            document.getElementById('galleryModalImg').src = imgSrc;
+            document.getElementById('galleryModalCaption').textContent = caption;
+            document.getElementById('galleryModal').style.display = 'flex';
+        }
+
+        function closeGalleryModal(event) {
+            if(event.target.id === 'galleryModal') {
+                document.getElementById('galleryModal').style.display = 'none';
+            }
+        }
+
+        function closeGalleryModalDirect() {
+            document.getElementById('galleryModal').style.display = 'none';
         }
 
         function toggleOrderForm() {
@@ -427,10 +614,6 @@
 
         function trackPCComponent(componentType, componentName) {
             trackClick(`PC Builder [${componentType}]: ${componentName}`);
-        }
-
-        function trackItemView(itemName) {
-            trackClick(`View/Click Item: ${itemName}`);
         }
 
         const repairData = defaultCustomerData.repairData;
@@ -463,12 +646,19 @@
             const gpu = parseInt(document.getElementById('pc-gpu').value) || 0;
             const ram = parseInt(document.getElementById('pc-ram').value) || 0;
             const storage = parseInt(document.getElementById('pc-storage').value) || 0;
-            if(cpu === 0) return;
+            
+            if(cpu === 0 && gpu === 0 && ram === 0 && storage === 0) {
+                document.getElementById('pc-total-price').textContent = `RM 0.00`;
+                document.getElementById('pc-recommendation').style.display = "none";
+                document.getElementById('wa-builder-link').style.display = "none";
+                return;
+            }
+
             const total = 700 + cpu + gpu + ram + storage;
             document.getElementById('pc-total-price').textContent = `RM ${total.toLocaleString()}`;
             document.getElementById('pc-recommendation').style.display = "block";
-            document.getElementById('pc-rec-text').textContent = "Konfigurasi sistem PC telah dianalisa dengan jayanya.";
-            document.getElementById('wa-builder-link').href = `https://wa.me/60189563923?text=${encodeURIComponent('Bina PC Total: RM ' + total)}`;
+            document.getElementById('pc-rec-text').textContent = "Konfigurasi sistem PC telah dipilih dan dianalisa dengan jayanya.";
+            document.getElementById('wa-builder-link').href = `https://wa.me/60189563923?text=${encodeURIComponent('Bina PC Custom Total: RM ' + total)}`;
             document.getElementById('wa-builder-link').style.display = "block";
         }
 
