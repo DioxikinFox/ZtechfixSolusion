@@ -18,109 +18,114 @@
       --green: #22c55e;
       --red: #ef4444;
       --shadow: 0 18px 40px rgba(0,0,0,0.28);
-      --radius: 16px;
+      --radius: 14px;
     }
 
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0b0b0d 0%, #12151a 100%); color: var(--text); scroll-behavior: smooth; }
+    body { margin: 0; font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0b0b0d 0%, #12151a 100%); color: var(--text); scroll-behavior: smooth; font-size: 0.9rem; }
     a { color: inherit; text-decoration: none; }
 
     .login-shell { min-height: 100vh; display: grid; place-items: center; padding: 2rem; }
-    .login-box { width: min(420px, 100%); background: rgba(20,20,24,0.92); border: 1px solid var(--line); border-radius: 20px; padding: 2rem; box-shadow: var(--shadow); }
-    .login-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; font-weight: 800; font-size: 1.2rem; }
-    .brand-mark { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg, var(--orange), #fb923c); color: #111; font-weight: 900; }
+    .login-box { width: min(400px, 100%); background: rgba(20,20,24,0.92); border: 1px solid var(--line); border-radius: 18px; padding: 1.75rem; box-shadow: var(--shadow); }
+    .login-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; font-weight: 800; font-size: 1.1rem; }
+    .brand-mark { width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; background: linear-gradient(135deg, var(--orange), #fb923c); color: #111; font-weight: 900; }
 
-    .field { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1rem; }
-    .field label { color: var(--muted); font-size: 0.8rem; font-weight: 600; }
-    .field input, .field textarea, .field select { width: 100%; border: 1px solid var(--line); background: #0e0f12; border-radius: 10px; padding: 0.8rem 0.9rem; color: var(--text); font-size: 0.95rem; }
+    .field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.85rem; }
+    .field label { color: var(--muted); font-size: 0.75rem; font-weight: 600; }
+    .field input, .field textarea, .field select { width: 100%; border: 1px solid var(--line); background: #0e0f12; border-radius: 8px; padding: 0.65rem 0.8rem; color: var(--text); font-size: 0.88rem; }
 
-    .btn { border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--text); padding: 0.8rem 1rem; font-weight: 600; cursor: pointer; transition: 0.2s ease; width: 100%; text-align: center; }
+    .btn { border: 1px solid var(--line); border-radius: 8px; background: transparent; color: var(--text); padding: 0.65rem 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s ease; width: 100%; text-align: center; font-size: 0.85rem; }
     .btn.primary { background: linear-gradient(135deg, var(--orange), var(--orange-2)); border-color: transparent; color: white; }
     .btn.success { background: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.35); color: #c7f9d5; }
     .btn.danger { background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.35); color: #fecaca; }
-    .error-text { color: #fed7d7; font-size: 0.82rem; min-height: 1.1em; margin-top: 0.45rem; }
+    .error-text { color: #fed7d7; font-size: 0.8rem; min-height: 1em; margin-top: 0.4rem; }
     .hidden { display: none !important; }
 
-    /* Modern Toggle Switch Style */
-    .switch { position: relative; display: inline-block; width: 50px; height: 26px; vertical-align: middle; margin-right: 8px; }
+    .switch { position: relative; display: inline-block; width: 42px; height: 22px; vertical-align: middle; margin-right: 6px; }
     .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2b2d35; transition: .3s; border-radius: 34px; border: 1px solid var(--line); }
-    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2b2d35; transition: .3s; border-radius: 30px; border: 1px solid var(--line); }
+    .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
     input:checked + .slider { background-color: var(--orange); }
-    input:checked + .slider:before { transform: translateX(24px); }
+    input:checked + .slider:before { transform: translateX(20px); }
 
-    /* Topbar & Navigation */
-    .topbar { position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; background: rgba(11,11,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 0.75rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
-
+    .topbar { position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; background: rgba(11,11,13,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); padding: 0.5rem 1rem; gap: 0.75rem; }
+    .admin-profile-area { display: flex; align-items: center; gap: 8px; }
     .brand-container { position: relative; display: inline-block; user-select: none; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 0.95rem; cursor: pointer; padding: 4px 8px; border-radius: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--line); transition: 0.2s; }
-    .brand:hover { border-color: var(--orange); }
-    .brand-dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 0.5rem; width: 180px; box-shadow: var(--shadow); z-index: 2000; display: none; }
+    .brand { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.85rem; cursor: pointer; padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid var(--line); }
+    .brand-dropdown { position: absolute; top: calc(100% + 6px); left: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 4px; width: 160px; box-shadow: var(--shadow); z-index: 2000; display: none; }
     .brand-dropdown.show { display: block; }
-    .brand-dropdown a { display: block; padding: 0.6rem 0.8rem; border-radius: 8px; color: var(--text); font-size: 0.82rem; font-weight: 600; transition: 0.2s; }
+    .brand-dropdown a { display: block; padding: 0.5rem 0.7rem; border-radius: 6px; color: var(--text); font-size: 0.78rem; font-weight: 600; }
     .brand-dropdown a:hover { background: rgba(249,115,22,0.12); color: var(--orange); }
 
-    .top-nav { display: flex; gap: 0.5rem; align-items: center; overflow-x: auto; max-width: 100%; padding-bottom: 2px; scrollbar-width: thin; }
-    .top-nav::-webkit-scrollbar { height: 4px; }
-    .top-nav::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
-    .top-nav a { padding: 0.5rem 0.85rem; border-radius: 8px; color: var(--muted); font-size: 0.8rem; font-weight: 600; white-space: nowrap; transition: 0.2s; border: 1px solid transparent; }
+    .top-nav { display: flex; gap: 4px; align-items: center; overflow-x: auto; scrollbar-width: none; }
+    .top-nav::-webkit-scrollbar { display: none; }
+    .top-nav a { padding: 0.35rem 0.6rem; border-radius: 6px; color: var(--muted); font-size: 0.75rem; font-weight: 600; white-space: nowrap; border: 1px solid transparent; transition: 0.2s; }
     .top-nav a:hover, .top-nav a.active { color: var(--text); background: rgba(249, 115, 22, 0.12); border-color: rgba(249, 115, 22, 0.3); }
 
-    .layout { max-width: 1300px; margin: 2rem auto; padding: 0 1rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
-    .main { display: flex; flex-direction: column; gap: 1.5rem; width: 100%; min-width: 0; }
+    .layout { max-width: 1250px; margin: 1.5rem auto; padding: 0 0.75rem 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    .main { display: flex; flex-direction: column; gap: 1.25rem; width: 100%; min-width: 0; }
 
-    .panel { background: rgba(20,20,24,0.82); border: 1px solid var(--line); border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow); scroll-margin-top: 90px; }
-    .panel h2 { margin: 0 0 1.25rem; font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--line); padding-bottom: 0.75rem; }
+    .panel { background: rgba(20,20,24,0.85); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem; box-shadow: var(--shadow); scroll-margin-top: 80px; }
+    .panel h2 { margin: 0 0 1rem; font-size: 1.1rem; display: flex; align-items: center; gap: 0.4rem; border-bottom: 1px solid var(--line); padding-bottom: 0.6rem; }
 
-    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(220px, 1fr)); gap: 1rem; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(200px, 1fr)); gap: 0.85rem; }
     .field.full { grid-column: 1 / -1; }
 
-    .dashboard-grid { display: grid; grid-template-columns: repeat(4, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }
-    .dashboard-card { background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(20,20,24,0.92)); border: 1px solid rgba(249,115,22,0.25); border-radius: 16px; padding: 1rem; }
-    .dashboard-card span { display: block; color: var(--muted); font-size: 0.72rem; text-transform: uppercase; margin-bottom: 0.5rem; }
-    .dashboard-card strong { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(4, minmax(140px, 1fr)); gap: 0.85rem; margin-bottom: 1rem; }
+    .dashboard-card { background: linear-gradient(135deg, rgba(249,115,22,0.1), rgba(20,20,24,0.9)); border: 1px solid rgba(249,115,22,0.2); border-radius: 12px; padding: 0.85rem; }
+    .dashboard-card span { display: block; color: var(--muted); font-size: 0.68rem; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .dashboard-card strong { font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 800; }
 
     table { width: 100%; border-collapse: collapse; }
-    th, td { text-align: left; padding: 0.8rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 0.85rem; word-break: break-word; }
-    th { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; }
+    th, td { text-align: left; padding: 0.65rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 0.8rem; word-break: break-word; }
+    th { color: var(--muted); font-size: 0.68rem; text-transform: uppercase; }
 
-    .status-pill { display: inline-block; border-radius: 999px; padding: 0.35rem 0.65rem; font-size: 0.72rem; font-weight: 700; border: 1px solid transparent; }
+    .status-pill { display: inline-block; border-radius: 999px; padding: 0.25rem 0.55rem; font-size: 0.68rem; font-weight: 700; border: 1px solid transparent; }
     .status-pending { background: rgba(249,115,22,0.08); border-color: rgba(249,115,22,0.3); color: #fed7aa; }
     .status-done { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.3); color: #bbf7d0; }
 
-    .table-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-    .small-btn { padding: 0.45rem 0.7rem; font-size: 0.72rem; border-radius: 8px; border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; }
-    .small-btn.success { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.35); color: #c7f9d5; }
-    .small-btn.danger { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.35); color: #fecaca; }
+    .small-btn { padding: 0.35rem 0.6rem; font-size: 0.68rem; border-radius: 6px; border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; }
+    .small-btn.success { background: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.35); color: #c7f9d5; }
+    .small-btn.danger { background: rgba(239, 68, 68, 0.12); border-color: rgba(239, 68, 68, 0.35); color: #fecaca; }
 
-    .empty-state { color: var(--muted); padding: 1rem 0; text-align: center; }
-    .toolbar-row { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin: 0 0 1rem; flex-wrap: wrap; }
-    .search-group { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; width: 100%; }
+    .empty-state { color: var(--muted); padding: 0.85rem 0; text-align: center; }
+    .toolbar-row { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; margin: 0 0 0.85rem; flex-wrap: wrap; }
+    .search-group { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; width: 100%; }
     @media(min-width: 600px) { .search-group { width: auto; } }
-    .search-box, .filter-select { background: rgba(12, 13, 17, 0.9); border: 1px solid var(--line); border-radius: 10px; color: var(--text); padding: 0.75rem 0.9rem; min-width: 150px; flex: 1; }
-    .search-box { min-width: 200px; }
+    .search-box, .filter-select { background: rgba(12, 13, 17, 0.9); border: 1px solid var(--line); border-radius: 8px; color: var(--text); padding: 0.6rem 0.8rem; font-size: 0.85rem; min-width: 130px; flex: 1; }
 
-    .manager-stack { display: grid; gap: 1rem; }
-    .manager-card { background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 14px; padding: 1rem; }
-    .manager-card h3 { margin: 0 0 0.9rem; font-size: 1rem; }
-    .manager-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
-    .manager-body { overflow-x: auto; width: 100%; -webkit-overflow-scrolling: touch; }
-    .mini-table { width: 100%; min-width: 650px; border-collapse: collapse; }
-    .mini-table th, .mini-table td { padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 0.8rem; }
+    .manager-stack { display: grid; gap: 0.85rem; }
+    .manager-card { background: rgba(255,255,255,0.015); border: 1px solid var(--line); border-radius: 12px; padding: 0.85rem; }
+    .manager-card h3 { margin: 0 0 0.75rem; font-size: 0.92rem; }
+    .manager-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+    .manager-body { overflow-x: auto; width: 100%; }
+    .mini-table { width: 100%; min-width: 600px; border-collapse: collapse; }
+    .mini-table th, .mini-table td { padding: 0.5rem; font-size: 0.78rem; }
 
-    .inline-form { display: grid; grid-template-columns: repeat(2, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+    .inline-form { display: grid; grid-template-columns: repeat(2, minmax(160px, 1fr)); gap: 0.65rem; margin-top: 0.85rem; padding-top: 0.85rem; border-top: 1px solid var(--line); }
     .inline-form .field { margin-bottom: 0; }
     .inline-form .full { grid-column: 1 / -1; }
-    .inline-actions { display: flex; gap: 0.75rem; align-items: end; flex-wrap: wrap; grid-column: 1 / -1; margin-top: 0.25rem; }
+    .inline-actions { display: flex; gap: 0.6rem; align-items: end; flex-wrap: wrap; grid-column: 1 / -1; }
 
+    .graph-bar { margin-bottom: 0.75rem; display: flex; flex-direction: column; gap: 3px; }
+    .graph-label { font-size: 0.75rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .graph-track { background: #1f2026; border-radius: 5px; height: 20px; width: 100%; overflow: hidden; border: 1px solid var(--line); }
+    .graph-fill { background: linear-gradient(90deg, var(--orange), var(--orange-2)); height: 100%; display: flex; align-items: center; padding-left: 6px; color: #fff; font-size: 0.68rem; font-weight: 700; border-radius: 3px; }
+
+    /* VERSI PHONE: MENU 3 BARIS & DATA KECIL */
     @media (max-width: 768px) {
-      .topbar { padding: 0.75rem 1rem; }
+      body { font-size: 0.82rem; }
+      .topbar { padding: 0.4rem 0.5rem; flex-direction: row; align-items: center; justify-content: space-between; }
+      .admin-profile-area { width: auto; }
+      .top-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 3px; max-width: 65%; }
+      .top-nav a { flex: 0 0 calc(33.33% - 3px); text-align: center; font-size: 0.68rem; padding: 0.4rem 2px; }
+      
       .form-grid, .inline-form { grid-template-columns: 1fr !important; }
       .dashboard-grid { grid-template-columns: repeat(2, 1fr) !important; }
-      .panel { padding: 1rem 0.75rem; }
-      .login-box { padding: 1.5rem; width: 100%; }
-      .login-shell { padding: 1rem; }
-      .search-box, .filter-select { min-width: 100%; }
+      .panel { padding: 0.85rem 0.6rem; }
+      .login-box { padding: 1.25rem; width: 100%; }
+      .login-shell { padding: 0.75rem; }
+      th, td, .mini-table th, .mini-table td { font-size: 0.73rem; padding: 0.4rem 0.3rem; }
     }
   </style>
 </head>
@@ -137,23 +142,25 @@
 
   <div id="adminApp" class="hidden">
     <header class="topbar">
-      <div class="brand-container">
-        <div class="brand" onclick="toggleBrandDropdown(event)">
-          <div class="brand-mark" style="width:28px; height:28px; font-size:0.75rem;">ZS</div>
-          <span>ZTECHFIX ADMIN ▾</span>
-        </div>
-        <div id="brandDropdown" class="brand-dropdown">
-          <a href="index.html" target="_blank">Preview Customer</a>
-          <a href="#" onclick="logoutAdmin(); return false;" style="color: var(--red);">Log Out</a>
+      <div class="admin-profile-area">
+        <div class="brand-container">
+          <div class="brand" onclick="toggleBrandDropdown(event)">
+            <div class="brand-mark" style="width:24px; height:24px; font-size:0.65rem;">ZS</div>
+            <span>Admin ▾</span>
+          </div>
+          <div id="brandDropdown" class="brand-dropdown">
+            <a href="index.html" target="_blank">Preview Customer</a>
+            <a href="#" onclick="logoutAdmin(); return false;" style="color: var(--red);">Log Out</a>
+          </div>
         </div>
       </div>
 
       <nav class="top-nav" id="topNavMenu">
         <a href="#dashboard-overview" class="active" onclick="setActiveNav(this)">Dashboard</a>
-        <a href="#smart-settings" onclick="setActiveNav(this)">Tetapan Operasi</a>
-        <a href="#analytics-feedbacks" onclick="setActiveNav(this)">Analitik & Maklum Balas</a>
-        <a href="#settings" onclick="setActiveNav(this)">General Settings</a>
-        <a href="#content-managers" onclick="setActiveNav(this)">Kandungan Website</a>
+        <a href="#smart-settings" onclick="setActiveNav(this)">Operasi</a>
+        <a href="#analytics-feedbacks" onclick="setActiveNav(this)">Analitik</a>
+        <a href="#settings" onclick="setActiveNav(this)">Settings</a>
+        <a href="#content-managers" onclick="setActiveNav(this)">Kandungan</a>
         <a href="#orders" onclick="setActiveNav(this)">Orders</a>
       </nav>
     </header>
@@ -163,17 +170,18 @@
         <section class="panel" id="dashboard-overview">
           <div class="toolbar-row">
             <div><h2 style="margin:0; border:none; padding:0;">1. Dashboard Overview</h2></div>
-            <div class="search-group" style="justify-content: flex-end;">
-              <button id="importAllBtn" class="btn primary" type="button" style="width:auto; display:flex; gap:8px; align-items:center;">
-                <span id="importIcon">📥</span> <span id="importText">Import Semua Data (Firebase)</span>
+            <div class="search-group" style="justify-content: flex-end; gap:6px;">
+              <button onclick="resetDashboardData()" class="btn danger" type="button" style="width:auto; padding:0.4rem 0.7rem; font-size:0.75rem;">Reset Dashboard</button>
+              <button id="importAllBtn" class="btn primary" type="button" style="width:auto; display:flex; gap:6px; align-items:center; font-size:0.78rem;">
+                <span id="importIcon">📥</span> <span id="importText">Import Data (Firebase)</span>
               </button>
             </div>
           </div>
-          <div class="dashboard-grid" style="margin-top: 1rem;">
-            <div class="dashboard-card"><span>Order Total</span><strong id="dashTotalOrders">0</strong></div>
+          <div class="dashboard-grid" style="margin-top: 0.75rem;">
+            <div class="dashboard-card"><span>Total Orders</span><strong id="dashTotalOrders">0</strong></div>
             <div class="dashboard-card"><span>Pending</span><strong id="dashPendingOrders">0</strong></div>
-            <div class="dashboard-card"><span>Done</span><strong id="dashDoneOrders">0</strong></div>
-            <div class="dashboard-card"><span>Website Data</span><strong id="dashSiteStatus">Ready</strong></div>
+            <div class="dashboard-card"><span>Selesai</span><strong id="dashDoneOrders">0</strong></div>
+            <div class="dashboard-card"><span>Pelawat Website</span><strong id="dashVisitsCount">0</strong></div>
           </div>
         </section>
 
@@ -182,77 +190,101 @@
           <div class="form-grid">
             <div class="field full">
               <label>Pengumuman Website (Banner)</label>
-              <div style="margin-top:8px; display: flex; align-items: center;">
-                <label class="switch"><input type="checkbox" id="showAnnouncement"><span class="slider"></span></label> Aktifkan Banner Pengumuman
+              <div style="margin-top:6px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                <div style="display: flex; align-items: center;">
+                  <label class="switch"><input type="checkbox" id="showAnnouncement"><span class="slider"></span></label> Aktifkan Banner
+                </div>
+                <input id="announcementTargetTime" type="datetime-local" style="width: auto; padding: 0.3rem 0.4rem; font-size: 0.75rem;">
               </div>
-              <input id="announcementText" type="text" placeholder="Teks pengumuman promosi..." class="form-control" style="margin-top:8px;">
+              <input id="announcementText" type="text" placeholder="Teks pengumuman promosi..." class="form-control" style="margin-top:6px;">
             </div>
-            <div class="field">
-              <label>Kedai Cuti/Tutup Paksa?</label>
-              <div style="margin-top:8px; display: flex; align-items: center;">
-                <label class="switch"><input type="checkbox" id="forceClose"><span class="slider"></span></label> Ya, Tutup Kedai Sementara
+
+            <div class="field full">
+              <label>Kedai Cuti / Tutup Paksa?</label>
+              <div style="margin-top:6px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                <div style="display: flex; align-items: center;">
+                  <label class="switch"><input type="checkbox" id="forceClose"><span class="slider"></span></label> Ya, Tutup Kedai
+                </div>
+                <input id="forceCloseTargetTime" type="datetime-local" style="width: auto; padding: 0.3rem 0.4rem; font-size: 0.75rem;">
               </div>
-              <input id="forceCloseMsg" type="text" placeholder="Sebab cuti..." class="form-control" style="margin-top:8px;">
+              <input id="forceCloseMsg" type="text" placeholder="Sebab kedai cuti..." class="form-control" style="margin-top:6px;">
             </div>
-            <div class="field">
-              <label>Staff 1 (Nama & Status Cuti)</label>
-              <input id="staff1_name" type="text" placeholder="Nama Staff 1">
-              <div style="margin-top:8px; display: flex; align-items: center;">
-                <label class="switch"><input type="checkbox" id="staff1_leave"><span class="slider"></span></label> Sedang Cuti
+
+            <div class="field full" style="border-top:1px solid #333; padding-top:0.75rem;">
+              <button type="button" class="btn" onclick="toggleStaffSettings()" style="background:#1a1c22; border-color:var(--orange); color:var(--orange); font-weight:700;">
+                👥 Tetapan Cuti Staff (Tekan untuk Buka/Tutup Form)
+              </button>
+            </div>
+
+            <div id="staffSettingsContainer" class="field full hidden" style="background:#0e0f12; padding:0.85rem; border-radius:10px; border:1px dashed var(--line);">
+              <div style="margin-bottom:0.75rem;">
+                <label style="font-weight:700; color:var(--text);">Staff 1</label>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:4px;">
+                  <input id="staff1_name" type="text" placeholder="Nama Staff 1">
+                  <input id="staff1_duration" type="text" placeholder="Tempoh">
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px;">
+                  <div style="display:flex; align-items:center;"><label class="switch"><input type="checkbox" id="staff1_leave"><span class="slider"></span></label> Cuti</div>
+                  <input id="staff1TargetTime" type="datetime-local" style="width:auto; padding:0.25rem; font-size:0.72rem;">
+                </div>
               </div>
-              <input id="staff1_duration" type="text" placeholder="Cth: 2 Hari / 4 Jam" style="margin-top:8px;">
-            </div>
-            <div class="field">
-              <label>Staff 2 (Nama & Status Cuti)</label>
-              <input id="staff2_name" type="text" placeholder="Nama Staff 2">
-              <div style="margin-top:8px; display: flex; align-items: center;">
-                <label class="switch"><input type="checkbox" id="staff2_leave"><span class="slider"></span></label> Sedang Cuti
+
+              <div>
+                <label style="font-weight:700; color:var(--text);">Staff 2</label>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:4px;">
+                  <input id="staff2_name" type="text" placeholder="Nama Staff 2">
+                  <input id="staff2_duration" type="text" placeholder="Tempoh">
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px;">
+                  <div style="display:flex; align-items:center;"><label class="switch"><input type="checkbox" id="staff2_leave"><span class="slider"></span></label> Cuti</div>
+                  <input id="staff2TargetTime" type="datetime-local" style="width:auto; padding:0.25rem; font-size:0.72rem;">
+                </div>
               </div>
-              <input id="staff2_duration" type="text" placeholder="Cth: 1 Minggu" style="margin-top:8px;">
             </div>
-            <div class="field full" style="border-top:1px solid #333; padding-top:1rem;">
-              <label style="margin-bottom: 0.75rem; display: block; font-weight: 700; color: var(--text);">Matikan Fitur / Sembunyikan Bahagian di Website</label>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+
+            <div class="field full" style="border-top:1px solid #333; padding-top:0.75rem;">
+              <label style="margin-bottom: 0.5rem; display: block; font-weight: 700; color: var(--text);">Matikan Fitur / Sembunyikan Bahagian di Website</label>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px;">
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleBooking"><span class="slider"></span></label> Buat Tempahan</div>
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleFeedback"><span class="slider"></span></label> Maklum Balas Pelanggan</div>
                 <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleRepair"><span class="slider"></span></label> Kalkulator Pembaikan</div>
                 <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleBuilder"><span class="slider"></span></label> Bina PC Custom</div>
                 <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleFixItems"><span class="slider"></span></label> Apa Yang Kami Baiki</div>
                 <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleWhyItems"><span class="slider"></span></label> Kenapa Pilih Kami</div>
                 <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleClearance"><span class="slider"></span></label> Jualan Lelong</div>
-                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleFinder"><span class="slider"></span></label> Carian Upgrade & Gadjet</div>
+                <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleFinder"><span class="slider"></span></label> Carian Upgrade</div>
                 <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleGallery"><span class="slider"></span></label> Galeri Hasil Kerja</div>
               </div>
             </div>
-            <button onclick="saveSmartSettings()" class="btn primary full" style="margin-top:1rem;">Simpan Tetapan Operasi ke DB</button>
-            <div id="lastSavedTimeDisplay" style="grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.78rem;"></div>
+            <button onclick="saveSmartSettings()" class="btn primary full" style="margin-top:0.5rem;">Simpan Tetapan Operasi ke DB</button>
+            <div id="lastSavedTimeDisplay" style="grid-column: 1 / -1; text-align: center; color: var(--muted); font-size: 0.72rem;"></div>
           </div>
         </section>
 
         <section class="panel" id="analytics-feedbacks">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:1.25rem; border-bottom:1px solid var(--line); padding-bottom:0.75rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:1rem; border-bottom:1px solid var(--line); padding-bottom:0.6rem;">
             <h2 style="margin:0; border:none; padding:0;">3. Analitik Klik & Maklum Balas</h2>
-            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-              <label style="color:var(--muted); font-size:0.8rem; font-weight:600;">Kategori:</label>
-              <select id="analyticsCategoryFilter" class="filter-select" onchange="loadAnalytics()" style="padding:0.4rem 0.6rem; min-width:130px;">
+            <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+              <select id="analyticsCategoryFilter" class="filter-select" onchange="loadAnalytics()" style="padding:0.3rem 0.5rem; min-width:110px; font-size:0.75rem;">
                 <option value="all">Semua Aktiviti</option>
                 <option value="Upgrade">Cairan Upgrade</option>
-                <option value="Issue">Masalah Kerap Diklik</option>
+                <option value="Issue">Masalah Kerosakan</option>
                 <option value="Device">Jenis Peranti</option>
               </select>
-              <label style="color:var(--muted); font-size:0.8rem; font-weight:600;">Paparan:</label>
-              <select id="analyticsLimitSelect" class="filter-select" onchange="loadAnalytics()" style="padding:0.4rem 0.6rem; min-width:90px;">
+              <select id="analyticsLimitSelect" class="filter-select" onchange="loadAnalytics()" style="padding:0.3rem 0.5rem; min-width:75px; font-size:0.75rem;">
                 <option value="5">Top 5</option>
                 <option value="10" selected>Top 10</option>
               </select>
             </div>
           </div>
-          <div style="background:#1a1c22; padding:1rem; border-radius:10px;">
-            <h3 style="margin-top:0;">📊 Aktiviti Klik Pelanggan Paling Banyak</h3>
-            <div id="analyticsContainer" style="margin-top:1rem; display:flex; flex-direction:column; gap:10px;"></div>
-            <button onclick="resetAnalytics()" class="btn danger" style="margin-top:1rem; width:auto;">Restart Graf Analitik</button>
+          <div style="background:#1a1c22; padding:0.85rem; border-radius:10px;">
+            <h3 style="margin-top:0; font-size:0.88rem;">📊 Aktiviti Klik Pelanggan (Graf Bar)</h3>
+            <div id="analyticsContainer" style="margin-top:0.75rem;"></div>
+            <button onclick="resetAnalytics()" class="btn danger" style="margin-top:0.75rem; width:auto; font-size:0.75rem;">Restart Analitik</button>
           </div>
 
-          <div style="margin-top: 2rem;">
-            <h3>Senarai Maklum Balas / Ulasan Pelanggan</h3>
+          <div style="margin-top: 1.5rem;">
+            <h3 style="font-size:0.88rem;">Senarai Ulasan Pelanggan</h3>
             <div class="manager-body">
               <table class="mini-table">
                 <thead><tr><th>Nama</th><th>Komen</th><th>Tarikh</th><th>Padam</th></tr></thead>
@@ -263,20 +295,24 @@
         </section>
 
         <section class="panel" id="settings">
-          <h2>4. General Store Settings</h2>
+          <h2>4. General Store Settings & Sosial Media</h2>
           <div class="toolbar-row">
             <div class="search-group">
-              <button id="saveSettingsBtn" class="btn primary" type="button" style="width:auto;">Save Settings</button>
+              <button id="saveSettingsBtn" class="btn primary" type="button" style="width:auto; font-size:0.78rem;">Save Settings</button>
             </div>
           </div>
           <div class="form-grid">
-            <div class="field"><label for="companyName">Company Name</label><input id="companyName" type="text" /></div>
+            <div class="field"><label for="companyName">Company Name / Nama Kedai</label><input id="companyName" type="text" /></div>
             <div class="field"><label for="whatsappNumber">WhatsApp Number</label><input id="whatsappNumber" type="text" placeholder="60189563923" /></div>
-            <div class="field"><label for="phoneNumber">Phone Number</label><input id="phoneNumber" type="text" placeholder="05-776 8905" /></div>
-            <div class="field full"><label for="email">Email</label><input id="email" type="email" /></div>
-            <div class="field full"><label for="address">Address</label><textarea id="address" rows="2"></textarea></div>
-            <div class="field full"><label for="heroTitle">Hero Title</label><input id="heroTitle" type="text" /></div>
-            <div class="field full"><label for="heroText">Hero Text</label><textarea id="heroText" rows="2"></textarea></div>
+            <div class="field"><label for="phoneNumber">Phone Number / No Tel</label><input id="phoneNumber" type="text" placeholder="05-776 8905" /></div>
+            <div class="field"><label for="email">Email</label><input id="email" type="email" /></div>
+            <div class="field full"><label for="address">Address / Alamat Premis</label><textarea id="address" rows="2"></textarea></div>
+            <div class="field"><label for="operatingHours">Hari & Waktu Operasi</label><input id="operatingHours" type="text" placeholder="Isnin - Ahad" /></div>
+            <div class="field"><label for="facebookLink">Link Facebook</label><input id="facebookLink" type="text" placeholder="https://facebook.com/..." /></div>
+            <div class="field"><label for="instagramLink">Link Instagram</label><input id="instagramLink" type="text" placeholder="https://instagram.com/..." /></div>
+            <div class="field"><label for="tiktokLink">Link TikTok</label><input id="tiktokLink" type="text" placeholder="https://tiktok.com/@..." /></div>
+            <div class="field full"><label for="heroTitle">Hero Title / Tajuk Utama Website</label><input id="heroTitle" type="text" /></div>
+            <div class="field full"><label for="heroText">Hero Text / Keterangan Utama</label><textarea id="heroText" rows="2"></textarea></div>
           </div>
         </section>
 
@@ -285,19 +321,57 @@
           
           <div class="manager-stack">
             <div class="manager-card">
-              <div class="manager-toolbar">
-                <h3>🛠️ Pengurusan Kalkulator Pembaikan (Kategori, Kerosakan & Julat Harga)</h3>
-              </div>
+              <div class="manager-toolbar"><h3 style="font-size:0.88rem;">📱 Apa Yang Kami Baiki</h3></div>
               <div class="manager-body">
                 <table class="mini-table">
-                  <thead><tr><th>Kategori</th><th>Key Isu</th><th>Label Kerosakan</th><th>Julat Harga</th><th>Tindakan</th></tr></thead>
+                  <thead><tr><th>Icon</th><th>Tajuk Peranti</th><th>Keterangan</th><th>Tindakan</th></tr></thead>
+                  <tbody id="fixItemsTableBody"></tbody>
+                </table>
+              </div>
+              <div class="inline-form" id="fixFormContainer">
+                <input type="hidden" id="editFixIndex" value="-1">
+                <div class="field"><label>Icon / Emoji</label><input id="newFixIcon" type="text" placeholder="📱"></div>
+                <div class="field"><label>Tajuk Peranti</label><input id="newFixTitle" type="text" placeholder="Smartphone"></div>
+                <div class="field full"><label>Keterangan Kerosakan</label><input id="newFixDesc" type="text" placeholder="Baik pulih skrin..."></div>
+                <div class="inline-actions">
+                  <button id="fixSubmitBtn" onclick="saveFixItem()" class="btn success" type="button">Tambah Peranti Baiki</button>
+                  <button id="fixCancelBtn" onclick="cancelFixEdit()" class="btn danger hidden" type="button">Batal</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="manager-card">
+              <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🔍 Kenapa Pilih Kami</h3></div>
+              <div class="manager-body">
+                <table class="mini-table">
+                  <thead><tr><th>Icon</th><th>Kelebihan</th><th>Penjelasan</th><th>Tindakan</th></tr></thead>
+                  <tbody id="whyItemsTableBody"></tbody>
+                </table>
+              </div>
+              <div class="inline-form" id="whyFormContainer">
+                <input type="hidden" id="editWhyIndex" value="-1">
+                <div class="field"><label>Icon / Emoji</label><input id="newWhyIcon" type="text" placeholder="⚡"></div>
+                <div class="field"><label>Tajuk Kelebihan</label><input id="newWhyTitle" type="text" placeholder="Pantas"></div>
+                <div class="field full"><label>Penjelasan Ringkas</label><input id="newWhyDesc" type="text" placeholder="Siap di depan mata..."></div>
+                <div class="inline-actions">
+                  <button id="whySubmitBtn" onclick="saveWhyItem()" class="btn success" type="button">Tambah Kelebihan</button>
+                  <button id="whyCancelBtn" onclick="cancelWhyEdit()" class="btn danger hidden" type="button">Batal</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="manager-card">
+              <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🛠️ Kalkulator Pembaikan</h3></div>
+              <div class="manager-body">
+                <table class="mini-table">
+                  <thead><tr><th>Kategori</th><th>Label Kerosakan</th><th>Harga (RM)</th><th>Tindakan</th></tr></thead>
                   <tbody id="repairCalculatorTableBody"></tbody>
                 </table>
               </div>
-              <div class="inline-form">
+              <div class="inline-form" id="repairFormContainer">
                 <div class="field">
-                  <label>Pilih Kategori / Taip Manual (Custom Type)</label>
-                  <input id="newRepairCategory" type="text" list="categoryList" placeholder="cth: phone atau kustom">
+                  <label>Kategori / Peranti</label>
+                  <input id="newRepairCategory" type="text" list="categoryList" placeholder="cth: phone">
                   <datalist id="categoryList">
                     <option value="phone">Telefon Pintar (Phone)</option>
                     <option value="iphone">iPhone (Apple)</option>
@@ -307,82 +381,110 @@
                     <option value="pc">Komputer Meja (Desktop)</option>
                     <option value="console">Konsol Permainan</option>
                     <option value="printer">Pencetak (Printer)</option>
-                    <option value="software">Perisian PC / Online Surfing</option>
                   </datalist>
                 </div>
-                <div class="field"><label>Key Kerosakan (cth: lcd_tukar)</label><input id="newRepairKey" type="text" placeholder="key_code"></div>
-                <div class="field"><label>Label Paparan</label><input id="newRepairLabel" type="text" placeholder="Tukar Skrin LCD"></div>
+                <div class="field"><label>Label Kerosakan</label><input id="newRepairLabel" type="text" placeholder="Tukar Skrin LCD"></div>
                 <div class="field"><label>Julat Harga (RM)</label><input id="newRepairPrice" type="text" placeholder="RM 150 - RM 300"></div>
                 <div class="inline-actions">
-                  <button onclick="addRepairCalculatorItem()" class="btn success" type="button">Tambah Item Kalkulator</button>
+                  <button id="repairSubmitBtn" onclick="saveRepairCalculatorItem()" class="btn success" type="button">Tambah Item</button>
+                  <button id="repairCancelBtn" onclick="cancelRepairEdit()" class="btn danger hidden" type="button">Batal</button>
                 </div>
               </div>
             </div>
 
             <div class="manager-card">
-              <h3>🤖 Analisis AI & Profil Spesifikasi Komponen (Gaming / Workstation)</h3>
-              <div class="form-grid" style="margin-top:1rem;">
-                <div class="field"><label>Profil AI CPU</label><input id="aiCpuProfile" type="text" placeholder="cth: Sesuai untuk Gaming eSports & Rendering"></div>
-                <div class="field"><label>Profil AI GPU</label><input id="aiGpuProfile" type="text" placeholder="cth: Prestasi Ultra 1080p / Ray Tracing On"></div>
-                <div class="field"><label>Profil AI RAM</label><input id="aiRamProfile" type="text" placeholder="cth: Optimum untuk Multitasking Berat"></div>
-                <div class="field"><label>Profil AI SSD</label><input id="aiStorageProfile" type="text" placeholder="cth: Kelajuan Tinggi NVMe Gen4"></div>
-                <button onclick="saveAIProfiles()" class="btn primary full" type="button">Kemas Kini Profil AI</button>
+              <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🖥️ Pilihan Perkakasan Bina PC Custom</h3></div>
+              <div class="manager-body">
+                <table class="mini-table">
+                  <thead><tr><th>Kategori</th><th>Model Komponen</th><th>Harga (RM)</th><th>Tindakan</th></tr></thead>
+                  <tbody id="builderTableBody"></tbody>
+                </table>
+              </div>
+              <div class="inline-form" id="builderFormContainer">
+                <input type="hidden" id="editBuilderIndex" value="-1">
+                <div class="field">
+                  <label>Kategori Hardware</label>
+                  <select id="newBuilderCategory" class="filter-select" style="width:100%; padding:0.6rem;">
+                    <option value="cpu">CPU (Pemproses)</option>
+                    <option value="gpu">GPU (Kad Grafik)</option>
+                    <option value="ram">RAM (Memori)</option>
+                    <option value="storage">Storage (Storan SSD)</option>
+                  </select>
+                </div>
+                <div class="field"><label>Model Komponen</label><input id="newBuilderLabel" type="text" placeholder="Intel Core i5"></div>
+                <div class="field"><label>Harga (RM)</label><input id="newBuilderValue" type="number" placeholder="450"></div>
+                <div class="inline-actions">
+                  <button id="builderSubmitBtn" onclick="saveBuilderOption()" class="btn success" type="button">Tambah Komponen</button>
+                  <button id="builderCancelBtn" onclick="cancelBuilderEdit()" class="btn danger hidden" type="button">Batal</button>
+                </div>
               </div>
             </div>
 
             <div class="manager-card">
-              <div class="manager-toolbar"><h3>📦 Jualan Peranti Refurbished / Lelong</h3></div>
+              <div class="manager-toolbar"><h3 style="font-size:0.88rem;">📦 Jualan Peranti Lelong</h3></div>
               <div class="manager-body">
                 <table class="mini-table">
                   <thead><tr><th>Gambar</th><th>Nama Item</th><th>Harga</th><th>Status</th><th>Tindakan</th></tr></thead>
                   <tbody id="clearanceTableBody"></tbody>
                 </table>
               </div>
-              <div class="inline-form">
+              <div class="inline-form" id="clearanceFormContainer">
+                <input type="hidden" id="editClearanceIndex" value="-1">
                 <div class="field"><label>Nama Item</label><input id="newClearanceTitle" type="text"></div>
                 <div class="field"><label>Harga (RM)</label><input id="newClearancePrice" type="text"></div>
-                <div class="field full"><label>URL Gambar</label><input id="newClearanceImg" type="text"></div>
+                <div class="field"><label>Status Peranti</label>
+                  <select id="newClearanceStatus" class="filter-select" style="width:100%; padding:0.6rem;">
+                    <option value="false">Tersedia</option>
+                    <option value="true">Dibooking (Dicop)</option>
+                  </select>
+                </div>
+                <div class="field"><label>URL Gambar</label><input id="newClearanceImg" type="text"></div>
                 <div class="field full"><label>Keterangan</label><textarea id="newClearanceDesc" rows="2"></textarea></div>
                 <div class="inline-actions">
-                  <button onclick="addClearanceItem()" class="btn success" type="button">Tambah Item Lelong</button>
+                  <button id="clearanceSubmitBtn" onclick="saveClearanceItem()" class="btn success" type="button">Tambah Lelong</button>
+                  <button id="clearanceCancelBtn" onclick="cancelClearanceEdit()" class="btn danger hidden" type="button">Batal</button>
                 </div>
               </div>
             </div>
 
             <div class="manager-card">
-              <div class="manager-toolbar"><h3>🚀 Enjin Carian Upgrade & Gadjet</h3></div>
+              <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🚀 Enjin Carian Upgrade & Gadjet</h3></div>
               <div class="manager-body">
                 <table class="mini-table">
-                  <thead><tr><th>Gambar</th><th>Nama Gadjet</th><th>Harga</th><th>Tag</th><th>Tindakan</th></tr></thead>
+                  <thead><tr><th>Gambar</th><th>Gadjet</th><th>Harga</th><th>Tag</th><th>Tindakan</th></tr></thead>
                   <tbody id="finderTableBody"></tbody>
                 </table>
               </div>
-              <div class="inline-form">
+              <div class="inline-form" id="finderFormContainer">
+                <input type="hidden" id="editFinderIndex" value="-1">
                 <div class="field"><label>Nama Gadjet</label><input id="newFinderTitle" type="text"></div>
                 <div class="field"><label>Harga</label><input id="newFinderPrice" type="text"></div>
-                <div class="field"><label>Tag Kategori</label><input id="newFinderTag" type="text" placeholder="Upgrade PC"></div>
-                <div class="field full"><label>URL Gambar</label><input id="newFinderImg" type="text"></div>
+                <div class="field"><label>Tag Kategori</label><input id="newFinderTag" type="text" placeholder="Upgrade"></div>
+                <div class="field"><label>URL Gambar</label><input id="newFinderImg" type="text"></div>
                 <div class="field full"><label>Keterangan</label><textarea id="newFinderDesc" rows="2"></textarea></div>
                 <div class="inline-actions">
-                  <button onclick="addFinderItem()" class="btn success" type="button">Tambah Produk Upgrade</button>
+                  <button id="finderSubmitBtn" onclick="saveFinderItem()" class="btn success" type="button">Tambah Upgrade</button>
+                  <button id="finderCancelBtn" onclick="cancelFinderEdit()" class="btn danger hidden" type="button">Batal</button>
                 </div>
               </div>
             </div>
 
             <div class="manager-card">
-              <div class="manager-toolbar"><h3>🖼️ Galeri Bukti Hasil Kerja Siap</h3></div>
+              <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🖼️ Galeri Hasil Kerja</h3></div>
               <div class="manager-body">
                 <table class="mini-table">
-                  <thead><tr><th>Gambar</th><th>Tajuk Projek</th><th>Keterangan</th><th>Tindakan</th></tr></thead>
+                  <thead><tr><th>Gambar</th><th>Tajuk</th><th>Keterangan</th><th>Tindakan</th></tr></thead>
                   <tbody id="galleryTableBody"></tbody>
                 </table>
               </div>
-              <div class="inline-form">
+              <div class="inline-form" id="galleryFormContainer">
+                <input type="hidden" id="editGalleryIndex" value="-1">
                 <div class="field"><label>Tajuk Projek</label><input id="newGalleryTitle" type="text"></div>
-                <div class="field full"><label>URL Gambar Penuh</label><input id="newGalleryImg" type="text"></div>
-                <div class="field full"><label>Keterangan Kerja</label><textarea id="newGalleryDesc" rows="2"></textarea></div>
+                <div class="field"><label>URL Gambar</label><input id="newGalleryImg" type="text"></div>
+                <div class="field full"><label>Keterangan</label><textarea id="newGalleryDesc" rows="2"></textarea></div>
                 <div class="inline-actions">
-                  <button onclick="addGalleryItem()" class="btn success" type="button">Tambah Gambar Galeri</button>
+                  <button id="gallerySubmitBtn" onclick="saveGalleryItem()" class="btn success" type="button">Tambah Galeri</button>
+                  <button id="galleryCancelBtn" onclick="cancelGalleryEdit()" class="btn danger hidden" type="button">Batal</button>
                 </div>
               </div>
             </div>
@@ -390,8 +492,13 @@
         </section>
 
         <section class="panel" id="orders">
-          <h2>6. Senarai Tempahan Pelanggan (Orders)</h2>
           <div class="toolbar-row">
+            <div><h2 style="margin:0; border:none; padding:0;">6. Senarai Tempahan Pelanggan (Orders)</h2></div>
+            <div class="search-group" style="justify-content: flex-end;">
+              <button onclick="resetAllOrders()" class="btn danger" type="button" style="width:auto; padding:0.4rem 0.7rem; font-size:0.75rem;">Reset Semua Orders</button>
+            </div>
+          </div>
+          <div class="toolbar-row" style="margin-top: 0.75rem;">
             <div class="search-group">
               <input id="orderSearch" class="search-box" type="text" placeholder="Cari nama / produk..." oninput="renderOrdersTable()" />
               <select id="orderStatusFilter" class="filter-select" onchange="renderOrdersTable()">
@@ -437,21 +544,20 @@
       phoneNumber: "05-776 8905",
       email: "ztechfixsolutions@yahoo.com",
       address: "No 11 Jalan Bendahara 3, Bandar Baru, 33000 Kuala Kangsar, Perak",
+      operatingHours: "Isnin - Ahad: 10.00 pagi - 10.00 malam",
+      facebookLink: "",
+      instagramLink: "",
+      tiktokLink: "",
       heroTitle: "Baiki Kerosakan. Bina Sistem Impian.",
       heroText: "Pakar baik pulih telefon pintar, iPhone, tablet, laptop, MacBook, dan binaan kustom PC di Kuala Kangsar.",
       builderBase: 700,
-      aiProfiles: {
-        cpu: "Sesuai untuk Gaming eSports & Multitasking",
-        gpu: "Prestasi Grafik Optimum untuk 1080p Gaming",
-        ram: "Lancar untuk Permainan Moden & Kerja Berat",
-        storage: "Kelajuan Akses Pantas NVMe SSD"
-      },
       fixItems: [],
       whyItems: [],
       clearanceItems: [],
       finderItems: [],
       galleryItems: [],
       repairCalculator: [],
+      builderOptions: { cpu: [], gpu: [], ram: [], storage: [] },
       orders: [],
       feedbacks: []
     };
@@ -465,22 +571,23 @@
       if (drop && drop.classList.contains('show')) drop.classList.remove('show');
     };
 
-    // Auto Sticky Active Nav berpandukan Scroll
+    function toggleStaffSettings() {
+      const box = document.getElementById('staffSettingsContainer');
+      box.classList.toggle('hidden');
+    }
+
     window.addEventListener('scroll', () => {
       const sections = document.querySelectorAll('section.panel');
       const navLinks = document.querySelectorAll('.top-nav a');
       let current = '';
       sections.forEach(sec => {
-        const sectionTop = sec.offsetTop;
-        if (window.pageYOffset >= sectionTop - 120) {
+        if (window.pageYOffset >= sec.offsetTop - 100) {
           current = sec.getAttribute('id');
         }
       });
       navLinks.forEach(a => {
         a.classList.remove('active');
-        if (a.getAttribute('href') === '#' + current) {
-          a.classList.add('active');
-        }
+        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
       });
     });
 
@@ -514,26 +621,32 @@
           siteData = { ...siteData, ...docSnap.data() };
         }
         
-        // Muat juga tetapan operasi rasmi
         const configSnap = await db.collection('settings').doc('mainConfig').get();
         if (configSnap.exists) {
           const c = configSnap.data();
           if(document.getElementById('showAnnouncement')) document.getElementById('showAnnouncement').checked = !!c.showAnnouncement;
           if(document.getElementById('announcementText')) document.getElementById('announcementText').value = c.announcementText || '';
+          if(document.getElementById('announcementTargetTime')) document.getElementById('announcementTargetTime').value = c.announcementTargetTime || '';
+
           if(document.getElementById('forceClose')) document.getElementById('forceClose').checked = !!c.forceClose;
           if(document.getElementById('forceCloseMsg')) document.getElementById('forceCloseMsg').value = c.forceCloseMsg || '';
+          if(document.getElementById('forceCloseTargetTime')) document.getElementById('forceCloseTargetTime').value = c.forceCloseTargetTime || '';
           
           if(c.staff1) {
             if(document.getElementById('staff1_name')) document.getElementById('staff1_name').value = c.staff1.name || '';
             if(document.getElementById('staff1_leave')) document.getElementById('staff1_leave').checked = !!c.staff1.onLeave;
             if(document.getElementById('staff1_duration')) document.getElementById('staff1_duration').value = c.staff1.duration || '';
+            if(document.getElementById('staff1TargetTime')) document.getElementById('staff1TargetTime').value = c.staff1.targetTime || '';
           }
           if(c.staff2) {
             if(document.getElementById('staff2_name')) document.getElementById('staff2_name').value = c.staff2.name || '';
             if(document.getElementById('staff2_leave')) document.getElementById('staff2_leave').checked = !!c.staff2.onLeave;
             if(document.getElementById('staff2_duration')) document.getElementById('staff2_duration').value = c.staff2.duration || '';
+            if(document.getElementById('staff2TargetTime')) document.getElementById('staff2TargetTime').value = c.staff2.targetTime || '';
           }
 
+          if(document.getElementById('toggleBooking')) document.getElementById('toggleBooking').checked = !c.hideBooking;
+          if(document.getElementById('toggleFeedback')) document.getElementById('toggleFeedback').checked = !c.hideFeedback;
           if(document.getElementById('toggleRepair')) document.getElementById('toggleRepair').checked = !c.hideRepairCalc;
           if(document.getElementById('toggleBuilder')) document.getElementById('toggleBuilder').checked = !c.hideBuilder;
           if(document.getElementById('toggleFixItems')) document.getElementById('toggleFixItems').checked = !c.hideFixItems;
@@ -551,6 +664,7 @@
         loadOrdersFromDB();
         loadFeedbacksFromDB();
         loadAnalytics();
+        loadVisitsCounter();
         updateDashboardCounts();
       } catch (e) {
         console.error("Ralat muat data admin:", e);
@@ -558,58 +672,49 @@
     }
 
     function fillFormFields() {
-      ['companyName', 'whatsappNumber', 'phoneNumber', 'email', 'address', 'heroTitle', 'heroText'].forEach(id => {
+      ['companyName', 'whatsappNumber', 'phoneNumber', 'email', 'address', 'operatingHours', 'facebookLink', 'instagramLink', 'tiktokLink', 'heroTitle', 'heroText'].forEach(id => {
         if(document.getElementById(id)) document.getElementById(id).value = siteData[id] || '';
       });
 
-      if(siteData.aiProfiles) {
-        if(document.getElementById('aiCpuProfile')) document.getElementById('aiCpuProfile').value = siteData.aiProfiles.cpu || '';
-        if(document.getElementById('aiGpuProfile')) document.getElementById('aiGpuProfile').value = siteData.aiProfiles.gpu || '';
-        if(document.getElementById('aiRamProfile')) document.getElementById('aiRamProfile').value = siteData.aiProfiles.ram || '';
-        if(document.getElementById('aiStorageProfile')) document.getElementById('aiStorageProfile').value = siteData.aiProfiles.storage || '';
-      }
-
+      renderFixItemsTable();
+      renderWhyItemsTable();
       renderRepairCalculatorTable();
+      renderBuilderTable();
       renderClearanceTable();
       renderFinderTable();
       renderGalleryTable();
     }
 
     document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
-      ['companyName', 'whatsappNumber', 'phoneNumber', 'email', 'address', 'heroTitle', 'heroText'].forEach(id => {
-        siteData[id] = document.getElementById(id).value;
+      ['companyName', 'whatsappNumber', 'phoneNumber', 'email', 'address', 'operatingHours', 'facebookLink', 'instagramLink', 'tiktokLink', 'heroTitle', 'heroText'].forEach(id => {
+        if(document.getElementById(id)) siteData[id] = document.getElementById(id).value;
       });
-      await saveToDB("Tetapan Umum berjaya disimpan!");
+      await saveToDB("General Store Settings & Sosial Media berjaya disimpan!");
     });
 
-    async function saveAIProfiles() {
-      siteData.aiProfiles = {
-        cpu: document.getElementById('aiCpuProfile').value,
-        gpu: document.getElementById('aiGpuProfile').value,
-        ram: document.getElementById('aiRamProfile').value,
-        storage: document.getElementById('aiStorageProfile').value
-      };
-      await saveToDB("Profil Analisis AI berjaya dikemaskini!");
-    }
-
-    // Simpan Tetapan Operasi, Staff & Paparan dengan Cap Masa (Tarikh & Masa)
     async function saveSmartSettings() {
       const nowString = new Date().toLocaleString('ms-MY', { timeZone: 'Asia/Kuala_Lumpur' });
       const smartConfig = {
         showAnnouncement: document.getElementById('showAnnouncement').checked,
         announcementText: document.getElementById('announcementText').value,
+        announcementTargetTime: document.getElementById('announcementTargetTime').value,
         forceClose: document.getElementById('forceClose').checked,
         forceCloseMsg: document.getElementById('forceCloseMsg').value,
+        forceCloseTargetTime: document.getElementById('forceCloseTargetTime').value,
         staff1: {
           name: document.getElementById('staff1_name').value,
           onLeave: document.getElementById('staff1_leave').checked,
-          duration: document.getElementById('staff1_duration').value
+          duration: document.getElementById('staff1_duration').value,
+          targetTime: document.getElementById('staff1TargetTime').value
         },
         staff2: {
           name: document.getElementById('staff2_name').value,
           onLeave: document.getElementById('staff2_leave').checked,
-          duration: document.getElementById('staff2_duration').value
+          duration: document.getElementById('staff2_duration').value,
+          targetTime: document.getElementById('staff2TargetTime').value
         },
+        hideBooking: !document.getElementById('toggleBooking').checked,
+        hideFeedback: !document.getElementById('toggleFeedback').checked,
         hideRepairCalc: !document.getElementById('toggleRepair').checked,
         hideBuilder: !document.getElementById('toggleBuilder').checked,
         hideFixItems: !document.getElementById('toggleFixItems').checked,
@@ -626,180 +731,580 @@
         if(document.getElementById('lastSavedTimeDisplay')) {
           document.getElementById('lastSavedTimeDisplay').textContent = `Terakhir dikemas kini: ${nowString}`;
         }
-        alert(`Tetapan Operasi, Staff & Paparan berjaya disimpan pada ${nowString}!`);
+        alert(`Tetapan Operasi berjaya disimpan pada ${nowString}!`);
       } catch (e) {
-        alert("Ralat simpan tetapan operasi: " + e.message);
+        alert("Ralat simpan tetapan: " + e.message);
       }
     }
 
-    // Kalkulator Pembaikan Manager
+    async function resetDashboardData() {
+      if (!confirm("Adakah anda pasti mahu set semula statistik Dashboard & bilangan pelawat?")) return;
+      if (!db) return;
+      try {
+        await db.collection('analytics').doc('website_visits').set({ count: 0 });
+        document.getElementById('dashVisitsCount').textContent = 0;
+        alert("Dashboard berjaya diset semula.");
+      } catch(e) {
+        alert("Ralat reset dashboard: " + e.message);
+      }
+    }
+
+    async function resetAllOrders() {
+      if (!confirm("AMARAN: Adakah anda pasti mahu memadam SEMUA senarai tempahan (orders) di database?")) return;
+      if (!db) return;
+      try {
+        const snap = await db.collection('orders').get();
+        const batch = db.batch();
+        snap.forEach(doc => batch.delete(doc.ref));
+        await batch.commit();
+        siteData.orders = [];
+        renderOrdersTable();
+        updateDashboardCounts();
+        alert("Semua order berjaya dipadam dari database.");
+      } catch(e) {
+        alert("Ralat memadam orders: " + e.message);
+      }
+    }
+
+    // --- 5.1 APA YANG KAMI BAIKI ---
+    let editFixIdx = -1;
+    function renderFixItemsTable() {
+      const tbody = document.getElementById('fixItemsTableBody');
+      tbody.innerHTML = '';
+      if (!siteData.fixItems || siteData.fixItems.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
+        return;
+      }
+      siteData.fixItems.forEach((item, index) => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${item.icon || '📱'}</td>
+            <td><strong>${item.title}</strong></td>
+            <td><small>${item.description}</small></td>
+            <td>
+              <button class="small-btn" onclick="editFixItem(${index})">Edit</button>
+              <button class="small-btn danger" onclick="deleteFixItem(${index})">Padam</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    async function saveFixItem() {
+      const icon = document.getElementById('newFixIcon').value.trim();
+      const title = document.getElementById('newFixTitle').value.trim();
+      const desc = document.getElementById('newFixDesc').value.trim();
+      if (!title || !desc) { alert("Sila isi tajuk dan keterangan."); return; }
+
+      if(!siteData.fixItems) siteData.fixItems = [];
+      const itemObj = { icon: icon || '📱', title, description: desc };
+
+      if (editFixIdx >= 0) {
+        siteData.fixItems[editFixIdx] = itemObj;
+        editFixIdx = -1;
+        document.getElementById('fixSubmitBtn').textContent = "Tambah Peranti Baiki";
+        document.getElementById('fixCancelBtn').classList.add('hidden');
+      } else {
+        siteData.fixItems.push(itemObj);
+      }
+
+      document.getElementById('newFixIcon').value = '';
+      document.getElementById('newFixTitle').value = '';
+      document.getElementById('newFixDesc').value = '';
+      await saveToDB("Senarai peranti berjaya dikemaskini!");
+      renderFixItemsTable();
+    }
+
+    function editFixItem(index) {
+      const item = siteData.fixItems[index];
+      document.getElementById('newFixIcon').value = item.icon || '';
+      document.getElementById('newFixTitle').value = item.title || '';
+      document.getElementById('newFixDesc').value = item.description || '';
+      editFixIdx = index;
+      document.getElementById('fixSubmitBtn').textContent = "Simpan";
+      document.getElementById('fixCancelBtn').classList.remove('hidden');
+    }
+
+    function cancelFixEdit() {
+      editFixIdx = -1;
+      document.getElementById('newFixIcon').value = '';
+      document.getElementById('newFixTitle').value = '';
+      document.getElementById('newFixDesc').value = '';
+      document.getElementById('fixSubmitBtn').textContent = "Tambah Peranti Baiki";
+      document.getElementById('fixCancelBtn').classList.add('hidden');
+    }
+
+    async function deleteFixItem(index) {
+      siteData.fixItems.splice(index, 1);
+      await saveToDB("Dipadam.");
+      renderFixItemsTable();
+    }
+
+    // --- 5.2 KENAPA PILIH KAMI ---
+    let editWhyIdx = -1;
+    function renderWhyItemsTable() {
+      const tbody = document.getElementById('whyItemsTableBody');
+      tbody.innerHTML = '';
+      if (!siteData.whyItems || siteData.whyItems.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
+        return;
+      }
+      siteData.whyItems.forEach((item, index) => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${item.icon || '⚡'}</td>
+            <td><strong>${item.title}</strong></td>
+            <td><small>${item.description}</small></td>
+            <td>
+              <button class="small-btn" onclick="editWhyItem(${index})">Edit</button>
+              <button class="small-btn danger" onclick="deleteWhyItem(${index})">Padam</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    async function saveWhyItem() {
+      const icon = document.getElementById('newWhyIcon').value.trim();
+      const title = document.getElementById('newWhyTitle').value.trim();
+      const desc = document.getElementById('newWhyDesc').value.trim();
+      if (!title || !desc) { alert("Sila isi tajuk dan keterangan."); return; }
+
+      if(!siteData.whyItems) siteData.whyItems = [];
+      const itemObj = { icon: icon || '⚡', title, description: desc };
+
+      if (editWhyIdx >= 0) {
+        siteData.whyItems[editWhyIdx] = itemObj;
+        editWhyIdx = -1;
+        document.getElementById('whySubmitBtn').textContent = "Tambah Kelebihan";
+        document.getElementById('whyCancelBtn').classList.add('hidden');
+      } else {
+        siteData.whyItems.push(itemObj);
+      }
+
+      document.getElementById('newWhyIcon').value = '';
+      document.getElementById('newWhyTitle').value = '';
+      document.getElementById('newWhyDesc').value = '';
+      await saveToDB("Kelebihan berjaya dikemaskini!");
+      renderWhyItemsTable();
+    }
+
+    function editWhyItem(index) {
+      const item = siteData.whyItems[index];
+      document.getElementById('newWhyIcon').value = item.icon || '';
+      document.getElementById('newWhyTitle').value = item.title || '';
+      document.getElementById('newWhyDesc').value = item.description || '';
+      editWhyIdx = index;
+      document.getElementById('whySubmitBtn').textContent = "Simpan";
+      document.getElementById('whyCancelBtn').classList.remove('hidden');
+    }
+
+    function cancelWhyEdit() {
+      editWhyIdx = -1;
+      document.getElementById('newWhyIcon').value = '';
+      document.getElementById('newWhyTitle').value = '';
+      document.getElementById('newWhyDesc').value = '';
+      document.getElementById('whySubmitBtn').textContent = "Tambah Kelebihan";
+      document.getElementById('whyCancelBtn').classList.add('hidden');
+    }
+
+    async function deleteWhyItem(index) {
+      siteData.whyItems.splice(index, 1);
+      await saveToDB("Dipadam.");
+      renderWhyItemsTable();
+    }
+
+    // --- 5.3 KALKULATOR PEMBAIKAN ---
+    let editRepairIdx = -1;
     function renderRepairCalculatorTable() {
       const tbody = document.getElementById('repairCalculatorTableBody');
       tbody.innerHTML = '';
       if (!siteData.repairCalculator || siteData.repairCalculator.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="empty-state">Tiada data kalkulator pembaikan.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
         return;
       }
       siteData.repairCalculator.forEach((item, index) => {
         tbody.innerHTML += `
           <tr>
             <td><strong>${item.deviceName || item.deviceType}</strong></td>
-            <td><code>${item.issueKey}</code></td>
             <td>${item.issueLabel}</td>
             <td style="color:var(--orange); font-weight:700;">${item.price}</td>
-            <td><button class="small-btn danger" onclick="deleteRepairItem(${index})">Padam</button></td>
+            <td>
+              <button class="small-btn" onclick="editRepairItem(${index})">Edit</button>
+              <button class="small-btn danger" onclick="deleteRepairItem(${index})">Padam</button>
+            </td>
           </tr>
         `;
       });
     }
 
-    async function addRepairCalculatorItem() {
+    async function saveRepairCalculatorItem() {
       const cat = document.getElementById('newRepairCategory').value.trim();
-      const key = document.getElementById('newRepairKey').value.trim();
       const label = document.getElementById('newRepairLabel').value.trim();
       const price = document.getElementById('newRepairPrice').value.trim();
-      if (!cat || !key || !label || !price) { alert("Sila isi semua medan kalkulator."); return; }
+      if (!cat || !label || !price) { alert("Sila isi semua medan."); return; }
 
       if(!siteData.repairCalculator) siteData.repairCalculator = [];
-      siteData.repairCalculator.push({ deviceType: cat, deviceName: cat.toUpperCase(), issueKey: key, issueLabel: label, price: price });
-      document.getElementById('newRepairKey').value = '';
+      const newItem = { deviceType: cat, deviceName: cat.toUpperCase(), issueKey: 'issue_' + Date.now(), issueLabel: label, price: price };
+
+      if (editRepairIdx >= 0) {
+        siteData.repairCalculator[editRepairIdx] = newItem;
+        editRepairIdx = -1;
+        document.getElementById('repairSubmitBtn').textContent = "Tambah Item";
+        document.getElementById('repairCancelBtn').classList.add('hidden');
+      } else {
+        siteData.repairCalculator.push(newItem);
+      }
+
       document.getElementById('newRepairLabel').value = '';
       document.getElementById('newRepairPrice').value = '';
-      await saveToDB("Item kalkulator pembaikan berjaya ditambah!");
+      await saveToDB("Kalkulator berjaya disimpan!");
       renderRepairCalculatorTable();
+    }
+
+    function editRepairItem(index) {
+      const item = siteData.repairCalculator[index];
+      document.getElementById('newRepairCategory').value = item.deviceType || '';
+      document.getElementById('newRepairLabel').value = item.issueLabel || '';
+      document.getElementById('newRepairPrice').value = item.price || '';
+      editRepairIdx = index;
+      document.getElementById('repairSubmitBtn').textContent = "Simpan";
+      document.getElementById('repairCancelBtn').classList.remove('hidden');
+    }
+
+    function cancelRepairEdit() {
+      editRepairIdx = -1;
+      document.getElementById('newRepairLabel').value = '';
+      document.getElementById('newRepairPrice').value = '';
+      document.getElementById('repairSubmitBtn').textContent = "Tambah Item";
+      document.getElementById('repairCancelBtn').classList.add('hidden');
     }
 
     async function deleteRepairItem(index) {
       siteData.repairCalculator.splice(index, 1);
-      await saveToDB("Item berjaya dipadam.");
+      await saveToDB("Dipadam.");
       renderRepairCalculatorTable();
     }
 
+    // --- 5.4 CUSTOM PC BUILDER ---
+    let editBuilderCat = "";
+    let editBuilderIdx = -1;
+    function renderBuilderTable() {
+      const tbody = document.getElementById('builderTableBody');
+      tbody.innerHTML = '';
+      if (!siteData.builderOptions) siteData.builderOptions = { cpu: [], gpu: [], ram: [], storage: [] };
+      
+      let totalCount = 0;
+      ['cpu', 'gpu', 'ram', 'storage'].forEach(cat => {
+        const arr = siteData.builderOptions[cat] || [];
+        arr.forEach((item, idx) => {
+          totalCount++;
+          tbody.innerHTML += `
+            <tr>
+              <td><span class="status-pill status-done">${cat.toUpperCase()}</span></td>
+              <td><strong>${item.label}</strong></td>
+              <td style="color:var(--orange); font-weight:700;">RM ${item.value}</td>
+              <td>
+                <button class="small-btn" onclick="editBuilderOption('${cat}', ${idx})">Edit</button>
+                <button class="small-btn danger" onclick="deleteBuilderOption('${cat}', ${idx})">Padam</button>
+              </td>
+            </tr>
+          `;
+        });
+      });
+
+      if (totalCount === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
+      }
+    }
+
+    async function saveBuilderOption() {
+      const cat = document.getElementById('newBuilderCategory').value;
+      const label = document.getElementById('newBuilderLabel').value.trim();
+      const value = Number(document.getElementById('newBuilderValue').value) || 0;
+      if (!label) { alert("Sila isi nama model komponen."); return; }
+
+      if (!siteData.builderOptions) siteData.builderOptions = { cpu: [], gpu: [], ram: [], storage: [] };
+      if (!siteData.builderOptions[cat]) siteData.builderOptions[cat] = [];
+
+      const optObj = { label, value };
+      if (editBuilderIdx >= 0 && editBuilderCat === cat) {
+        siteData.builderOptions[cat][editBuilderIdx] = optObj;
+        editBuilderIdx = -1;
+        editBuilderCat = "";
+        document.getElementById('builderSubmitBtn').textContent = "Tambah Komponen";
+        document.getElementById('builderCancelBtn').classList.add('hidden');
+      } else {
+        siteData.builderOptions[cat].push(optObj);
+      }
+
+      document.getElementById('newBuilderLabel').value = '';
+      document.getElementById('newBuilderValue').value = '';
+      await saveToDB("Perkakasan PC Custom disimpan!");
+      renderBuilderTable();
+    }
+
+    function editBuilderOption(cat, idx) {
+      const item = siteData.builderOptions[cat][idx];
+      document.getElementById('newBuilderCategory').value = cat;
+      document.getElementById('newBuilderLabel').value = item.label || '';
+      document.getElementById('newBuilderValue').value = item.value || 0;
+      editBuilderCat = cat;
+      editBuilderIdx = idx;
+      document.getElementById('builderSubmitBtn').textContent = "Simpan";
+      document.getElementById('builderCancelBtn').classList.remove('hidden');
+    }
+
+    function cancelBuilderEdit() {
+      editBuilderCat = "";
+      editBuilderIdx = -1;
+      document.getElementById('newBuilderLabel').value = '';
+      document.getElementById('newBuilderValue').value = '';
+      document.getElementById('builderSubmitBtn').textContent = "Tambah Komponen";
+      document.getElementById('builderCancelBtn').classList.add('hidden');
+    }
+
+    async function deleteBuilderOption(cat, idx) {
+      siteData.builderOptions[cat].splice(idx, 1);
+      await saveToDB("Dipadam.");
+      renderBuilderTable();
+    }
+
+    // --- 5.5 JUALAN LELONG ---
     function renderClearanceTable() {
       const tbody = document.getElementById('clearanceTableBody');
       tbody.innerHTML = '';
       if (!siteData.clearanceItems || siteData.clearanceItems.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="empty-state">Tiada item lelong.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
         return;
       }
       siteData.clearanceItems.forEach((item, idx) => {
         tbody.innerHTML += `
           <tr>
-            <td><img src="${item.image}" width="40" height="40" style="object-fit:cover; border-radius:6px;"></td>
-            <td><strong>${item.title}</strong><br><small style="color:var(--muted);">${item.tag || ''}</small></td>
+            <td><img src="${item.image}" width="35" height="35" style="object-fit:cover; border-radius:4px;"></td>
+            <td><strong>${item.title}</strong></td>
             <td style="color:var(--orange); font-weight:700;">${item.newPrice}</td>
-            <td><span class="status-pill ${item.isReserved ? 'status-pending' : 'status-done'}">${item.isReserved ? 'Dicop' : 'Tersedia'}</span></td>
-            <td><button class="small-btn danger" onclick="deleteClearanceItem(${idx})">Padam</button></td>
+            <td><span class="status-pill ${item.isReserved ? 'status-pending' : 'status-done'}">${item.isReserved ? 'Dibooking' : 'Tersedia'}</span></td>
+            <td>
+              <button class="small-btn" onclick="editClearanceItem(${idx})">Edit</button>
+              <button class="small-btn danger" onclick="deleteClearanceItem(${idx})">Padam</button>
+            </td>
           </tr>
         `;
       });
     }
 
-    async function addClearanceItem() {
+    async function saveClearanceItem() {
       const title = document.getElementById('newClearanceTitle').value.trim();
       const price = document.getElementById('newClearancePrice').value.trim();
+      const isReserved = document.getElementById('newClearanceStatus').value === 'true';
       const img = document.getElementById('newClearanceImg').value.trim();
       const desc = document.getElementById('newClearanceDesc').value.trim();
-      if (!title || !price) { alert("Sila isi nama dan harga item."); return; }
+      const editIdx = parseInt(document.getElementById('editClearanceIndex').value);
+      if (!title || !price) { alert("Isi nama dan harga."); return; }
 
       if(!siteData.clearanceItems) siteData.clearanceItems = [];
-      siteData.clearanceItems.push({ title, newPrice: price, image: img || 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80', description: desc, tag: 'Lelong Bajet', isReserved: false });
+      const itemObj = { title, newPrice: price, image: img || 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80', description: desc, tag: 'Lelong Bajet', isReserved };
+
+      if (editIdx >= 0) {
+        siteData.clearanceItems[editIdx] = itemObj;
+        document.getElementById('editClearanceIndex').value = -1;
+        document.getElementById('clearanceSubmitBtn').textContent = "Tambah Lelong";
+        document.getElementById('clearanceCancelBtn').classList.add('hidden');
+      } else {
+        siteData.clearanceItems.push(itemObj);
+      }
+
       document.getElementById('newClearanceTitle').value = '';
       document.getElementById('newClearancePrice').value = '';
       document.getElementById('newClearanceImg').value = '';
       document.getElementById('newClearanceDesc').value = '';
-      await saveToDB("Item lelong ditambah!");
+      await saveToDB("Item lelong disimpan!");
       renderClearanceTable();
+    }
+
+    function editClearanceItem(idx) {
+      const item = siteData.clearanceItems[idx];
+      document.getElementById('newClearanceTitle').value = item.title || '';
+      document.getElementById('newClearancePrice').value = item.newPrice || '';
+      document.getElementById('newClearanceStatus').value = item.isReserved ? 'true' : 'false';
+      document.getElementById('newClearanceImg').value = item.image || '';
+      document.getElementById('newClearanceDesc').value = item.description || '';
+      document.getElementById('editClearanceIndex').value = idx;
+      document.getElementById('clearanceSubmitBtn').textContent = "Simpan";
+      document.getElementById('clearanceCancelBtn').classList.remove('hidden');
+    }
+
+    function cancelClearanceEdit() {
+      document.getElementById('editClearanceIndex').value = -1;
+      document.getElementById('newClearanceTitle').value = '';
+      document.getElementById('newClearancePrice').value = '';
+      document.getElementById('newClearanceImg').value = '';
+      document.getElementById('newClearanceDesc').value = '';
+      document.getElementById('clearanceSubmitBtn').textContent = "Tambah Lelong";
+      document.getElementById('clearanceCancelBtn').classList.add('hidden');
     }
 
     async function deleteClearanceItem(idx) {
       siteData.clearanceItems.splice(idx, 1);
-      await saveToDB("Item lelong dipadam.");
+      await saveToDB("Dipadam.");
       renderClearanceTable();
     }
 
+    // --- 5.6 ENJIN CARIAN ---
     function renderFinderTable() {
       const tbody = document.getElementById('finderTableBody');
       tbody.innerHTML = '';
       if (!siteData.finderItems || siteData.finderItems.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="empty-state">Tiada item upgrade.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
         return;
       }
       siteData.finderItems.forEach((item, idx) => {
         tbody.innerHTML += `
           <tr>
-            <td><img src="${item.image}" width="40" height="40" style="object-fit:cover; border-radius:6px;"></td>
+            <td><img src="${item.image}" width="35" height="35" style="object-fit:cover; border-radius:4px;"></td>
             <td><strong>${item.title}</strong></td>
             <td style="color:var(--orange); font-weight:700;">${item.price}</td>
             <td><span class="status-pill status-done">${item.tag || 'Upgrade'}</span></td>
-            <td><button class="small-btn danger" onclick="deleteFinderItem(${idx})">Padam</button></td>
+            <td>
+              <button class="small-btn" onclick="editFinderItem(${idx})">Edit</button>
+              <button class="small-btn danger" onclick="deleteFinderItem(${idx})">Padam</button>
+            </td>
           </tr>
         `;
       });
     }
 
-    async function addFinderItem() {
+    async function saveFinderItem() {
       const title = document.getElementById('newFinderTitle').value.trim();
       const price = document.getElementById('newFinderPrice').value.trim();
       const tag = document.getElementById('newFinderTag').value.trim();
       const img = document.getElementById('newFinderImg').value.trim();
       const desc = document.getElementById('newFinderDesc').value.trim();
-      if (!title || !price) { alert("Isi nama dan harga produk upgrade."); return; }
+      const editIdx = parseInt(document.getElementById('editFinderIndex').value);
+      if (!title || !price) { alert("Isi nama dan harga."); return; }
 
       if(!siteData.finderItems) siteData.finderItems = [];
-      siteData.finderItems.push({ title, price, tag: tag || 'Upgrade PC', image: img || 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80', description: desc });
+      const itemObj = { title, price, tag: tag || 'Upgrade', image: img || 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80', description: desc };
+
+      if (editIdx >= 0) {
+        siteData.finderItems[editIdx] = itemObj;
+        document.getElementById('editFinderIndex').value = -1;
+        document.getElementById('finderSubmitBtn').textContent = "Tambah Upgrade";
+        document.getElementById('finderCancelBtn').classList.add('hidden');
+      } else {
+        siteData.finderItems.push(itemObj);
+      }
+
       document.getElementById('newFinderTitle').value = '';
       document.getElementById('newFinderPrice').value = '';
       document.getElementById('newFinderTag').value = '';
       document.getElementById('newFinderImg').value = '';
       document.getElementById('newFinderDesc').value = '';
-      await saveToDB("Produk upgrade ditambah!");
+      await saveToDB("Upgrade disimpan!");
       renderFinderTable();
+    }
+
+    function editFinderItem(idx) {
+      const item = siteData.finderItems[idx];
+      document.getElementById('newFinderTitle').value = item.title || '';
+      document.getElementById('newFinderPrice').value = item.price || '';
+      document.getElementById('newFinderTag').value = item.tag || '';
+      document.getElementById('newFinderImg').value = item.image || '';
+      document.getElementById('newFinderDesc').value = item.description || '';
+      document.getElementById('editFinderIndex').value = idx;
+      document.getElementById('finderSubmitBtn').textContent = "Simpan";
+      document.getElementById('finderCancelBtn').classList.remove('hidden');
+    }
+
+    function cancelFinderEdit() {
+      document.getElementById('editFinderIndex').value = -1;
+      document.getElementById('newFinderTitle').value = '';
+      document.getElementById('newFinderPrice').value = '';
+      document.getElementById('newFinderTag').value = '';
+      document.getElementById('newFinderImg').value = '';
+      document.getElementById('newFinderDesc').value = '';
+      document.getElementById('finderSubmitBtn').textContent = "Tambah Upgrade";
+      document.getElementById('finderCancelBtn').classList.add('hidden');
     }
 
     async function deleteFinderItem(idx) {
       siteData.finderItems.splice(idx, 1);
-      await saveToDB("Produk dipadam.");
+      await saveToDB("Dipadam.");
       renderFinderTable();
     }
 
+    // --- 5.7 GALERI HASIL KERJA ---
     function renderGalleryTable() {
       const tbody = document.getElementById('galleryTableBody');
       tbody.innerHTML = '';
       if (!siteData.galleryItems || siteData.galleryItems.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada gambar galeri.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
         return;
       }
       siteData.galleryItems.forEach((item, idx) => {
         tbody.innerHTML += `
           <tr>
-            <td><img src="${item.image}" width="40" height="40" style="object-fit:cover; border-radius:6px;"></td>
+            <td><img src="${item.image}" width="35" height="35" style="object-fit:cover; border-radius:4px;"></td>
             <td><strong>${item.title}</strong></td>
             <td><small>${item.description}</small></td>
-            <td><button class="small-btn danger" onclick="deleteGalleryItem(${idx})">Padam</button></td>
+            <td>
+              <button class="small-btn" onclick="editGalleryItem(${idx})">Edit</button>
+              <button class="small-btn danger" onclick="deleteGalleryItem(${idx})">Padam</button>
+            </td>
           </tr>
         `;
       });
     }
 
-    async function addGalleryItem() {
+    async function saveGalleryItem() {
       const title = document.getElementById('newGalleryTitle').value.trim();
       const img = document.getElementById('newGalleryImg').value.trim();
       const desc = document.getElementById('newGalleryDesc').value.trim();
+      const editIdx = parseInt(document.getElementById('editGalleryIndex').value);
       if (!title || !img) { alert("Isi tajuk dan URL gambar."); return; }
 
       if(!siteData.galleryItems) siteData.galleryItems = [];
-      siteData.galleryItems.push({ title, image: img, description: desc });
+      const itemObj = { title, image: img, description: desc };
+
+      if (editIdx >= 0) {
+        siteData.galleryItems[editIdx] = itemObj;
+        document.getElementById('editGalleryIndex').value = -1;
+        document.getElementById('gallerySubmitBtn').textContent = "Tambah Galeri";
+        document.getElementById('galleryCancelBtn').classList.add('hidden');
+      } else {
+        siteData.galleryItems.push(itemObj);
+      }
+
       document.getElementById('newGalleryTitle').value = '';
       document.getElementById('newGalleryImg').value = '';
       document.getElementById('newGalleryDesc').value = '';
-      await saveToDB("Gambar galeri ditambah!");
+      await saveToDB("Galeri disimpan!");
       renderGalleryTable();
+    }
+
+    function editGalleryItem(idx) {
+      const item = siteData.galleryItems[idx];
+      document.getElementById('newGalleryTitle').value = item.title || '';
+      document.getElementById('newGalleryImg').value = item.image || '';
+      document.getElementById('newGalleryDesc').value = item.description || '';
+      document.getElementById('editGalleryIndex').value = idx;
+      document.getElementById('gallerySubmitBtn').textContent = "Simpan";
+      document.getElementById('galleryCancelBtn').classList.remove('hidden');
+    }
+
+    function cancelGalleryEdit() {
+      document.getElementById('editGalleryIndex').value = -1;
+      document.getElementById('newGalleryTitle').value = '';
+      document.getElementById('newGalleryImg').value = '';
+      document.getElementById('newGalleryDesc').value = '';
+      document.getElementById('gallerySubmitBtn').textContent = "Tambah Galeri";
+      document.getElementById('galleryCancelBtn').classList.add('hidden');
     }
 
     async function deleteGalleryItem(idx) {
       siteData.galleryItems.splice(idx, 1);
-      await saveToDB("Gambar dipadam.");
+      await saveToDB("Dipadam.");
       renderGalleryTable();
     }
 
@@ -812,7 +1317,7 @@
         renderOrdersTable();
         updateDashboardCounts();
       } catch (e) {
-        console.error("Ralat muat orders:", e);
+        console.error("Ralat orders:", e);
       }
     }
 
@@ -829,7 +1334,7 @@
       });
 
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" class="empty-state">Tiada order dijumpai.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
         return;
       }
 
@@ -846,7 +1351,7 @@
             <td><span class="status-pill ${isDone ? 'status-done' : 'status-pending'}">${isDone ? 'Selesai' : 'Pending'}</span></td>
             <td>
               <div class="table-actions">
-                <button class="small-btn ${isDone ? '' : 'success'}" onclick="toggleOrderStatus('${order.id}', '${isDone ? 'pending' : 'done'}')">${isDone ? 'Buat Pending' : 'Set Selesai'}</button>
+                <button class="small-btn ${isDone ? '' : 'success'}" onclick="toggleOrderStatus('${order.id}', '${isDone ? 'pending' : 'done'}')">${isDone ? 'Pending' : 'Selesai'}</button>
                 <button class="small-btn danger" onclick="deleteOrder('${order.id}')">Padam</button>
               </div>
             </td>
@@ -862,28 +1367,45 @@
     }
 
     async function deleteOrder(id) {
-      if (!confirm("Padam order ini?")) return;
+      if (!confirm("Padam order?")) return;
       if (!db) return;
       await db.collection('orders').doc(id).delete();
       loadOrdersFromDB();
     }
 
-    // Analitik Klik dengan Pilihan Kategori (Upgrade, Masalah, Peranti)
+    // --- ANALITIK KLIK & VISITS ---
+    async function loadVisitsCounter() {
+      if (!db) return;
+      try {
+        const docSnap = await db.collection('analytics').doc('website_visits').get();
+        if (docSnap.exists) {
+          document.getElementById('dashVisitsCount').textContent = docSnap.data().count || 0;
+        } else {
+          document.getElementById('dashVisitsCount').textContent = 0;
+        }
+      } catch (e) {
+        document.getElementById('dashVisitsCount').textContent = 0;
+      }
+    }
+
     async function loadAnalytics() {
       const container = document.getElementById('analyticsContainer');
       const limitVal = parseInt(document.getElementById('analyticsLimitSelect').value) || 10;
       const categoryFilter = document.getElementById('analyticsCategoryFilter').value;
-      container.innerHTML = '<div class="empty-state">Memuatkan data analitik...</div>';
+      container.innerHTML = '<div class="empty-state">Memuatkan...</div>';
       
       if (!db) return;
       try {
         const snap = await db.collection('analytics').get();
         let list = [];
+        let maxClicks = 1;
+
         snap.forEach(doc => { 
           const id = doc.id;
+          if (id === 'website_visits') return;
           const data = doc.data();
+          const clicks = data.clicks || 0;
           
-          // Penapisan Kategori Analitik
           let match = true;
           if (categoryFilter === 'Upgrade') {
             match = id.toLowerCase().includes('ssd') || id.toLowerCase().includes('ram') || id.toLowerCase().includes('upgrade');
@@ -894,47 +1416,47 @@
           }
 
           if (match) {
-            list.push({ name: id, ...data });
+            if (clicks > maxClicks) maxClicks = clicks;
+            list.push({ name: id, clicks });
           }
         });
         
-        list.sort((a, b) => (b.clicks || 0) - (a.clicks || 0));
+        list.sort((a, b) => b.clicks - a.clicks);
         list = list.slice(0, limitVal);
 
         if (list.length === 0) {
-          container.innerHTML = '<div class="empty-state">Tiada rekod analitik dalam kategori ini.</div>';
+          container.innerHTML = '<div class="empty-state">Tiada data maklumat disetkan lagi di database.</div>';
           return;
         }
 
         container.innerHTML = '';
         list.forEach(item => {
-          const clicks = item.clicks || 0;
+          const widthPercent = Math.max((item.clicks / maxClicks) * 100, 5);
           container.innerHTML += `
-            <div style="background:#141418; padding:0.75rem 1rem; border-radius:8px; border:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-              <div>
-                <strong>${item.name}</strong>
-                <div style="font-size:0.72rem; color:var(--muted);">Terakhir diklik: ${item.lastClicked ? new Date(item.lastClicked).toLocaleString() : 'N/A'}</div>
-              </div>
-              <div style="background:rgba(249,115,22,0.15); color:var(--orange); padding:0.3rem 0.7rem; border-radius:6px; font-weight:800; font-size:0.9rem;">
-                ${clicks} Klik
+            <div class="graph-bar">
+              <div class="graph-label" title="${item.name}">${item.name}</div>
+              <div class="graph-track">
+                <div class="graph-fill" style="width: ${widthPercent}%;">${item.clicks} klik</div>
               </div>
             </div>
           `;
         });
       } catch (e) {
-        container.innerHTML = '<div class="empty-state">Ralat memuatkan analitik.</div>';
+        container.innerHTML = '<div class="empty-state">Tiada data maklumat disetkan lagi di database.</div>';
       }
     }
 
     async function resetAnalytics() {
-      if (!confirm("Adakah anda pasti mahu set semula graf analitik klik?")) return;
+      if (!confirm("Set semula graf analitik klik?")) return;
       if (!db) return;
       const snap = await db.collection('analytics').get();
       const batch = db.batch();
-      snap.forEach(doc => batch.delete(doc.ref));
+      snap.forEach(doc => {
+        if (doc.id !== 'website_visits') batch.delete(doc.ref);
+      });
       await batch.commit();
       loadAnalytics();
-      alert("Graf analitik telah dikosongkan.");
+      alert("Analitik dikosongkan.");
     }
 
     async function loadFeedbacksFromDB() {
@@ -957,10 +1479,10 @@
           `;
         });
         if (count === 0) {
-          tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada maklum balas.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
         }
       } catch (e) {
-        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Ralat memuatkan maklum balas.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Tiada data maklumat disetkan lagi di database.</td></tr>`;
       }
     }
 
@@ -982,16 +1504,16 @@
     document.getElementById('importAllBtn').addEventListener('click', async () => {
       if (!db) return alert("Firebase tidak bersambung.");
       document.getElementById('importIcon').textContent = "⏳";
-      document.getElementById('importText').textContent = "Sedang Import...";
+      document.getElementById('importText').textContent = "Importing...";
       try {
         await db.collection('siteSettings').doc('main').set(siteData, { merge: true });
         document.getElementById('importIcon').textContent = "📥";
-        document.getElementById('importText').textContent = "Import Semua Data (Firebase)";
-        alert("Berjaya! Semua data kandungan website dan tetapan telah disegerakkan ke pangkalan data server untuk paparan customer.");
+        document.getElementById('importText').textContent = "Import Data (Firebase)";
+        alert("Berjaya! Semua data disegerakkan ke pangkalan data server website customer.");
       } catch (e) {
         document.getElementById('importIcon').textContent = "📥";
-        document.getElementById('importText').textContent = "Import Semua Data (Firebase)";
-        alert("Ralat semasa import: " + e.message);
+        document.getElementById('importText').textContent = "Import Data (Firebase)";
+        alert("Ralat: " + e.message);
       }
     });
 
@@ -1001,7 +1523,7 @@
         await db.collection('siteSettings').doc('main').set(siteData, { merge: true });
         if (successMsg) alert(successMsg);
       } catch (e) {
-        alert("Ralat menyimpan ke database: " + e.message);
+        alert("Ralat database: " + e.message);
       }
     }
   </script>
