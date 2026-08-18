@@ -454,6 +454,29 @@
             window.scrollTo({ top: 0, behavior: 'auto' });
         }
 
+        // Fungsi Penambahan: Merekod pelawat unik/sesi ke Firestore untuk Dashboard Admin
+        async function recordVisitorTraffic() {
+            if (!db) return;
+            const visitKey = "ztechfix_visited";
+            if (!sessionStorage.getItem(visitKey)) {
+                sessionStorage.setItem(visitKey, "true");
+                try {
+                    const visitRef = db.collection('analytics').doc('website_visits');
+                    await db.runTransaction(async (transaction) => {
+                        const doc = await transaction.get(visitRef);
+                        if (!doc.exists) {
+                            transaction.set(visitRef, { count: 1 });
+                        } else {
+                            const newCount = (doc.data().count || 0) + 1;
+                            transaction.update(visitRef, { count: newCount });
+                        }
+                    });
+                } catch (e) {
+                    console.error("Ralat kemas kini pelawat:", e);
+                }
+            }
+        }
+
         async function pushDefaultDataToDB() {
             if (!db) return alert("Firebase tidak bersambung.");
             
@@ -866,6 +889,7 @@
         window.onload = () => {
             loadDatabaseData();
             loadSmartSettings();
+            recordVisitorTraffic(); // Mengira data pelawat secara automatik apabila web dibuka
         }
     </script>
 </body>

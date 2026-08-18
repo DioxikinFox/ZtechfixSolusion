@@ -221,9 +221,9 @@
             <div><h2 style="margin:0; border:none; padding:0;">1. Dashboard Overview</h2></div>
             <div class="search-group" style="justify-content: flex-end; gap:6px;">
               <button onclick="resetDashboardData()" class="btn danger" type="button" style="width:auto; padding:0.4rem 0.7rem; font-size:0.75rem;">Reset Dashboard</button>
-              <button id="importAllBtn" class="btn primary" type="button" style="width:auto; display:flex; gap:6px; align-items:center; font-size:0.78rem;">
+              <!-- <button id="importAllBtn" class="btn primary" type="button" style="width:auto; display:flex; gap:6px; align-items:center; font-size:0.78rem;">
                 <span id="importIcon">📥</span> <span id="importText">Import Data (Firebase)</span>
-              </button>
+              </button> -->
             </div>
           </div>
           <div class="dashboard-grid" style="margin-top: 0.75rem;">
@@ -698,14 +698,14 @@
     document.getElementById('username').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        document.getElementById('password').focus(); // Tekan Enter pertama: turun ke kotak password
+        document.getElementById('password').focus();
       }
     });
 
     document.getElementById('password').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        handleLogin(); // Tekan Enter kedua: terus tekan butang login secara automatik
+        handleLogin();
       }
     });
 
@@ -842,7 +842,10 @@
 
       if (!db) return alert("Firebase tidak bersambung.");
       try {
+        // Diselaraskan ke koleksi settings/mainConfig dan siteSettings/main supaya serasi dengan app pelawat
         await db.collection('settings').doc('mainConfig').set(smartConfig, { merge: true });
+        await db.collection('siteSettings').doc('main').set({ mainConfig: smartConfig }, { merge: true });
+        
         if(document.getElementById('lastSavedTimeDisplay')) {
           document.getElementById('lastSavedTimeDisplay').textContent = `Terakhir dikemas kini: ${nowString}`;
         }
