@@ -62,6 +62,12 @@
     .top-nav a { padding: 0.35rem 0.6rem; border-radius: 6px; color: var(--muted); font-size: 0.75rem; font-weight: 600; white-space: nowrap; border: 1px solid transparent; transition: 0.2s; }
     .top-nav a:hover, .top-nav a.active { color: var(--text); background: rgba(249, 115, 22, 0.12); border-color: rgba(249, 115, 22, 0.3); }
 
+    .mobile-menu-toggle { display: none; background: transparent; border: 1px solid var(--line); color: var(--text); padding: 0.35rem 0.6rem; border-radius: 6px; font-size: 1rem; cursor: pointer; }
+    .mobile-nav-dropdown { position: absolute; top: calc(100% + 6px); right: 1rem; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px; width: 180px; box-shadow: var(--shadow); z-index: 2000; display: none; }
+    .mobile-nav-dropdown.show { display: block; }
+    .mobile-nav-dropdown a { display: block; padding: 0.5rem 0.7rem; border-radius: 6px; color: var(--text); font-size: 0.78rem; font-weight: 600; margin-bottom: 2px; }
+    .mobile-nav-dropdown a:hover { background: rgba(249,115,22,0.12); color: var(--orange); }
+
     .layout { max-width: 1250px; margin: 1.5rem auto; padding: 0 0.75rem 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
     .main { display: flex; flex-direction: column; gap: 1.25rem; width: 100%; min-width: 0; }
 
@@ -112,34 +118,62 @@
     .graph-track { background: #1f2026; border-radius: 5px; height: 20px; width: 100%; overflow: hidden; border: 1px solid var(--line); }
     .graph-fill { background: linear-gradient(90deg, var(--orange), var(--orange-2)); height: 100%; display: flex; align-items: center; padding-left: 6px; color: #fff; font-size: 0.68rem; font-weight: 700; border-radius: 3px; }
 
-    /* VERSI PHONE: MENU 3 BARIS & DATA KECIL */
+    /* KHUSUS VERSI PHONE: KEKAL DALAM KOTAK KELABU DENGAN SKROL DALAMAN (SLIDE) */
     @media (max-width: 768px) {
-      body { font-size: 0.82rem; }
-      .topbar { padding: 0.4rem 0.5rem; flex-direction: row; align-items: center; justify-content: space-between; }
-      .admin-profile-area { width: auto; }
-      .top-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 3px; max-width: 65%; }
-      .top-nav a { flex: 0 0 calc(33.33% - 3px); text-align: center; font-size: 0.68rem; padding: 0.4rem 2px; }
+      body { font-size: 0.78rem; }
+      .topbar { padding: 0.35rem 0.5rem; }
+      .top-nav { display: none !important; }
+      .mobile-menu-toggle { display: inline-block; }
       
-      .form-grid, .inline-form { grid-template-columns: 1fr !important; }
-      .dashboard-grid { grid-template-columns: repeat(2, 1fr) !important; }
-      .panel { padding: 0.85rem 0.6rem; }
-      .login-box { padding: 1.25rem; width: 100%; }
-      .login-shell { padding: 0.75rem; }
-      th, td, .mini-table th, .mini-table td { font-size: 0.73rem; padding: 0.4rem 0.3rem; }
+      .form-grid, .inline-form { grid-template-columns: 1fr !important; gap: 0.5rem; }
+      .dashboard-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.5rem; }
+      .panel { padding: 0.75rem 0.5rem; border-radius: 10px; }
+      .login-box { padding: 1rem; width: 100%; }
+      .login-shell { padding: 0.5rem; }
+      th, td, .mini-table th, .mini-table td { font-size: 0.7rem; padding: 0.3rem 0.2rem; }
+      .btn, .small-btn, .search-box, .filter-select, .field input, .field select, .field textarea { padding: 0.45rem 0.6rem; font-size: 0.78rem; }
+      .dashboard-card { padding: 0.6rem; }
+      .dashboard-card strong { font-size: 1.2rem; }
+
+      .manager-card {
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .manager-body {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        display: block;
+        border-radius: 8px;
+        background: rgba(0,0,0,0.2);
+        padding-bottom: 4px;
+      }
+      .manager-body::-webkit-scrollbar {
+        height: 5px;
+      }
+      .manager-body::-webkit-scrollbar-thumb {
+        background: var(--orange);
+        border-radius: 10px;
+      }
+      .mini-table {
+        min-width: 520px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- LOGIN SCREEN -->
   <div id="loginScreen" class="login-shell">
     <div class="login-box">
       <div class="login-header"><div class="brand-mark">ZS</div><span>Login Admin</span></div>
-      <div class="field"><label for="username">Username</label><input id="username" type="text" value="admin" /></div>
-      <div class="field"><label for="password">Password</label><input id="password" type="password" value="123456" /></div>
+      <div class="field"><label for="username">Email Admin</label><input id="username" type="email" value="ZtechFix@gmail.com" /></div>
+      <div class="field"><label for="password">Password</label><input id="password" type="password" value="ztechfix905" /></div>
       <button id="loginBtn" class="btn primary" type="button">Masuk</button>
       <div id="loginError" class="error-text"></div>
     </div>
   </div>
 
+  <!-- ADMIN APP -->
   <div id="adminApp" class="hidden">
     <header class="topbar">
       <div class="admin-profile-area">
@@ -155,6 +189,7 @@
         </div>
       </div>
 
+      <!-- DESKTOP TOP NAV -->
       <nav class="top-nav" id="topNavMenu">
         <a href="#dashboard-overview" class="active" onclick="setActiveNav(this)">Dashboard</a>
         <a href="#smart-settings" onclick="setActiveNav(this)">Operasi</a>
@@ -163,10 +198,24 @@
         <a href="#content-managers" onclick="setActiveNav(this)">Kandungan</a>
         <a href="#orders" onclick="setActiveNav(this)">Orders</a>
       </nav>
+
+      <!-- MOBILE HAMBURGER MENU -->
+      <div class="brand-container">
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu(event)">☰ Menu</button>
+        <div id="mobileNavDropdown" class="mobile-nav-dropdown">
+          <a href="#dashboard-overview" onclick="toggleMobileMenu(event)">Dashboard</a>
+          <a href="#smart-settings" onclick="toggleMobileMenu(event)">Operasi</a>
+          <a href="#analytics-feedbacks" onclick="toggleMobileMenu(event)">Analitik</a>
+          <a href="#settings" onclick="toggleMobileMenu(event)">Settings</a>
+          <a href="#content-managers" onclick="toggleMobileMenu(event)">Kandungan</a>
+          <a href="#orders" onclick="toggleMobileMenu(event)">Orders</a>
+        </div>
+      </div>
     </header>
 
     <div class="layout">
       <main class="main">
+        <!-- 1. DASHBOARD OVERVIEW -->
         <section class="panel" id="dashboard-overview">
           <div class="toolbar-row">
             <div><h2 style="margin:0; border:none; padding:0;">1. Dashboard Overview</h2></div>
@@ -185,6 +234,7 @@
           </div>
         </section>
 
+        <!-- 2. TETAPAN OPERASI -->
         <section class="panel" id="smart-settings">
           <h2>2. Tetapan Operasi, Staff & Paparan</h2>
           <div class="form-grid">
@@ -243,7 +293,7 @@
             </div>
 
             <div class="field full" style="border-top:1px solid #333; padding-top:0.75rem;">
-              <label style="margin-bottom: 0.5rem; display: block; font-weight: 700; color: var(--text);">Matikan Fitur / Sembunyikan Bahagian di Website</label>
+              <label style="margin-bottom: 0.5rem; display: block; font-weight: 700; color: var(--text);">Matikan Fitur / Sembunyikan & Klik untuk Guna di Website</label>
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px;">
                 <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleBooking"><span class="slider"></span></label> Buat Tempahan</div>
                 <div style="display: flex; align-items: center;"><label class="switch"><input type="checkbox" id="toggleFeedback"><span class="slider"></span></label> Maklum Balas Pelanggan</div>
@@ -261,6 +311,7 @@
           </div>
         </section>
 
+        <!-- 3. ANALITIK KLIK & MAKLUM BALAS -->
         <section class="panel" id="analytics-feedbacks">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:1rem; border-bottom:1px solid var(--line); padding-bottom:0.6rem;">
             <h2 style="margin:0; border:none; padding:0;">3. Analitik Klik & Maklum Balas</h2>
@@ -294,6 +345,7 @@
           </div>
         </section>
 
+        <!-- 4. GENERAL SETTINGS -->
         <section class="panel" id="settings">
           <h2>4. General Store Settings & Sosial Media</h2>
           <div class="toolbar-row">
@@ -316,10 +368,12 @@
           </div>
         </section>
 
+        <!-- 5. KANDUNGAN WEBSITE & KALKULATOR -->
         <section class="panel" id="content-managers">
           <h2>5. Kandungan Website & Kalkulator Pembaikan</h2>
           
           <div class="manager-stack">
+            <!-- 5.1 APA YANG KAMI BAIKI -->
             <div class="manager-card">
               <div class="manager-toolbar"><h3 style="font-size:0.88rem;">📱 Apa Yang Kami Baiki</h3></div>
               <div class="manager-body">
@@ -340,6 +394,7 @@
               </div>
             </div>
 
+            <!-- 5.2 KENAPA PILIH KAMI -->
             <div class="manager-card">
               <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🔍 Kenapa Pilih Kami</h3></div>
               <div class="manager-body">
@@ -360,8 +415,9 @@
               </div>
             </div>
 
+            <!-- 5.3 KALKULATOR PEMBAIKAN -->
             <div class="manager-card">
-              <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🛠️ Kalkulator Pembaikan</h3></div>
+              <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🛠️ Kalkulator Pembaikan (Julat Harga: Digit Sahaja)</h3></div>
               <div class="manager-body">
                 <table class="mini-table">
                   <thead><tr><th>Kategori</th><th>Label Kerosakan</th><th>Harga (RM)</th><th>Tindakan</th></tr></thead>
@@ -384,7 +440,7 @@
                   </datalist>
                 </div>
                 <div class="field"><label>Label Kerosakan</label><input id="newRepairLabel" type="text" placeholder="Tukar Skrin LCD"></div>
-                <div class="field"><label>Julat Harga (RM)</label><input id="newRepairPrice" type="text" placeholder="RM 150 - RM 300"></div>
+                <div class="field"><label>Julat Harga (Digit Sahaja, cth: 150 atau 150-300)</label><input id="newRepairPrice" type="text" inputmode="numeric" placeholder="150 atau 150-300"></div>
                 <div class="inline-actions">
                   <button id="repairSubmitBtn" onclick="saveRepairCalculatorItem()" class="btn success" type="button">Tambah Item</button>
                   <button id="repairCancelBtn" onclick="cancelRepairEdit()" class="btn danger hidden" type="button">Batal</button>
@@ -392,6 +448,7 @@
               </div>
             </div>
 
+            <!-- 5.4 CUSTOM PC BUILDER -->
             <div class="manager-card">
               <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🖥️ Pilihan Perkakasan Bina PC Custom</h3></div>
               <div class="manager-body">
@@ -406,13 +463,17 @@
                   <label>Kategori Hardware</label>
                   <select id="newBuilderCategory" class="filter-select" style="width:100%; padding:0.6rem;">
                     <option value="cpu">CPU (Pemproses)</option>
+                    <option value="motherboard">Motherboard</option>
                     <option value="gpu">GPU (Kad Grafik)</option>
                     <option value="ram">RAM (Memori)</option>
                     <option value="storage">Storage (Storan SSD)</option>
+                    <option value="psu">Power Supply (PSU)</option>
+                    <option value="accessory">Aksesori Tambahan</option>
+                    <option value="monitor">Monitor</option>
                   </select>
                 </div>
-                <div class="field"><label>Model Komponen</label><input id="newBuilderLabel" type="text" placeholder="Intel Core i5"></div>
-                <div class="field"><label>Harga (RM)</label><input id="newBuilderValue" type="number" placeholder="450"></div>
+                <div class="field"><label>Model Komponen</label><input id="newBuilderLabel" type="text" placeholder="Intel Core i5 / H610M"></div>
+                <div class="field"><label>Harga (RM - Digit Sahaja)</label><input id="newBuilderValue" type="number" inputmode="numeric" placeholder="450"></div>
                 <div class="inline-actions">
                   <button id="builderSubmitBtn" onclick="saveBuilderOption()" class="btn success" type="button">Tambah Komponen</button>
                   <button id="builderCancelBtn" onclick="cancelBuilderEdit()" class="btn danger hidden" type="button">Batal</button>
@@ -420,6 +481,7 @@
               </div>
             </div>
 
+            <!-- 5.5 JUALAN LELONG -->
             <div class="manager-card">
               <div class="manager-toolbar"><h3 style="font-size:0.88rem;">📦 Jualan Peranti Lelong</h3></div>
               <div class="manager-body">
@@ -431,14 +493,14 @@
               <div class="inline-form" id="clearanceFormContainer">
                 <input type="hidden" id="editClearanceIndex" value="-1">
                 <div class="field"><label>Nama Item</label><input id="newClearanceTitle" type="text"></div>
-                <div class="field"><label>Harga (RM)</label><input id="newClearancePrice" type="text"></div>
+                <div class="field"><label>Harga (Digit Sahaja, cth: 350)</label><input id="newClearancePrice" type="text" inputmode="numeric" placeholder="350"></div>
                 <div class="field"><label>Status Peranti</label>
                   <select id="newClearanceStatus" class="filter-select" style="width:100%; padding:0.6rem;">
                     <option value="false">Tersedia</option>
-                    <option value="true">Dibooking (Dicop)</option>
+                    <option value="true">Booking (Dicop)</option>
                   </select>
                 </div>
-                <div class="field"><label>URL Gambar</label><input id="newClearanceImg" type="text"></div>
+                <div class="field"><label>URL Gambar Yang Sah (https://...)</label><input id="newClearanceImg" type="url" placeholder="https://images.unsplash.com/..."></div>
                 <div class="field full"><label>Keterangan</label><textarea id="newClearanceDesc" rows="2"></textarea></div>
                 <div class="inline-actions">
                   <button id="clearanceSubmitBtn" onclick="saveClearanceItem()" class="btn success" type="button">Tambah Lelong</button>
@@ -447,6 +509,7 @@
               </div>
             </div>
 
+            <!-- 5.6 ENJIN CARIAN -->
             <div class="manager-card">
               <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🚀 Enjin Carian Upgrade & Gadjet</h3></div>
               <div class="manager-body">
@@ -458,9 +521,9 @@
               <div class="inline-form" id="finderFormContainer">
                 <input type="hidden" id="editFinderIndex" value="-1">
                 <div class="field"><label>Nama Gadjet</label><input id="newFinderTitle" type="text"></div>
-                <div class="field"><label>Harga</label><input id="newFinderPrice" type="text"></div>
+                <div class="field"><label>Harga (Digit Sahaja, cth: 299)</label><input id="newFinderPrice" type="text" inputmode="numeric" placeholder="299"></div>
                 <div class="field"><label>Tag Kategori</label><input id="newFinderTag" type="text" placeholder="Upgrade"></div>
-                <div class="field"><label>URL Gambar</label><input id="newFinderImg" type="text"></div>
+                <div class="field"><label>URL Gambar Yang Sah (https://...)</label><input id="newFinderImg" type="url" placeholder="https://images.unsplash.com/..."></div>
                 <div class="field full"><label>Keterangan</label><textarea id="newFinderDesc" rows="2"></textarea></div>
                 <div class="inline-actions">
                   <button id="finderSubmitBtn" onclick="saveFinderItem()" class="btn success" type="button">Tambah Upgrade</button>
@@ -469,6 +532,7 @@
               </div>
             </div>
 
+            <!-- 5.7 GALERI HASIL KERJA -->
             <div class="manager-card">
               <div class="manager-toolbar"><h3 style="font-size:0.88rem;">🖼️ Galeri Hasil Kerja</h3></div>
               <div class="manager-body">
@@ -480,7 +544,7 @@
               <div class="inline-form" id="galleryFormContainer">
                 <input type="hidden" id="editGalleryIndex" value="-1">
                 <div class="field"><label>Tajuk Projek</label><input id="newGalleryTitle" type="text"></div>
-                <div class="field"><label>URL Gambar</label><input id="newGalleryImg" type="text"></div>
+                <div class="field"><label>URL Gambar Yang Sah (https://...)</label><input id="newGalleryImg" type="url" placeholder="https://images.unsplash.com/..."></div>
                 <div class="field full"><label>Keterangan</label><textarea id="newGalleryDesc" rows="2"></textarea></div>
                 <div class="inline-actions">
                   <button id="gallerySubmitBtn" onclick="saveGalleryItem()" class="btn success" type="button">Tambah Galeri</button>
@@ -491,6 +555,7 @@
           </div>
         </section>
 
+        <!-- 6. ORDERS MANAGEMENT -->
         <section class="panel" id="orders">
           <div class="toolbar-row">
             <div><h2 style="margin:0; border:none; padding:0;">6. Senarai Tempahan Pelanggan (Orders)</h2></div>
@@ -520,6 +585,7 @@
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   
   <script>
@@ -537,6 +603,7 @@
       firebase.initializeApp(firebaseConfig);
     }
     const db = window.firebase ? firebase.firestore() : null;
+    const auth = window.firebase ? firebase.auth() : null;
 
     let siteData = {
       companyName: "ZTECHFIX SOLUTIONS",
@@ -557,7 +624,7 @@
       finderItems: [],
       galleryItems: [],
       repairCalculator: [],
-      builderOptions: { cpu: [], gpu: [], ram: [], storage: [] },
+      builderOptions: { cpu: [], motherboard: [], gpu: [], ram: [], storage: [], psu: [], accessory: [], monitor: [] },
       orders: [],
       feedbacks: []
     };
@@ -566,9 +633,17 @@
       e.stopPropagation();
       document.getElementById('brandDropdown').classList.toggle('show');
     }
+
+    function toggleMobileMenu(e) {
+      e.stopPropagation();
+      document.getElementById('mobileNavDropdown').classList.toggle('show');
+    }
+
     window.onclick = () => {
       const drop = document.getElementById('brandDropdown');
       if (drop && drop.classList.contains('show')) drop.classList.remove('show');
+      const mobDrop = document.getElementById('mobileNavDropdown');
+      if (mobDrop && mobDrop.classList.contains('show')) mobDrop.classList.remove('show');
     };
 
     function toggleStaffSettings() {
@@ -596,21 +671,61 @@
       el.classList.add('active');
     }
 
-    document.getElementById('loginBtn').addEventListener('click', () => {
-      const u = document.getElementById('username').value.trim();
-      const p = document.getElementById('password').value.trim();
-      if (u === 'admin' && p === '123456') {
+    // Fungsi Log Masuk
+    async function handleLogin() {
+      const email = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      
+      if (!auth) {
+        document.getElementById('loginError').textContent = 'Firebase Auth tidak tersedia!';
+        return;
+      }
+
+      try {
+        document.getElementById('loginError').textContent = 'Sedang log masuk...';
+        await auth.signInWithEmailAndPassword(email, pass);
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('adminApp').classList.remove('hidden');
         initAdminData();
-      } else {
-        document.getElementById('loginError').textContent = 'Username atau password salah!';
+      } catch (error) {
+        document.getElementById('loginError').textContent = 'Ralat: ' + error.message;
+      }
+    }
+
+    document.getElementById('loginBtn').addEventListener('click', handleLogin);
+
+    // KAWALAN KEKUNCI ENTER UNTUK RUANGAN LOGIN
+    document.getElementById('username').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        document.getElementById('password').focus(); // Tekan Enter pertama: turun ke kotak password
+      }
+    });
+
+    document.getElementById('password').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleLogin(); // Tekan Enter kedua: terus tekan butang login secara automatik
       }
     });
 
     function logoutAdmin() {
+      if (auth) auth.signOut();
       document.getElementById('adminApp').classList.add('hidden');
       document.getElementById('loginScreen').classList.remove('hidden');
+    }
+
+    function isValidUrl(string) {
+      try {
+        const url = new URL(string);
+        return url.protocol === "http:" || url.protocol === "https:";
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function isNumericOnly(string) {
+      return /^\d+(\-\d+)?$/.test(string.trim());
     }
 
     async function initAdminData() {
@@ -766,7 +881,6 @@
       }
     }
 
-    // --- 5.1 APA YANG KAMI BAIKI ---
     let editFixIdx = -1;
     function renderFixItemsTable() {
       const tbody = document.getElementById('fixItemsTableBody');
@@ -840,7 +954,6 @@
       renderFixItemsTable();
     }
 
-    // --- 5.2 KENAPA PILIH KAMI ---
     let editWhyIdx = -1;
     function renderWhyItemsTable() {
       const tbody = document.getElementById('whyItemsTableBody');
@@ -914,7 +1027,6 @@
       renderWhyItemsTable();
     }
 
-    // --- 5.3 KALKULATOR PEMBAIKAN ---
     let editRepairIdx = -1;
     function renderRepairCalculatorTable() {
       const tbody = document.getElementById('repairCalculatorTableBody');
@@ -943,6 +1055,7 @@
       const label = document.getElementById('newRepairLabel').value.trim();
       const price = document.getElementById('newRepairPrice').value.trim();
       if (!cat || !label || !price) { alert("Sila isi semua medan."); return; }
+      if (!isNumericOnly(price)) { alert("Ralat: Julat harga mesti mengandungi nombor/digit sahaja (cth: 150 atau 150-300)."); return; }
 
       if(!siteData.repairCalculator) siteData.repairCalculator = [];
       const newItem = { deviceType: cat, deviceName: cat.toUpperCase(), issueKey: 'issue_' + Date.now(), issueLabel: label, price: price };
@@ -986,16 +1099,15 @@
       renderRepairCalculatorTable();
     }
 
-    // --- 5.4 CUSTOM PC BUILDER ---
     let editBuilderCat = "";
     let editBuilderIdx = -1;
     function renderBuilderTable() {
       const tbody = document.getElementById('builderTableBody');
       tbody.innerHTML = '';
-      if (!siteData.builderOptions) siteData.builderOptions = { cpu: [], gpu: [], ram: [], storage: [] };
+      if (!siteData.builderOptions) siteData.builderOptions = { cpu: [], motherboard: [], gpu: [], ram: [], storage: [], psu: [], accessory: [], monitor: [] };
       
       let totalCount = 0;
-      ['cpu', 'gpu', 'ram', 'storage'].forEach(cat => {
+      ['cpu', 'motherboard', 'gpu', 'ram', 'storage', 'psu', 'accessory', 'monitor'].forEach(cat => {
         const arr = siteData.builderOptions[cat] || [];
         arr.forEach((item, idx) => {
           totalCount++;
@@ -1021,10 +1133,12 @@
     async function saveBuilderOption() {
       const cat = document.getElementById('newBuilderCategory').value;
       const label = document.getElementById('newBuilderLabel').value.trim();
-      const value = Number(document.getElementById('newBuilderValue').value) || 0;
-      if (!label) { alert("Sila isi nama model komponen."); return; }
+      const valueInput = document.getElementById('newBuilderValue').value.trim();
+      const value = Number(valueInput) || 0;
+      if (!label || !valueInput) { alert("Sila isi model komponen dan harga."); return; }
+      if (!/^\d+$/.test(valueInput)) { alert("Ralat: Harga komponen mesti mengandungi nombor/digit sahaja."); return; }
 
-      if (!siteData.builderOptions) siteData.builderOptions = { cpu: [], gpu: [], ram: [], storage: [] };
+      if (!siteData.builderOptions) siteData.builderOptions = { cpu: [], motherboard: [], gpu: [], ram: [], storage: [], psu: [], accessory: [], monitor: [] };
       if (!siteData.builderOptions[cat]) siteData.builderOptions[cat] = [];
 
       const optObj = { label, value };
@@ -1070,7 +1184,6 @@
       renderBuilderTable();
     }
 
-    // --- 5.5 JUALAN LELONG ---
     function renderClearanceTable() {
       const tbody = document.getElementById('clearanceTableBody');
       tbody.innerHTML = '';
@@ -1084,7 +1197,7 @@
             <td><img src="${item.image}" width="35" height="35" style="object-fit:cover; border-radius:4px;"></td>
             <td><strong>${item.title}</strong></td>
             <td style="color:var(--orange); font-weight:700;">${item.newPrice}</td>
-            <td><span class="status-pill ${item.isReserved ? 'status-pending' : 'status-done'}">${item.isReserved ? 'Dibooking' : 'Tersedia'}</span></td>
+            <td><span class="status-pill ${item.isReserved ? 'status-pending' : 'status-done'}">${item.isReserved ? 'Booking' : 'Tersedia'}</span></td>
             <td>
               <button class="small-btn" onclick="editClearanceItem(${idx})">Edit</button>
               <button class="small-btn danger" onclick="deleteClearanceItem(${idx})">Padam</button>
@@ -1101,10 +1214,12 @@
       const img = document.getElementById('newClearanceImg').value.trim();
       const desc = document.getElementById('newClearanceDesc').value.trim();
       const editIdx = parseInt(document.getElementById('editClearanceIndex').value);
-      if (!title || !price) { alert("Isi nama dan harga."); return; }
+      if (!title || !price || !img) { alert("Sila isi semua medan wajib."); return; }
+      if (!/^\d+$/.test(price)) { alert("Ralat: Harga lelong mesti mengandungi nombor/digit sahaja."); return; }
+      if (!isValidUrl(img)) { alert("Ralat: Sila masukkan URL gambar yang sah (bermula dengan http:// atau https://)."); return; }
 
       if(!siteData.clearanceItems) siteData.clearanceItems = [];
-      const itemObj = { title, newPrice: price, image: img || 'https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80', description: desc, tag: 'Lelong Bajet', isReserved };
+      const itemObj = { title, newPrice: price, image: img, description: desc, tag: isReserved ? 'Booking' : 'Tersedia', isReserved };
 
       if (editIdx >= 0) {
         siteData.clearanceItems[editIdx] = itemObj;
@@ -1151,7 +1266,6 @@
       renderClearanceTable();
     }
 
-    // --- 5.6 ENJIN CARIAN ---
     function renderFinderTable() {
       const tbody = document.getElementById('finderTableBody');
       tbody.innerHTML = '';
@@ -1182,10 +1296,12 @@
       const img = document.getElementById('newFinderImg').value.trim();
       const desc = document.getElementById('newFinderDesc').value.trim();
       const editIdx = parseInt(document.getElementById('editFinderIndex').value);
-      if (!title || !price) { alert("Isi nama dan harga."); return; }
+      if (!title || !price || !img) { alert("Sila isi semua medan wajib."); return; }
+      if (!/^\d+$/.test(price)) { alert("Ralat: Harga gadget mesti mengandungi nombor/digit sahaja."); return; }
+      if (!isValidUrl(img)) { alert("Ralat: Sila masukkan URL gambar yang sah (bermula dengan http:// atau https://)."); return; }
 
       if(!siteData.finderItems) siteData.finderItems = [];
-      const itemObj = { title, price, tag: tag || 'Upgrade', image: img || 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=600&q=80', description: desc };
+      const itemObj = { title, price, tag: tag || 'Upgrade', image: img, description: desc };
 
       if (editIdx >= 0) {
         siteData.finderItems[editIdx] = itemObj;
@@ -1234,7 +1350,6 @@
       renderFinderTable();
     }
 
-    // --- 5.7 GALERI HASIL KERJA ---
     function renderGalleryTable() {
       const tbody = document.getElementById('galleryTableBody');
       tbody.innerHTML = '';
@@ -1262,7 +1377,8 @@
       const img = document.getElementById('newGalleryImg').value.trim();
       const desc = document.getElementById('newGalleryDesc').value.trim();
       const editIdx = parseInt(document.getElementById('editGalleryIndex').value);
-      if (!title || !img) { alert("Isi tajuk dan URL gambar."); return; }
+      if (!title || !img) { alert("Sila isi tajuk dan URL gambar."); return; }
+      if (!isValidUrl(img)) { alert("Ralat: Sila masukkan URL gambar galeri yang sah (bermula dengan http:// atau https://)."); return; }
 
       if(!siteData.galleryItems) siteData.galleryItems = [];
       const itemObj = { title, image: img, description: desc };
@@ -1373,7 +1489,6 @@
       loadOrdersFromDB();
     }
 
-    // --- ANALITIK KLIK & VISITS ---
     async function loadVisitsCounter() {
       if (!db) return;
       try {
